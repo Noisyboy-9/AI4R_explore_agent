@@ -19,6 +19,7 @@ COLOR_CHECKPOINT = (220, 35, 20)
 COLOR_VISITED = (35, 170, 70)
 COLOR_RAY = (245, 205, 40)
 COLOR_RAY_HIT = (250, 230, 75)
+COLOR_CHECKPOINT_HIT = (255, 95, 45)
 COLOR_THRUST = (35, 180, 80)
 COLOR_BRAKE = (45, 120, 230)
 COLOR_TURN = (245, 170, 35)
@@ -893,6 +894,15 @@ class Drone:
         points = np.full((self.N_ECHO, 2), self.x)  # points for visualiziation
         points[:, 1] = self.y
         distances = np.full((self.N_ECHO), max_distance)  # distances for observation
+        checkpoint_points = np.full((self.N_ECHO, 2), self.x)
+        checkpoint_points[:, 1] = self.y
+        checkpoint_indices = np.full((self.N_ECHO), -1, dtype=int)
+        checkpoint_distances = np.full((self.N_ECHO), max_distance)
+        if self.game.reward_mode == 'coverage':
+            candidate_goal_indices = np.flatnonzero(~self.coverage_visited)
+        else:
+            candidate_goal_indices = np.arange(self.env.n_goals)
+
         n = self.env.level_collision_vectors.shape[0]
         for i in range(self.N_ECHO):
             found = False
@@ -910,7 +920,23 @@ class Drone:
                 points[i, :] = points_candidates[argmin]
                 distances[i] = distances_candidates[argmin]
 
+            nearest_checkpoint = max_distance
+            for goal_index in candidate_goal_indices:
+                goal = self.env.goals[goal_index]
+                result = line_intersect(*line1, *goal)
+                if result is None:
+                    continue
+                distance = np.sqrt((self.x - result[0]) ** 2 + (self.y - result[1]) ** 2)
+                if distance <= distances[i] + 1e-6 and distance < nearest_checkpoint:
+                    nearest_checkpoint = distance
+                    checkpoint_points[i, :] = result
+                    checkpoint_indices[i] = int(goal_index)
+            checkpoint_distances[i] = nearest_checkpoint
+
         self.echo_collision_points = points
+        self.echo_checkpoint_points = checkpoint_points
+        self.echo_checkpoint_indices = checkpoint_indices
+        self.echo_checkpoint_distances = checkpoint_distances
         # ─── NORMALIZE DISTANCES ─────────────────────────────────────────
         # linear mapping from 0 to ECHO_MAX_DISTANCE into [-1, 1]
         # values always in range [-1,1]
@@ -1392,12 +1418,25 @@ class ExploreDrone(gym.Env):
                     direction = np.array([1.0, 0.0])
 
                 end = start + direction * visual_ray_length
+                end_distance = visual_ray_length
                 if len(self.drone.echo_collision_points) == n:
                     hit = self.drone.echo_collision_points[i].astype(float)
                     hit_distance = np.linalg.norm(hit - start)
                     valid_hit = hit_distance > 2 and not np.allclose(hit, [0, 0])
                     if valid_hit and hit_distance <= visual_ray_length:
                         end = hit
+                        end_distance = hit_distance
+
+                if hasattr(self.drone, 'echo_checkpoint_points') and len(self.drone.echo_checkpoint_points) == n:
+                    checkpoint = self.drone.echo_checkpoint_points[i].astype(float)
+                    checkpoint_distance = np.linalg.norm(checkpoint - start)
+                    valid_checkpoint = (
+                        self.drone.echo_checkpoint_indices[i] >= 0
+                        and checkpoint_distance > 2
+                        and checkpoint_distance <= end_distance + 1e-6
+                    )
+                    if valid_checkpoint:
+                        end = checkpoint
 
                 width = 5 if i == middle_echo_index else 3
                 pygame.draw.line(self.win, COLOR_RAY, start, end, width)
@@ -1411,6 +1450,22 @@ class ExploreDrone(gym.Env):
                     continue
                 pygame.draw.circle(self.win, COLOR_RAY_HIT, (int(point[0]), int(point[1])), 7)
                 pygame.draw.circle(self.win, COLOR_BLACK, (int(point[0]), int(point[1])), 7, 2)
+
+        def draw_echo_checkpoint_points():
+            if not hasattr(self.drone, 'echo_checkpoint_points'):
+                return
+            start = np.array([self.drone.x, self.drone.y], dtype=float)
+            seen = set()
+            for point, goal_index in zip(self.drone.echo_checkpoint_points, self.drone.echo_checkpoint_indices):
+                if goal_index < 0 or goal_index in seen:
+                    continue
+                point = point.astype(float)
+                hit_distance = np.linalg.norm(point - start)
+                if hit_distance <= 2 or hit_distance > RENDER_RAY_LENGTH or np.allclose(point, [0, 0]):
+                    continue
+                seen.add(int(goal_index))
+                pygame.draw.circle(self.win, COLOR_CHECKPOINT_HIT, (int(point[0]), int(point[1])), 11)
+                pygame.draw.circle(self.win, COLOR_BLACK, (int(point[0]), int(point[1])), 11, 2)
 
         def draw_text(surface, text=None, size=30, x=0, y=0,
                       font_name=pygame.font.match_font('consolas'),
@@ -1431,6 +1486,7 @@ class ExploreDrone(gym.Env):
                 ("visited", COLOR_VISITED, "line"),
                 ("sensor ray", COLOR_RAY, "line"),
                 ("ray hit", COLOR_RAY_HIT, "dot"),
+                ("checkpoint hit", COLOR_CHECKPOINT_HIT, "dot"),
                 ("accel", COLOR_THRUST, "arrow"),
                 ("brake", COLOR_BRAKE, "arrow"),
                 ("turn", COLOR_TURN, "arc"),
@@ -1501,6 +1557,7 @@ class ExploreDrone(gym.Env):
             draw_echo_vector()
         if self.gui_draw_echo_points:
             draw_echo_collision_points()
+            draw_echo_checkpoint_points()
         if self.gui_draw_goal_points:
             draw_goal_intersection_points()
         if self.drone.visible:
