@@ -34,7 +34,7 @@ After completing the practical, students should be able to:
 
 ## Environment
 
-The robot moves in a 2D continuous environment with walls, rooms, door openings, and checkpoint gates. The environment follows the standard Gymnasium interaction pattern:
+The robot moves in a 2D continuous environment with walls, rooms, door openings, and checkpoint gates. The default `rooms` map has a side alcove, an upper internal room, and lower compartments connected by narrow openings. The environment follows the standard Gymnasium interaction pattern:
 
 - `reset()` initializes an episode;
 - `step(action)` applies one action and returns the next observation, reward, and termination flags;
