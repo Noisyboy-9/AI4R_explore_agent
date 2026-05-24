@@ -262,7 +262,7 @@ python explore_agent_rollout.py --checkpoint tmp/ppo_rooms/checkpoint_best --env
 ```
 
 The rollout prints the cumulative reward, checkpoint coverage, and maximum reward, for example `checkpoints 10/20; max reward 10.0`.
-In the Pygame view, walls are black, unvisited checkpoints are red, and visited checkpoints turn green.
+In the Pygame view, walls are black, unvisited checkpoints are red, and visited checkpoints turn green. Yellow rays show the robot's distance sensors. Green/blue motion marks show acceleration or braking, and orange arcs show turn commands.
 
 ## Optional Baseline Task
 

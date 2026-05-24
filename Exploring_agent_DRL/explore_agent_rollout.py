@@ -58,6 +58,9 @@ def make_env_config(args, gui):
         "reward_mode": args.reward_mode,
         "max_steps": args.max_steps,
         "gui": gui,
+        "gui_draw_echo_vectors": gui,
+        "gui_draw_echo_points": gui,
+        "gui_velocity": gui,
     }
 
 

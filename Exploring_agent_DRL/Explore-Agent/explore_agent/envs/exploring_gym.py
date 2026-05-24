@@ -5,6 +5,15 @@ import math
 WINDOW_WIDTH = 1600
 WINDOW_HEIGHT = 1000
 
+COLOR_BLACK = (0, 0, 0)
+COLOR_CHECKPOINT = (220, 35, 20)
+COLOR_VISITED = (35, 170, 70)
+COLOR_RAY = (245, 205, 40)
+COLOR_RAY_HIT = (250, 230, 75)
+COLOR_THRUST = (35, 180, 80)
+COLOR_BRAKE = (45, 120, 230)
+COLOR_TURN = (245, 170, 35)
+
 
 
 def distance_to_line_segment(x, y, x1, y1, x2, y2, d=1):
@@ -462,6 +471,8 @@ class Drone:
         self.done = False
         self.action = np.array([0, 0])
         self.action_state = 0
+        self.last_accel_cmd = 0.0
+        self.last_turn_cmd = 0.0
         self.goal_vector_last = None
         self.coverage_visited = np.zeros(self.env.n_goals, dtype=bool)
         self.coverage_count = 0
@@ -792,7 +803,7 @@ class ExploreDrone(gym.Env):
             'gui_reward_total': [True, False],
             'gui_velocity': [False, True],
             'gui_draw_echo_points': [True, False],
-            'gui_draw_echo_vectors': [False, True],
+            'gui_draw_echo_vectors': [True, False],
             'gui_draw_goal_all': [True, False],
             'gui_draw_goal_next': [True, False],
             'gui_draw_goal_points': [False, True],
@@ -938,6 +949,8 @@ class ExploreDrone(gym.Env):
 
         # set action_state for image
         self.drone.action = tmp_action.copy()
+        self.drone.last_accel_cmd = float(tmp_action[0])
+        self.drone.last_turn_cmd = float(tmp_action[1])
         if self.drone.action[0] < 0:
             self.drone.action_state = 2
         else:
@@ -1047,13 +1060,11 @@ class ExploreDrone(gym.Env):
             if self.gui_frames_remaining:
                 self.gui_interface.append('frames_remaining')
 
-            middle_echo_index = int((self.drone.N_ECHO - 1) / 2)
-
         def draw_level():
             # pygame.draw.lines(self.win, (178, 190, 181), False, self.env.line1_list, 7)
             # pygame.draw.lines(self.win, (178, 190, 181), False, self.env.line2_list, 7)
             for wall in self.env.level_collision_vectors:
-                pygame.draw.line(self.win, (0, 0, 0), wall[:2], wall[2:], 7)
+                pygame.draw.line(self.win, COLOR_BLACK, wall[:2], wall[2:], 7)
 
         def draw_goal_next():
             goal = tuple(self.env.goals[self.drone.level, :])
@@ -1065,10 +1076,54 @@ class ExploreDrone(gym.Env):
         def draw_goal_all():
             for i in range(self.env.goals.shape[0]):
                 goal = tuple(self.env.goals[i, :])
-                color = (220, 35, 20)
+                color = COLOR_CHECKPOINT
                 if self.reward_mode == 'coverage' and self.drone.coverage_visited[i]:
-                    color = (35, 170, 70)
+                    color = COLOR_VISITED
                 pygame.draw.lines(self.win, color, False, (goal[0:2], goal[2:4]), 7)
+
+        def draw_motion_overlay():
+            x, y = int(self.drone.x), int(self.drone.y)
+            heading = self.drone.ang
+            accel = self.drone.last_accel_cmd
+            turn = self.drone.last_turn_cmd
+            speed = np.sqrt(self.drone.vel_x ** 2 + self.drone.vel_y ** 2)
+
+            # Velocity vector shows actual motion, independent from the commanded action.
+            if speed > 0.1:
+                vx_end = (int(x + self.drone.vel_x * 8), int(y + self.drone.vel_y * 8))
+                pygame.draw.line(self.win, (50, 50, 50), (x, y), vx_end, 4)
+                pygame.draw.circle(self.win, (50, 50, 50), vx_end, 5)
+
+            # Acceleration/braking command indicator.
+            if abs(accel) > 0.05:
+                direction = 1 if accel > 0 else -1
+                color = COLOR_THRUST if accel > 0 else COLOR_BRAKE
+                start = (
+                    int(x - direction * 22 * np.cos(heading)),
+                    int(y + direction * 22 * np.sin(heading)),
+                )
+                end = (
+                    int(x - direction * (58 + 28 * abs(accel)) * np.cos(heading)),
+                    int(y + direction * (58 + 28 * abs(accel)) * np.sin(heading)),
+                )
+                pygame.draw.line(self.win, color, start, end, 8)
+                pygame.draw.circle(self.win, color, end, 9)
+
+            # Turning command indicator.
+            if abs(turn) > 0.05:
+                radius = 48
+                rect = pygame.Rect(x - radius, y - radius, 2 * radius, 2 * radius)
+                if turn > 0:
+                    start_ang, end_ang = heading - 0.2, heading + 1.0
+                else:
+                    start_ang, end_ang = heading - 1.0, heading + 0.2
+                pygame.draw.arc(self.win, COLOR_TURN, rect, start_ang, end_ang, 5)
+                tip_ang = end_ang if turn > 0 else start_ang
+                tip = (
+                    int(x + radius * np.cos(tip_ang)),
+                    int(y - radius * np.sin(tip_ang)),
+                )
+                pygame.draw.circle(self.win, COLOR_TURN, tip, 7)
 
         def draw_drone():
             self.drone.img = self.drone_IMG[self.drone.action_state]
@@ -1101,17 +1156,37 @@ class ExploreDrone(gym.Env):
 
         def draw_echo_vector():
             n = self.drone.N_ECHO
-            echo_vectors_short = self.drone.echo_vectors
-            if len(self.drone.echo_collision_points) == n:
-                echo_vectors_short = self.drone.echo_vectors
-                for i in range(n):
-                    echo_vectors_short[i, [2, 3]] = self.drone.echo_collision_points[i]
-            for vector in echo_vectors_short:
-                pygame.draw.line(self.win, (135, 40, 160), vector[0:2], vector[2:4], 4)
+            visual_ray_length = 360
+            for i, vector in enumerate(self.drone.echo_vectors):
+                start = vector[0:2].astype(float)
+                ray_end = vector[2:4].astype(float)
+                direction = ray_end - start
+                norm = np.linalg.norm(direction)
+                if norm > 0:
+                    direction = direction / norm
+                else:
+                    direction = np.array([1.0, 0.0])
+
+                end = start + direction * visual_ray_length
+                if len(self.drone.echo_collision_points) == n:
+                    hit = self.drone.echo_collision_points[i].astype(float)
+                    hit_distance = np.linalg.norm(hit - start)
+                    valid_hit = hit_distance > 2 and not np.allclose(hit, [0, 0])
+                    if valid_hit and hit_distance <= visual_ray_length:
+                        end = hit
+
+                width = 5 if i == middle_echo_index else 3
+                pygame.draw.line(self.win, COLOR_RAY, start, end, width)
 
         def draw_echo_collision_points():
+            start = np.array([self.drone.x, self.drone.y], dtype=float)
             for point in self.drone.echo_collision_points:
-                pygame.draw.circle(self.win, (255, 40, 40), (int(point[0]), int(point[1])), 6)
+                point = point.astype(float)
+                hit_distance = np.linalg.norm(point - start)
+                if hit_distance <= 2 or hit_distance > 360 or np.allclose(point, [0, 0]):
+                    continue
+                pygame.draw.circle(self.win, COLOR_RAY_HIT, (int(point[0]), int(point[1])), 7)
+                pygame.draw.circle(self.win, COLOR_BLACK, (int(point[0]), int(point[1])), 7, 2)
 
         def draw_text(surface, text=None, size=30, x=0, y=0,
                       font_name=pygame.font.match_font('consolas'),
@@ -1150,19 +1225,20 @@ class ExploreDrone(gym.Env):
 
         # ─── RECURING RENDERING ──────────────────────────────────────────
         self.win.blit(self.BG_IMG, (0, 0))
+        if self.env_visible:
+            draw_level()
         if self.gui_draw_goal_all:
             draw_goal_all()
         if self.gui_draw_goal_next and self.reward_mode != 'coverage':
             draw_goal_next()
-        if self.gui_draw_echo_points:
-            draw_echo_collision_points()
         if self.gui_draw_echo_vectors:
             draw_echo_vector()
+        if self.gui_draw_echo_points:
+            draw_echo_collision_points()
         if self.gui_draw_goal_points:
             draw_goal_intersection_points()
-        if self.env_visible:
-            draw_level()
         if self.drone.visible:
+            draw_motion_overlay()
             draw_drone()
         draw_spectators()
 
