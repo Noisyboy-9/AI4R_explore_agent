@@ -203,7 +203,7 @@ Use the arrow keys to drive. Press `r` to reset.
 
 Run these commands from `Exploring_agent_DRL` after activating the Conda environment.
 
-The default rooms task uses a coverage observation with several nearby unvisited checkpoints, not only one next checkpoint. PPO is also run with a small entropy coefficient by default, and the environment gives penalties for hovering, repeated wall contact, and not approaching a visible unvisited checkpoint. Wall contact penalties increase within each checkpoint-to-checkpoint segment but are bounded and reset after reaching a new checkpoint. These changes make the task behave more like exploration than the older lap-following example.
+The default rooms task uses a coverage observation with several nearby unvisited checkpoints, not only one next checkpoint. Each checkpoint slot points to the checkpoint midpoint, which keeps the policy from aiming at endpoints close to walls or already visited gates. PPO is also run with a small entropy coefficient by default, and the environment gives penalties for hovering, repeated wall contact, and not approaching a visible unvisited checkpoint. Wall contact penalties increase within each checkpoint-to-checkpoint segment but are bounded and reset after reaching a new checkpoint. These changes make the task behave more like exploration than the older lap-following example.
 
 CPU-only short run:
 

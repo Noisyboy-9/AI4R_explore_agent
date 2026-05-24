@@ -90,6 +90,10 @@ def closest_point_on_line_segment(x, y, x1, y1, x2, y2):
     return x1 + param * C, y1 + param * D
 
 
+def line_segment_midpoint(x1, y1, x2, y2):
+    return (x1 + x2) / 2, (y1 + y2) / 2
+
+
 def wrap_angle(angle):
     while angle > np.pi:
         angle -= 2 * np.pi
@@ -639,7 +643,7 @@ class Drone:
         candidates = []
         for goal_index in unvisited:
             goal = self.env.get_goal_line(goal_index)
-            px, py = closest_point_on_line_segment(self.x, self.y, *goal)
+            px, py = line_segment_midpoint(*goal)
             dx, dy = px - self.x, py - self.y
             distance = np.sqrt(dx ** 2 + dy ** 2)
             goal_ang = np.arctan2(-dy, dx)

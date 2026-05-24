@@ -76,7 +76,7 @@ where:
 - `alpha` is the angle between the robot heading and its velocity direction;
 - `beta` is the angle between the robot heading and the next goal/checkpoint direction.
 
-In the default `coverage` task, the observation is extended with five unvisited checkpoint slots. Each slot contains the relative angle, distance, and visibility flag for one nearby unvisited checkpoint. The final two values report overall checkpoint progress and how long the robot has gone without collecting a new checkpoint. This is different from the older racing-track task, where one next checkpoint was enough.
+In the default `coverage` task, the observation is extended with five unvisited checkpoint slots. Each slot contains the relative angle, distance, and visibility flag for the midpoint of one nearby unvisited checkpoint. The final two values report overall checkpoint progress and how long the robot has gone without collecting a new checkpoint. This is different from the older racing-track task, where one next checkpoint was enough. The midpoint target keeps the policy from aiming at checkpoint endpoints close to walls or already visited gates.
 
 The observation values are normalized to match the declared Gymnasium observation space.
 
