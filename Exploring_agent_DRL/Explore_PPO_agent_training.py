@@ -47,7 +47,7 @@ def parse_args():
         default="",
         help="Optional .npz layout exported by the local layout editor.",
     )
-    parser.add_argument("--entropy-coeff", type=float, default=0.01)
+    parser.add_argument("--entropy-coeff", type=float, default=0.1)
     parser.add_argument(
         "--train-batch-size",
         type=int,

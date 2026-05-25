@@ -17,7 +17,7 @@ def parse_args():
 
     train = subparsers.add_parser("train", help="Train PPO on the 2D checkpoint exploration task.")
     train.add_argument("--iterations", type=int, default=500)
-    train.add_argument("--entropy-coeff", type=float, default=0.01)
+    train.add_argument("--entropy-coeff", type=float, default=0.1)
     train.add_argument("--num-gpus", type=float, default=0)
     train.add_argument("--num-workers", type=int, default=0)
     train.add_argument("--max-steps", type=int, default=400)

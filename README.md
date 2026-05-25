@@ -22,15 +22,15 @@ Train a PPO agent for the `2d_checkpoint_exploration` task and report how well i
 
 Your goal is to get as high a score as possible. A score above `6.0` at any point during the allowed rollout is enough to submit the assignment, but the report must explain why the robot behaves as shown in the rollout video. The final reward may be lower if the robot later collides, stalls, or accumulates penalties. A higher and more stable score is better, especially if the behavior does not rely on repeated wall contact. For the final video and score, the rollout may run for up to `1000` steps.
 
-Start with the default setting, `entropy_coeff=0.01`, and first try to reach more than `6.0` during a `1000` step rollout. The provided setup has been tested to reach this target with enough training and without major code changes. After that, change the entropy coefficient for the comparison experiment and explain the behavior in the video report.
+Start with the provided setting, `entropy_coeff=0.1`, and first try to reach more than `6.0` during a `1000` step rollout. The provided setup has been tested to reach this target with enough training and without major code changes. After that, research what entropy regularization does in PPO, test other entropy values, and explain which value gave the best behavior.
 
 Required experiments:
 
-- Train PPO with `entropy_coeff=0.0`.
-- Train PPO with `entropy_coeff=0.01` as the default setting.
-- Train PPO with `entropy_coeff=0.1`.
+- Train PPO with the provided setting, `entropy_coeff=0.1`.
+- Research how `entropy_coeff` affects PPO exploration.
+- Choose and test at least two additional entropy values.
 - Compare the reward curves, final checkpoint coverage, wall-contact behavior, and visual rollout behavior.
-- Explain how the different entropy values changed the observed behavior.
+- Explain which entropy value worked best and why.
 
 PPO is the default supported algorithm for the assignment. Students may try another RL algorithm if they keep the map, checkpoints, and reward definition fixed. If another algorithm is used for the submitted result, the report must explain the selected algorithm and repeat the exploration-parameter comparison using that algorithm's closest equivalent to `entropy_coeff`.
 
@@ -38,7 +38,7 @@ Required deliverable:
 
 - A short video or presentation segment showing the best rollout.
 - A short explanation of what the robot learned.
-- A comparison of all three required entropy settings: `0.0`, `0.01`, and `0.1`, discussed or presented in the video report.
+- A comparison of the tested entropy settings, including the provided `0.1` setting, discussed or presented in the video report.
 - A discussion of failure cases such as getting stuck, oscillating, missing side checkpoints, or colliding with walls.
 - The best score reached at any time within the allowed rollout length, plus the final score if it is different.
 - If the reward drops strongly after reaching a good score, a clear explanation of what went wrong and what was tried to improve it.
@@ -257,23 +257,23 @@ Use the arrow keys to drive. Press `r` to reset.
 Default PPO. Start here:
 
 ```text
-entropy_coeff = 0.01
+entropy_coeff = 0.1
 ```
 
 ```bash
-python run_assignment.py train --iterations 500 --train-batch-size 2000 --sgd-minibatch-size 256 --num-sgd-iter 10 --num-workers 0 --num-gpus 0 --entropy-coeff 0.01 --checkpoint-dir tmp/ppo_entropy_001
+python run_assignment.py train --iterations 500 --train-batch-size 2000 --sgd-minibatch-size 256 --num-sgd-iter 10 --num-workers 0 --num-gpus 0 --entropy-coeff 0.1 --checkpoint-dir tmp/ppo_entropy_010
 ```
 
 GPU version, if CUDA is available:
 
 ```bash
-python run_assignment.py train --iterations 500 --train-batch-size 2000 --sgd-minibatch-size 256 --num-sgd-iter 10 --num-workers 0 --num-gpus 1 --entropy-coeff 0.01 --checkpoint-dir tmp/ppo_entropy_001
+python run_assignment.py train --iterations 500 --train-batch-size 2000 --sgd-minibatch-size 256 --num-sgd-iter 10 --num-workers 0 --num-gpus 1 --entropy-coeff 0.1 --checkpoint-dir tmp/ppo_entropy_010
 ```
 
 You can also call the training script directly:
 
 ```bash
-python Explore_PPO_agent_training.py --iterations 500 --num-workers 0 --num-gpus 0 --env-name 2d_checkpoint_exploration --reward-mode coverage --max-steps 400 --entropy-coeff 0.01 --train-batch-size 2000 --checkpoint-dir tmp/ppo_entropy_001
+python Explore_PPO_agent_training.py --iterations 500 --num-workers 0 --num-gpus 0 --env-name 2d_checkpoint_exploration --reward-mode coverage --max-steps 400 --entropy-coeff 0.1 --train-batch-size 2000 --checkpoint-dir tmp/ppo_entropy_010
 ```
 
 ### Training Length per PPO Iteration
@@ -287,7 +287,7 @@ python Explore_PPO_agent_training.py --iterations 500 --num-workers 0 --num-gpus
 Students may change this value if they want longer or shorter PPO updates:
 
 ```bash
-python run_assignment.py train --iterations 500 --train-batch-size 4000 --num-workers 0 --num-gpus 0 --entropy-coeff 0.01 --checkpoint-dir tmp/ppo_entropy_001_batch4000
+python run_assignment.py train --iterations 500 --train-batch-size 4000 --num-workers 0 --num-gpus 0 --entropy-coeff 0.1 --checkpoint-dir tmp/ppo_entropy_010_batch4000
 ```
 
 A larger batch gives PPO a more stable update but each iteration takes longer. A smaller batch gives faster iteration feedback but usually noisier learning.
@@ -300,7 +300,7 @@ Students may adjust the training values to reach the task goal, as long as they 
 - `--train-batch-size`: number of environment steps collected before one PPO update. The default `2000` is about five full `400` step training episodes. Larger values are more stable but slower per iteration.
 - `--sgd-minibatch-size`: number of samples used in each optimizer minibatch after the full train batch is collected. It should normally be smaller than `--train-batch-size`.
 - `--num-sgd-iter`: number of optimization passes over the collected train batch. Higher values learn more from the same data, but too high can overfit to recent behavior.
-- `--entropy-coeff`: entropy coefficient used by PPO. The required report comparison uses `0.0`, `0.01`, and `0.1`.
+- `--entropy-coeff`: entropy coefficient used by PPO. The provided setup uses `0.1`; students should research and compare additional values before choosing the best final setting.
 - `--max-steps`: maximum training episode length. The assignment uses `400` during training and allows up to `1000` during final rollout.
 - `--num-workers`: number of Ray rollout workers. Keep `0` for simple local training unless the machine has enough CPU cores.
 - `--num-gpus`: use `1` only when CUDA is available; otherwise use `0`.
@@ -336,7 +336,7 @@ python run_assignment.py rollout --checkpoint tmp/ddpg_2d_checkpoint_exploration
 To continue from an existing checkpoint, pass `--resume-from` and write new checkpoints to a new folder:
 
 ```bash
-python run_assignment.py train --iterations 300 --resume-from tmp/ppo_entropy_001/checkpoint_best --checkpoint-dir tmp/ppo_entropy_001_resume --num-workers 0 --num-gpus 0 --entropy-coeff 0.01 --train-batch-size 2000
+python run_assignment.py train --iterations 300 --resume-from tmp/ppo_entropy_010/checkpoint_best --checkpoint-dir tmp/ppo_entropy_010_resume --num-workers 0 --num-gpus 0 --entropy-coeff 0.1 --train-batch-size 2000
 ```
 
 Use the same fixed map when resuming. If the map, observation format, or reward mode is changed, old checkpoints may not be compatible or may behave differently from the submitted setup.
@@ -346,13 +346,13 @@ Use the same fixed map when resuming. If the map, observation format, or reward 
 Visual rollout:
 
 ```bash
-python run_assignment.py rollout --checkpoint tmp/ppo_entropy_001/checkpoint_best --steps 1000 --max-steps 1000 --render-fps 30
+python run_assignment.py rollout --checkpoint tmp/ppo_entropy_010/checkpoint_best --steps 1000 --max-steps 1000 --render-fps 30
 ```
 
 Terminal-only rollout:
 
 ```bash
-python run_assignment.py rollout --checkpoint tmp/ppo_entropy_001/checkpoint_best --steps 1000 --max-steps 1000 --no-gui
+python run_assignment.py rollout --checkpoint tmp/ppo_entropy_010/checkpoint_best --steps 1000 --max-steps 1000 --no-gui
 ```
 
 The rollout prints cumulative reward, checkpoint coverage, maximum checkpoint reward, hover penalty, collision penalty, and progress penalty.
@@ -361,26 +361,26 @@ For assessment, use the best score reached at any time within the `1000` step ro
 
 ## What to Discuss in the Report
 
-First report the best result obtained with the default PPO entropy setting, `entropy_coeff=0.01`, unless a different algorithm was selected. List the hyperparameters changed from the provided command, such as `--iterations`, `--train-batch-size`, `--sgd-minibatch-size`, `--num-sgd-iter`, network settings, or other PPO/training options. For each change, explain why it was made and how it affected the score or rollout behavior. If another algorithm is used, report the equivalent algorithm-specific hyperparameters instead.
+First report what you learned about entropy regularization in PPO and why you selected the entropy values to test. The provided setup uses `entropy_coeff=0.1`; compare it with at least two additional values and identify the best setting for this task. List any other hyperparameters changed from the provided command, such as `--iterations`, `--train-batch-size`, `--sgd-minibatch-size`, `--num-sgd-iter`, network settings, or other PPO/training options. For each change, explain why it was made and how it affected the score or rollout behavior. If another algorithm is used, report the equivalent algorithm-specific hyperparameters instead.
 
-For each entropy setting, discuss:
+For each entropy setting tested, discuss:
 
 - best reward during the rollout, final reward, and checkpoint count;
 - whether the robot enters multiple rooms;
 - whether it slows down enough to cross side checkpoints;
 - whether it gets stuck near walls;
 - how much wall-contact penalty appears;
-- how the behavior changes across the three entropy values;
+- how the behavior changes across the entropy values;
 - which entropy setting gave the best rollout and why.
 
-For PPO, use the best default `entropy_coeff=0.01` run as the middle case in the entropy comparison. Then run the two additional comparison cases with the same training setup, changing only `--entropy-coeff` and `--checkpoint-dir`:
+For PPO, use the provided `entropy_coeff=0.1` run as the reference case. The following commands are example additional comparison cases; students may choose different values if they justify them from their entropy research:
 
 ```bash
 python run_assignment.py train --iterations 500 --train-batch-size 2000 --sgd-minibatch-size 256 --num-sgd-iter 10 --num-workers 0 --num-gpus 0 --entropy-coeff 0.0 --checkpoint-dir tmp/ppo_entropy_000
-python run_assignment.py train --iterations 500 --train-batch-size 2000 --sgd-minibatch-size 256 --num-sgd-iter 10 --num-workers 0 --num-gpus 0 --entropy-coeff 0.1 --checkpoint-dir tmp/ppo_entropy_010
+python run_assignment.py train --iterations 500 --train-batch-size 2000 --sgd-minibatch-size 256 --num-sgd-iter 10 --num-workers 0 --num-gpus 0 --entropy-coeff 0.01 --checkpoint-dir tmp/ppo_entropy_001
 ```
 
-Test each trained checkpoint, including the already trained default `0.01` checkpoint, and report what changed in the reward curve and rollout video. If a different RL algorithm is used, run the same kind of comparison with its exploration parameter and explain which parameter was changed.
+Test each trained checkpoint, including the provided `0.1` checkpoint, and report what changed in the reward curve and rollout video. If a different RL algorithm is used, run the same kind of comparison with its exploration parameter and explain which parameter was changed.
 
 Keep the complete submission video below about `5` minutes if possible. The video only needs to show the best rollout. Discuss or present the entropy-coefficient results using concise plots, tables, or spoken explanation; there is no need to include a full rollout for every entropy run. If a short clip from another rollout clearly supports a behavior pattern discussed in the report, it can be included briefly.
 
