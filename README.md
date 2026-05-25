@@ -56,8 +56,6 @@ Keep submitted code readable. Comments should explain decisions that are not obv
 
 The robot moves in a continuous 2D map with rooms, walls, doorways, and checkpoint gates. Walls are black, unvisited checkpoints are red, and visited checkpoints turn green. Yellow rays show range observations. The robot receives a checkpoint reward only when it crosses a previously unvisited checkpoint gate.
 
-![Observation and reward flow](Exploring_agent_DRL/docs/observation_reward_flow.png)
-
 The environment follows the Gymnasium API:
 
 ```python
@@ -81,8 +79,7 @@ Exploring_agent_DRL/
 ├── docs/
 │   ├── AI4R_explore_agent_assignment.pdf
 │   ├── rooms_task_overview.png
-│   ├── original_observation_space.png
-│   └── observation_reward_flow.png
+│   └── original_observation_space.png
 ├── Explore-Agent/explore_agent/envs/
 │   ├── exploring_gym.py                      # Gymnasium environment and robot dynamics
 │   ├── rooms_layout.py                       # fixed map and checkpoint layout

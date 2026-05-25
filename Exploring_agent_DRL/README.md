@@ -65,8 +65,7 @@ performance_sanity_check.py               # headless/render speed check
 docs/                                     # assignment guide and README figures
 ├── AI4R_explore_agent_assignment.pdf
 ├── rooms_task_overview.png
-├── original_observation_space.png
-└── observation_reward_flow.png
+└── original_observation_space.png
 Explore-Agent/explore_agent/envs/
 ├── exploring_gym.py                      # Gymnasium environment and robot dynamics
 ├── rooms_layout.py                       # walls and checkpoint map
@@ -108,8 +107,6 @@ The first `10` values describe the robot's local motion and target direction:
 - `beta`: normalized angle between the robot heading and the selected checkpoint target direction.
 
 The remaining observation values describe several visible unvisited checkpoint candidates, so the policy can choose between multiple exploration directions instead of only reacting to one target.
-
-![Observation and reward flow](docs/observation_reward_flow.png)
 
 The default reward mode is `coverage`:
 
