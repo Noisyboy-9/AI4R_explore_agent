@@ -37,7 +37,7 @@ PPO is the default supported algorithm for the assignment. Students may try anot
 
 Required deliverable:
 
-- A short video report, `5` minutes or less, showing the best rollout.
+- A short video report, `5` minutes or less, showing the best rollout with the explanations listed below.
 - A short explanation of what the robot learned.
 - A comparison between the best setup and the `entropy_coeff=0.0` comparison run, discussed or presented in the video report.
 - A discussion of failure cases such as getting stuck, oscillating, missing side checkpoints, or colliding with walls.
