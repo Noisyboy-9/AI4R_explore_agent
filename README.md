@@ -22,15 +22,15 @@ Train a PPO agent for the `2d_checkpoint_exploration` task and report how well i
 
 Your goal is to get as high a score as possible. A score above `6.0` at any point during the allowed rollout is enough to submit the assignment, but the report must explain why the robot behaves as shown in the rollout video. The final reward may be lower if the robot later collides, stalls, or accumulates penalties. A higher and more stable score is better, especially if the behavior does not rely on repeated wall contact. For the final video and score, the rollout may run for up to `1000` steps.
 
-Start with the provided setting, `entropy_coeff=0.1`, and first try to reach more than `6.0` during a `1000` step rollout. The provided setup has been tested to reach this target with enough training and without major code changes. After that, research what entropy regularization does in PPO, test other entropy values, and explain which value gave the best behavior.
+Start with the provided setting, `entropy_coeff=0.1`, and first try to reach more than `6.0` during a `1000` step rollout. The provided setup has been tested to reach this target with enough training and without major code changes. After that, research what entropy regularization does in PPO, run one comparison with `entropy_coeff=0.0`, and explain the behavior difference between the no-entropy version and the best setup.
 
 Required experiments:
 
 - Train PPO with the provided setting, `entropy_coeff=0.1`.
 - Research how `entropy_coeff` affects PPO exploration.
-- Choose and test at least two additional entropy values.
+- Train one comparison run with `entropy_coeff=0.0`.
 - Compare the reward curves, final checkpoint coverage, wall-contact behavior, and visual rollout behavior.
-- Explain which entropy value worked best and why.
+- Explain the behavior difference between the best setup and the `entropy_coeff=0.0` version.
 
 PPO is the default supported algorithm for the assignment. Students may try another RL algorithm if they keep the map, checkpoints, and reward definition fixed. If another algorithm is used for the submitted result, the report must explain the selected algorithm and repeat the exploration-parameter comparison using that algorithm's closest equivalent to `entropy_coeff`.
 
@@ -38,7 +38,7 @@ Required deliverable:
 
 - A short video or presentation segment showing the best rollout.
 - A short explanation of what the robot learned.
-- A comparison of the tested entropy settings, including the provided `0.1` setting, discussed or presented in the video report.
+- A comparison between the best setup and the `entropy_coeff=0.0` comparison run, discussed or presented in the video report.
 - A discussion of failure cases such as getting stuck, oscillating, missing side checkpoints, or colliding with walls.
 - The best score reached at any time within the allowed rollout length, plus the final score if it is different.
 - If the reward drops strongly after reaching a good score, a clear explanation of what went wrong and what was tried to improve it.
@@ -361,28 +361,27 @@ For assessment, use the best score reached at any time within the `1000` step ro
 
 ## What to Discuss in the Report
 
-First report what you learned about entropy regularization in PPO and why you selected the entropy values to test. The provided setup uses `entropy_coeff=0.1`; compare it with at least two additional values and identify the best setting for this task. List any other hyperparameters changed from the provided command, such as `--iterations`, `--train-batch-size`, `--sgd-minibatch-size`, `--num-sgd-iter`, network settings, or other PPO/training options. For each change, explain why it was made and how it affected the score or rollout behavior. If another algorithm is used, report the equivalent algorithm-specific hyperparameters instead.
+First report what you learned about entropy regularization in PPO and how it relates to exploration. The provided setup uses `entropy_coeff=0.1`; compare your best setup against one `entropy_coeff=0.0` run and explain the behavior difference. List any other hyperparameters changed from the provided command, such as `--iterations`, `--train-batch-size`, `--sgd-minibatch-size`, `--num-sgd-iter`, network settings, or other PPO/training options. For each change, explain why it was made and how it affected the score or rollout behavior. If another algorithm is used, report the equivalent algorithm-specific hyperparameters instead.
 
-For each entropy setting tested, discuss:
+For the best setup and the no-entropy comparison run, discuss:
 
 - best reward during the rollout, final reward, and checkpoint count;
 - whether the robot enters multiple rooms;
 - whether it slows down enough to cross side checkpoints;
 - whether it gets stuck near walls;
 - how much wall-contact penalty appears;
-- how the behavior changes across the entropy values;
-- which entropy setting gave the best rollout and why.
+- how the behavior changes when entropy-driven exploration is removed;
+- which setup gave the best rollout and why.
 
-For PPO, use the provided `entropy_coeff=0.1` run as the reference case. The following commands are example additional comparison cases; students may choose different values if they justify them from their entropy research:
+For PPO, run this comparison case against the best setup:
 
 ```bash
 python run_assignment.py train --iterations 500 --train-batch-size 2000 --sgd-minibatch-size 256 --num-sgd-iter 10 --num-workers 0 --num-gpus 0 --entropy-coeff 0.0 --checkpoint-dir tmp/ppo_entropy_000
-python run_assignment.py train --iterations 500 --train-batch-size 2000 --sgd-minibatch-size 256 --num-sgd-iter 10 --num-workers 0 --num-gpus 0 --entropy-coeff 0.01 --checkpoint-dir tmp/ppo_entropy_001
 ```
 
-Test each trained checkpoint, including the provided `0.1` checkpoint, and report what changed in the reward curve and rollout video. If a different RL algorithm is used, run the same kind of comparison with its exploration parameter and explain which parameter was changed.
+Test the best checkpoint and the `entropy_coeff=0.0` checkpoint, then report what changed in the reward curve and rollout behavior. If a different RL algorithm is used, run the same kind of comparison with its closest low/no-exploration parameter and explain which parameter was changed.
 
-Keep the complete submission video below about `5` minutes if possible. The video only needs to show the best rollout. Discuss or present the entropy-coefficient results using concise plots, tables, or spoken explanation; there is no need to include a full rollout for every entropy run. If a short clip from another rollout clearly supports a behavior pattern discussed in the report, it can be included briefly.
+Keep the complete submission video below about `5` minutes if possible. The video only needs to show the best rollout. Discuss or present the `entropy_coeff=0.0` comparison using concise plots, tables, or spoken explanation; there is no need to include the full comparison rollout. If a short clip from the comparison rollout clearly supports a behavior pattern discussed in the report, it can be included briefly.
 
 A good format is: show the best rollout first, then briefly explain the score, the main behavior, any failure near the end, the most important training changes, and the entropy comparison.
 
