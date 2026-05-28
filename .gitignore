@@ -51,5 +51,7 @@ Thumbs.db
 .vscode/
 .idea/
 
-Exploring_agent_DRL/tmp/*
-Exploring_agent_DRL/logs/*
+tmp/*
+logs/*
+.gpu_job_queues
+.gpu_job_queues
