@@ -54,4 +54,4 @@ Thumbs.db
 tmp/*
 logs/*
 .gpu_job_queues
-.gpu_job_queues
+.ipynb_checkpoints/
