@@ -50,3 +50,6 @@ checkpoint*.tar.gz
 Thumbs.db
 .vscode/
 .idea/
+
+Exploring_agent_DRL/tmp/*
+Exploring_agent_DRL/logs/*
