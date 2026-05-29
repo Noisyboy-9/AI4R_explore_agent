@@ -29,7 +29,7 @@ TOTAL_SLOTS=$((${#GPUS[@]} * JOBS_PER_GPU))
 # 110 cores / 6 concurrent jobs ≈ 18 cores per job.
 # We use 17 rollout workers per job and leave room for the driver process,
 # Ray overhead, logging, and the OS scheduler.
-NUM_WORKERS=17
+NUM_WORKERS=18
 
 SGD_MINIBATCH_SIZE=256
 
