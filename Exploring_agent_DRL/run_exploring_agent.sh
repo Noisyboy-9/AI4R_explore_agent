@@ -62,6 +62,7 @@ run_job() {
 
   (
     CUDA_VISIBLE_DEVICES="$gpu" \
+      PYTHONUNBUFFERED=1 \
       python run_assignment.py train \
       --iterations "$iter" \
       --train-batch-size "$batch" \
