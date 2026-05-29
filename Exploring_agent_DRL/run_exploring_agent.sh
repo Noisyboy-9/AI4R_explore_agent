@@ -12,6 +12,7 @@ MAX_JOBS=6
 NUM_WORKERS=18
 SGD_MINIBATCH_SIZE=256
 NUM_GPUS_PER_JOB=0.33
+SKIP_JOB_IDS=(0 2 8 11 14 17 20 23 26)
 
 BASE_CHECKPOINT_DIR="tmp/hparam_sweep"
 LOG_DIR="logs/hparam_sweep"
@@ -21,6 +22,19 @@ mkdir -p "$BASE_CHECKPOINT_DIR" "$LOG_DIR"
 active_jobs=0
 job_id=0
 failed_jobs=0
+submitted_jobs=0
+
+should_skip_job() {
+  local candidate="$1"
+
+  for skipped_job_id in "${SKIP_JOB_IDS[@]}"; do
+    if [ "$candidate" -eq "$skipped_job_id" ]; then
+      return 0
+    fi
+  done
+
+  return 1
+}
 
 wait_for_one_job() {
   if ! wait -n; then
@@ -69,12 +83,19 @@ for iter in "${ITERATIONS[@]}"; do
   for batch in "${TRAIN_BATCH_SIZES[@]}"; do
     for sgd_iter in "${NUM_SGD_ITERS[@]}"; do
       for entropy in "${ENTROPY_VALUES[@]}"; do
+        if should_skip_job "$job_id"; then
+          echo "Skipping previously completed job_${job_id}"
+          job_id=$((job_id + 1))
+          continue
+        fi
+
         while [ "$active_jobs" -ge "$MAX_JOBS" ]; do
           wait_for_one_job
         done
 
         gpu="${GPUS[$((job_id % ${#GPUS[@]}))]}"
         run_job "$iter" "$batch" "$sgd_iter" "$entropy" "$job_id" "$gpu"
+        submitted_jobs=$((submitted_jobs + 1))
         job_id=$((job_id + 1))
       done
     done
@@ -85,5 +106,6 @@ while [ "$active_jobs" -gt 0 ]; do
   wait_for_one_job
 done
 
-echo "Submitted ${job_id} jobs."
+echo "Enumerated ${job_id} jobs."
+echo "Submitted ${submitted_jobs} jobs."
 echo "Jobs with non-zero exit status: ${failed_jobs}"
