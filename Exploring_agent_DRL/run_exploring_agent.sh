@@ -12,12 +12,15 @@ MAX_JOBS=6
 NUM_WORKERS=18
 SGD_MINIBATCH_SIZE=256
 NUM_GPUS_PER_JOB=0.33
-SKIP_JOB_IDS=(0 1 2 3 4 5 6 7 8 9 10 11 14 17 20 23 26)
 
 BASE_CHECKPOINT_DIR="tmp/hparam_sweep"
 LOG_DIR="logs/hparam_sweep"
+FINISHED_JOBS_FILE="finished_jobs.txt"
 
 mkdir -p "$BASE_CHECKPOINT_DIR" "$LOG_DIR"
+touch "$FINISHED_JOBS_FILE"
+mapfile -t SKIP_JOB_IDS < "$FINISHED_JOBS_FILE"
+declare -A PID_TO_JOB_ID=()
 
 active_jobs=0
 job_id=0
@@ -37,10 +40,14 @@ should_skip_job() {
 }
 
 wait_for_one_job() {
-  if ! wait -n; then
+  local finished_pid=""
+  if ! wait -n -p finished_pid; then
     failed_jobs=$((failed_jobs + 1))
   fi
 
+  SKIP_JOB_IDS+=("${PID_TO_JOB_ID[$finished_pid]}")
+  printf '%s\n' "${PID_TO_JOB_ID[$finished_pid]}" >> "$FINISHED_JOBS_FILE"
+  unset 'PID_TO_JOB_ID[$finished_pid]'
   active_jobs=$((active_jobs - 1))
 }
 
@@ -74,6 +81,7 @@ run_job() {
       --checkpoint-dir "$checkpoint_dir" \
       >"$log_file" 2>&1
   ) &
+  PID_TO_JOB_ID[$!]="$job_id"
 
   active_jobs=$((active_jobs + 1))
 }
