@@ -1,7 +1,9 @@
+import math
+import logging
+
 import gymnasium as gym
 # import gym
 import numpy as np
-import math
 try:
     from .reward_config import (
         CHECKPOINT_CROSS_TOLERANCE,
@@ -82,6 +84,8 @@ COLOR_VELOCITY = (50, 50, 50)
 COLOR_PANEL_BG = (255, 255, 255)
 COLOR_PANEL_BORDER = (70, 70, 70)
 COLOR_TEXT = (19, 19, 41)
+
+logger = logging.getLogger(__name__)
 
 def distance_to_line_segment(x, y, x1, y1, x2, y2, d=1):
     # Calculate the distance between the point and the line segment
@@ -1140,6 +1144,16 @@ class ExploreDrone(gym.Env):
                 self.drone.coverage_stall_interp,
             ])
             observation = np.concatenate((observation, self.drone.coverage_goal_features, coverage_state))
+
+        non_finite_mask = ~np.isfinite(observation)
+        if non_finite_mask.any():
+            logger.error(
+                "Non-finite raw observation detected: observation=%s mask=%s. This shows instability in the training parameters!",
+                observation,
+                non_finite_mask.astype(np.int8),
+            )
+
+        observation = np.nan_to_num(observation, nan=0.0, posinf=1.0, neginf=-1.0)
         return np.clip(observation, -1.0, 1.0).astype(np.float32)
 
     def parse_env_config(self, env_config):
