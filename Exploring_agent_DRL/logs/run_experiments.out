@@ -1,0 +1,42 @@
+Starting PPO hyperparameter sweep with up to 8 concurrent jobs.
+Skipping previously completed job_0
+Skipping previously completed job_1
+Skipping previously completed job_2
+Skipping previously completed job_3
+Skipping previously completed job_4
+Skipping previously completed job_5
+Skipping previously completed job_6
+Skipping previously completed job_7
+Skipping previously completed job_8
+Skipping previously completed job_9
+Skipping previously completed job_10
+Skipping previously completed job_11
+Starting job_12_iter_500_batch_2000_sgd_10_entropy_0_05 on GPU 2
+Starting job_13_iter_500_batch_2000_sgd_10_entropy_0_2 on GPU 3
+Skipping previously completed job_14
+Starting job_15_iter_500_batch_3000_sgd_3_entropy_0_0 on GPU 5
+Starting job_16_iter_500_batch_3000_sgd_3_entropy_0_1 on GPU 2
+Skipping previously completed job_17
+Starting job_18_iter_500_batch_3000_sgd_3_entropy_0_2 on GPU 4
+Starting job_19_iter_500_batch_3000_sgd_3_entropy_0_3 on GPU 5
+Skipping previously completed job_20
+Starting job_21_iter_500_batch_3000_sgd_5_entropy_0_1 on GPU 3
+Starting job_22_iter_500_batch_3000_sgd_5_entropy_0_05 on GPU 4
+Skipping previously completed job_23
+Starting job_24_iter_500_batch_3000_sgd_5_entropy_0_3 on GPU 2
+Starting job_25_iter_500_batch_3000_sgd_10_entropy_0_0 on GPU 3
+Skipping previously completed job_26
+Starting job_27_iter_500_batch_3000_sgd_10_entropy_0_05 on GPU 5
+Starting job_28_iter_500_batch_3000_sgd_10_entropy_0_2 on GPU 2
+Starting job_29_iter_500_batch_3000_sgd_10_entropy_0_3 on GPU 3
+Starting job_30_iter_500_batch_4000_sgd_3_entropy_0_0 on GPU 4
+Starting job_31_iter_500_batch_4000_sgd_3_entropy_0_1 on GPU 5
+Starting job_32_iter_500_batch_4000_sgd_3_entropy_0_05 on GPU 2
+Starting job_33_iter_500_batch_4000_sgd_3_entropy_0_2 on GPU 3
+Starting job_34_iter_500_batch_4000_sgd_3_entropy_0_3 on GPU 4
+Starting job_35_iter_500_batch_4000_sgd_5_entropy_0_0 on GPU 5
+Starting job_36_iter_500_batch_4000_sgd_5_entropy_0_1 on GPU 2
+Starting job_37_iter_500_batch_4000_sgd_5_entropy_0_05 on GPU 3
+Starting job_38_iter_500_batch_4000_sgd_5_entropy_0_2 on GPU 4
+Starting job_39_iter_500_batch_4000_sgd_5_entropy_0_3 on GPU 5
+Starting job_40_iter_500_batch_4000_sgd_10_entropy_0_0 on GPU 2

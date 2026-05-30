@@ -1,0 +1,15 @@
+/usr/bin/python Explore_PPO_agent_training.py --iterations 1000 --num-workers 17 --num-gpus 0.5 --env-name 2d_checkpoint_exploration --reward-mode coverage --max-steps 400 --entropy-coeff 0.3 --checkpoint-dir tmp/hparam_sweep/job_89_iter_1000_batch_4000_sgd_10_entropy_0_3 --spawn-mode random --spawn-index 0 --train-batch-size 4000 --sgd-minibatch-size 256 --num-sgd-iter 10
+Traceback (most recent call last):
+  File "/home/jovyan/Desktop/dev/sina/AI4R_explore_agent/Exploring_agent_DRL/Explore_PPO_agent_training.py", line 7, in <module>
+    import ray
+ModuleNotFoundError: No module named 'ray'
+Traceback (most recent call last):
+  File "/home/jovyan/Desktop/dev/sina/AI4R_explore_agent/Exploring_agent_DRL/run_assignment.py", line 180, in <module>
+    raise SystemExit(main())
+  File "/home/jovyan/Desktop/dev/sina/AI4R_explore_agent/Exploring_agent_DRL/run_assignment.py", line 108, in main
+    return run_command(command)
+  File "/home/jovyan/Desktop/dev/sina/AI4R_explore_agent/Exploring_agent_DRL/run_assignment.py", line 8, in run_command
+    return subprocess.run(command, check=True).returncode
+  File "/usr/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['/usr/bin/python', 'Explore_PPO_agent_training.py', '--iterations', '1000', '--num-workers', '17', '--num-gpus', '0.5', '--env-name', '2d_checkpoint_exploration', '--reward-mode', 'coverage', '--max-steps', '400', '--entropy-coeff', '0.3', '--checkpoint-dir', 'tmp/hparam_sweep/job_89_iter_1000_batch_4000_sgd_10_entropy_0_3', '--spawn-mode', 'random', '--spawn-index', '0', '--train-batch-size', '4000', '--sgd-minibatch-size', '256', '--num-sgd-iter', '10']' returned non-zero exit status 1.

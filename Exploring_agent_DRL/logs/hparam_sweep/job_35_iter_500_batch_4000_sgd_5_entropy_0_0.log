@@ -1,0 +1,472 @@
+/opt/miniconda3/envs/aiar-rl-explore-gpu/bin/python Explore_PPO_agent_training.py --iterations 500 --num-workers 17 --num-gpus 0.5 --env-name 2d_checkpoint_exploration --reward-mode coverage --max-steps 400 --entropy-coeff 0.0 --checkpoint-dir tmp/hparam_sweep/job_35_iter_500_batch_4000_sgd_5_entropy_0_0 --spawn-mode random --spawn-index 0 --train-batch-size 4000 --sgd-minibatch-size 256 --num-sgd-iter 5
+/opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+
+Training PPO
+  environment: 2d_checkpoint_exploration
+  reward mode: coverage
+  max steps per episode: 400
+  rollout workers: 17
+  requested GPUs: 0.5
+  observation shape: (27,)
+  checkpoint layout: built-in
+  spawn mode: random
+  entropy coefficient: 0.0
+  PPO update: train batch 4000, minibatch 256, SGD passes 5
+  coverage task: 20 checkpoints x 0.50 reward = 10.00 max reward
+  exploration shaping: -0.004/step for hovering, -0.020/step when blocked by a wall, -0.002/step for no progress, bounded wall-contact penalty
+
+Log columns
+  iter: completed PPO training iteration
+  reward min/mean/max: episode return statistics from the latest training batch
+  train batch: environment steps collected before one PPO update
+  target>=6: whether the latest batch contains an episode above the submission threshold
+  max%: best episode reward in the latest batch as a percentage of the checkpoint reward maximum
+          idle penalties can reduce returns below the checkpoint score
+          early scores can be negative because collision has a penalty
+  len: mean episode length in environment steps
+  best: best mean reward saved after warmup iterations
+
+2026-05-30 06:33:55,238	INFO worker.py:1636 -- Started a local Ray instance.
+/opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/rllib/algorithms/algorithm.py:442: RayDeprecationWarning: This API is deprecated and may be removed in future Ray releases. You could suppress this warning by setting env variable PYTHONWARNINGS="ignore::DeprecationWarning"
+`UnifiedLogger` will be removed in Ray 2.7.
+  return UnifiedLogger(config, logdir, loggers=None)
+/opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/tune/logger/unified.py:53: RayDeprecationWarning: This API is deprecated and may be removed in future Ray releases. You could suppress this warning by setting env variable PYTHONWARNINGS="ignore::DeprecationWarning"
+The `JsonLogger interface is deprecated in favor of the `ray.tune.json.JsonLoggerCallback` interface and will be removed in Ray 2.7.
+  self._loggers.append(cls(self.config, self.logdir, self.trial))
+/opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/tune/logger/unified.py:53: RayDeprecationWarning: This API is deprecated and may be removed in future Ray releases. You could suppress this warning by setting env variable PYTHONWARNINGS="ignore::DeprecationWarning"
+The `CSVLogger interface is deprecated in favor of the `ray.tune.csv.CSVLoggerCallback` interface and will be removed in Ray 2.7.
+  self._loggers.append(cls(self.config, self.logdir, self.trial))
+/opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/tune/logger/unified.py:53: RayDeprecationWarning: This API is deprecated and may be removed in future Ray releases. You could suppress this warning by setting env variable PYTHONWARNINGS="ignore::DeprecationWarning"
+The `TBXLogger interface is deprecated in favor of the `ray.tune.tensorboardx.TBXLoggerCallback` interface and will be removed in Ray 2.7.
+  self._loggers.append(cls(self.config, self.logdir, self.trial))
+2026-05-30 06:33:58,010	INFO tensorboardx.py:48 -- pip install "ray[tune]" to see TensorBoard files.
+2026-05-30 06:33:58,010	WARNING unified.py:56 -- Could not instantiate TBXLogger: No module named 'tensorboardX'.
+2026-05-30 06:33:58,012	INFO algorithm.py:536 -- Current log_level is WARN. For more information, set 'log_level': 'INFO' / 'DEBUG' or use the -v and -vv flags.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[36m(RolloutWorker pid=354457)[0m 2026-05-30 06:34:05,273	WARNING env.py:155 -- Your env doesn't have a .spec.max_episode_steps attribute. Your horizon will default to infinity, and your environment will not be reset.
+2026-05-30 06:34:06,648	WARNING util.py:68 -- Install gputil for GPU system monitoring.
+iter    1 | reward     nan/    nan/    nan | target>=6  no | max    nan% | len    nan | best    0.00
+iter    2 | reward   -1.57/  -0.86/   0.01 | target>=6  no | max    0.1% | len  400.0 | best    0.00
+iter    3 | reward   -1.57/  -0.86/   0.01 | target>=6  no | max    0.1% | len  400.0 | best    0.00
+iter    4 | reward   -1.96/  -0.73/   1.58 | target>=6  no | max   15.8% | len  400.0 | best    0.00
+iter    5 | reward   -1.96/  -0.73/   1.58 | target>=6  no | max   15.8% | len  400.0 | best    0.00
+iter    6 | reward   -1.96/  -0.52/   1.67 | target>=6  no | max   16.7% | len  400.0 | best    0.00
+iter    7 | reward   -1.96/  -0.35/   1.67 | target>=6  no | max   16.7% | len  400.0 | best    0.00
+iter    8 | reward   -1.96/  -0.35/   1.67 | target>=6  no | max   16.7% | len  400.0 | best    0.00
+iter    9 | reward   -2.02/  -0.18/   2.70 | target>=6  no | max   27.0% | len  400.0 | best    0.00
+iter   10 | reward   -2.02/  -0.18/   2.70 | target>=6  no | max   27.0% | len  400.0 | best    0.00
+iter   11 | reward   -2.02/   0.08/   3.45 | target>=6  no | max   34.5% | len  400.0 | best    0.00
+iter   12 | reward   -2.02/   0.37/   3.45 | target>=6  no | max   34.5% | len  400.0 | best    0.00
+iter   13 | reward   -2.02/   0.37/   3.45 | target>=6  no | max   34.5% | len  400.0 | best    0.00
+iter   14 | reward   -2.02/   0.67/   3.45 | target>=6  no | max   34.5% | len  400.0 | best    0.00
+iter   15 | reward   -2.02/   0.67/   3.45 | target>=6  no | max   34.5% | len  400.0 | best    0.00
+iter   16 | reward   -2.98/   0.75/   3.45 | target>=6  no | max   34.5% | len  400.0 | best    0.00
+iter   17 | reward   -2.98/   0.82/   3.45 | target>=6  no | max   34.5% | len  400.0 | best    0.00
+iter   18 | reward   -2.98/   0.98/   3.86 | target>=6  no | max   38.6% | len  400.0 | best    0.00
+iter   19 | reward   -2.98/   1.14/   3.86 | target>=6  no | max   38.6% | len  400.0 | best    0.00
+iter   20 | reward   -2.98/   1.14/   3.86 | target>=6  no | max   38.6% | len  400.0 | best    0.00
+iter   21 | reward   -3.87/   1.17/   3.89 | target>=6  no | max   38.9% | len  400.0 | best    0.00
+iter   22 | reward   -3.87/   1.17/   3.89 | target>=6  no | max   38.9% | len  400.0 | best    0.00
+iter   23 | reward   -3.87/   1.35/   4.55 | target>=6  no | max   45.5% | len  400.0 | best    0.00
+iter   24 | reward   -3.87/   1.45/   4.55 | target>=6  no | max   45.5% | len  400.0 | best    0.00
+iter   25 | reward   -3.87/   1.45/   4.55 | target>=6  no | max   45.5% | len  400.0 | best    0.00
+iter   26 | reward   -3.87/   1.44/   4.55 | target>=6  no | max   45.5% | len  400.0 | best    0.00
+iter   27 | reward   -3.87/   1.44/   4.55 | target>=6  no | max   45.5% | len  400.0 | best    0.00
+iter   28 | reward   -3.87/   1.47/   4.55 | target>=6  no | max   45.5% | len  400.0 | best    0.00
+iter   29 | reward   -3.87/   1.46/   4.55 | target>=6  no | max   45.5% | len  400.0 | best    0.00
+iter   30 | reward   -3.87/   1.46/   4.55 | target>=6  no | max   45.5% | len  400.0 | best    0.00
+iter   31 | reward   -3.86/   1.64/   4.55 | target>=6  no | max   45.5% | len  400.0 | best    0.00
+iter   32 | reward   -3.86/   1.64/   4.55 | target>=6  no | max   45.5% | len  400.0 | best    0.00
+iter   33 | reward   -5.46/   1.56/   4.50 | target>=6  no | max   45.0% | len  400.0 | best    0.00
+iter   34 | reward   -5.46/   1.60/   4.50 | target>=6  no | max   45.0% | len  400.0 | best    0.00
+iter   35 | reward   -5.46/   1.83/   4.54 | target>=6  no | max   45.4% | len  400.0 | best    0.00
+iter   36 | reward   -5.46/   2.27/   5.25 | target>=6  no | max   52.5% | len  400.0 | best    0.00
+iter   37 | reward   -5.46/   2.27/   5.25 | target>=6  no | max   52.5% | len  400.0 | best    0.00
+iter   38 | reward   -5.46/   2.33/   5.25 | target>=6  no | max   52.5% | len  400.0 | best    0.00
+iter   39 | reward   -5.46/   2.43/   5.25 | target>=6  no | max   52.5% | len  400.0 | best    0.00
+iter   40 | reward   -5.46/   2.52/   5.25 | target>=6  no | max   52.5% | len  400.0 | best    0.00
+iter   41 | reward   -6.49/   2.60/   5.25 | target>=6  no | max   52.5% | len  400.0 | best    0.00
+iter   42 | reward   -6.49/   2.60/   5.25 | target>=6  no | max   52.5% | len  400.0 | best    0.00
+iter   43 | reward   -6.49/   2.80/   5.78 | target>=6  no | max   57.8% | len  400.0 | best    0.00
+iter   44 | reward   -6.49/   2.80/   5.78 | target>=6  no | max   57.8% | len  400.0 | best    0.00
+iter   45 | reward   -6.49/   2.87/   5.78 | target>=6  no | max   57.8% | len  400.0 | best    0.00
+iter   46 | reward   -6.49/   3.02/   5.78 | target>=6  no | max   57.8% | len  400.0 | best    0.00
+iter   47 | reward   -6.49/   3.02/   5.78 | target>=6  no | max   57.8% | len  400.0 | best    0.00
+iter   48 | reward   -6.49/   3.11/   5.81 | target>=6  no | max   58.1% | len  400.0 | best    0.00
+iter   49 | reward   -6.49/   3.11/   5.81 | target>=6  no | max   58.1% | len  400.0 | best    0.00
+iter   50 | reward   -6.49/   3.14/   5.82 | target>=6  no | max   58.2% | len  400.0 | best    0.00
+Iteration 51: new best mean reward 3.27
+iter   51 | reward   -5.43/   3.27/   5.82 | target>=6  no | max   58.2% | len  400.0 | best    3.27
+Iteration 52: new best mean reward 3.33
+iter   52 | reward   -5.43/   3.33/   5.82 | target>=6  no | max   58.2% | len  400.0 | best    3.33
+Iteration 53: new best mean reward 3.46
+iter   53 | reward   -5.43/   3.46/   5.82 | target>=6  no | max   58.2% | len  400.0 | best    3.46
+iter   54 | reward   -5.43/   3.46/   5.82 | target>=6  no | max   58.2% | len  400.0 | best    3.46
+Iteration 55: new best mean reward 3.46
+iter   55 | reward   -5.43/   3.46/   5.82 | target>=6  no | max   58.2% | len  400.0 | best    3.46
+iter   56 | reward   -5.43/   3.30/   5.82 | target>=6  no | max   58.2% | len  400.0 | best    3.46
+iter   57 | reward   -5.43/   3.32/   5.82 | target>=6  no | max   58.2% | len  400.0 | best    3.46
+iter   58 | reward   -7.05/   3.12/   5.82 | target>=6  no | max   58.2% | len  400.0 | best    3.46
+iter   59 | reward   -7.05/   3.12/   5.82 | target>=6  no | max   58.2% | len  400.0 | best    3.46
+iter   60 | reward   -7.05/   3.25/   5.81 | target>=6  no | max   58.1% | len  400.0 | best    3.46
+iter   61 | reward   -7.05/   3.25/   5.81 | target>=6  no | max   58.1% | len  400.0 | best    3.46
+iter   62 | reward   -7.05/   3.17/   5.81 | target>=6  no | max   58.1% | len  400.0 | best    3.46
+iter   63 | reward   -7.05/   3.09/   5.37 | target>=6  no | max   53.7% | len  400.0 | best    3.46
+iter   64 | reward   -7.05/   3.09/   5.37 | target>=6  no | max   53.7% | len  400.0 | best    3.46
+iter   65 | reward   -7.05/   3.11/   6.07 | target>=6 yes | max   60.7% | len  400.0 | best    3.46
+iter   66 | reward   -7.05/   3.11/   6.07 | target>=6 yes | max   60.7% | len  400.0 | best    3.46
+iter   67 | reward   -7.05/   3.09/   6.07 | target>=6 yes | max   60.7% | len  400.0 | best    3.46
+iter   68 | reward   -5.79/   3.20/   6.07 | target>=6 yes | max   60.7% | len  400.0 | best    3.46
+iter   69 | reward   -5.50/   3.21/   6.07 | target>=6 yes | max   60.7% | len  400.0 | best    3.46
+iter   70 | reward   -5.50/   3.14/   6.07 | target>=6 yes | max   60.7% | len  400.0 | best    3.46
+iter   71 | reward   -5.50/   3.14/   6.07 | target>=6 yes | max   60.7% | len  400.0 | best    3.46
+iter   72 | reward   -5.50/   3.02/   6.07 | target>=6 yes | max   60.7% | len  400.0 | best    3.46
+iter   73 | reward   -5.50/   3.03/   6.07 | target>=6 yes | max   60.7% | len  400.0 | best    3.46
+iter   74 | reward   -5.50/   2.98/   6.07 | target>=6 yes | max   60.7% | len  400.0 | best    3.46
+iter   75 | reward   -5.50/   2.82/   5.89 | target>=6  no | max   58.9% | len  400.0 | best    3.46
+iter   76 | reward   -5.50/   2.82/   5.89 | target>=6  no | max   58.9% | len  400.0 | best    3.46
+iter   77 | reward   -5.50/   2.81/   6.11 | target>=6 yes | max   61.1% | len  400.0 | best    3.46
+iter   78 | reward   -5.50/   2.77/   6.11 | target>=6 yes | max   61.1% | len  400.0 | best    3.46
+iter   79 | reward   -5.47/   2.87/   6.31 | target>=6 yes | max   63.1% | len  400.0 | best    3.46
+iter   80 | reward   -6.44/   2.82/   6.31 | target>=6 yes | max   63.1% | len  400.0 | best    3.46
+iter   81 | reward   -6.44/   2.82/   6.31 | target>=6 yes | max   63.1% | len  400.0 | best    3.46
+iter   82 | reward   -6.44/   3.02/   6.31 | target>=6 yes | max   63.1% | len  400.0 | best    3.46
+iter   83 | reward   -6.44/   3.02/   6.31 | target>=6 yes | max   63.1% | len  400.0 | best    3.46
+iter   84 | reward   -6.44/   3.02/   6.31 | target>=6 yes | max   63.1% | len  400.0 | best    3.46
+iter   85 | reward   -6.44/   2.94/   6.31 | target>=6 yes | max   63.1% | len  400.0 | best    3.46
+iter   86 | reward   -6.44/   3.07/   6.31 | target>=6 yes | max   63.1% | len  400.0 | best    3.46
+iter   87 | reward   -6.44/   3.18/   6.31 | target>=6 yes | max   63.1% | len  400.0 | best    3.46
+iter   88 | reward   -6.44/   3.18/   6.31 | target>=6 yes | max   63.1% | len  400.0 | best    3.46
+iter   89 | reward   -6.44/   3.23/   6.06 | target>=6 yes | max   60.6% | len  400.0 | best    3.46
+iter   90 | reward   -6.44/   3.20/   6.06 | target>=6 yes | max   60.6% | len  400.0 | best    3.46
+iter   91 | reward   -5.00/   3.39/   6.06 | target>=6 yes | max   60.6% | len  400.0 | best    3.46
+iter   92 | reward   -5.00/   3.35/   6.04 | target>=6 yes | max   60.4% | len  400.0 | best    3.46
+iter   93 | reward   -5.00/   3.35/   6.04 | target>=6 yes | max   60.4% | len  400.0 | best    3.46
+Iteration 94: new best mean reward 3.58
+iter   94 | reward   -5.00/   3.58/   6.04 | target>=6 yes | max   60.4% | len  400.0 | best    3.58
+iter   95 | reward   -5.61/   3.54/   6.04 | target>=6 yes | max   60.4% | len  400.0 | best    3.58
+Iteration 96: new best mean reward 3.59
+iter   96 | reward   -5.61/   3.59/   6.04 | target>=6 yes | max   60.4% | len  400.0 | best    3.59
+Iteration 97: new best mean reward 3.65
+iter   97 | reward   -5.61/   3.65/   6.04 | target>=6 yes | max   60.4% | len  400.0 | best    3.65
+Iteration 98: new best mean reward 3.69
+iter   98 | reward   -5.61/   3.69/   5.91 | target>=6  no | max   59.1% | len  400.0 | best    3.69
+Iteration 99: new best mean reward 3.77
+iter   99 | reward   -5.61/   3.77/   5.93 | target>=6  no | max   59.3% | len  400.0 | best    3.77
+Iteration 100: new best mean reward 3.77
+iter  100 | reward   -5.61/   3.77/   5.93 | target>=6  no | max   59.3% | len  400.0 | best    3.77
+Iteration 101: new best mean reward 3.84
+iter  101 | reward   -5.61/   3.84/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    3.84
+Iteration 102: new best mean reward 3.89
+iter  102 | reward   -5.61/   3.89/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    3.89
+iter  103 | reward   -6.46/   3.74/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    3.89
+iter  104 | reward   -6.46/   3.84/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    3.89
+iter  105 | reward   -6.46/   3.84/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    3.89
+iter  106 | reward   -6.46/   3.89/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    3.89
+iter  107 | reward   -6.46/   3.87/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    3.89
+iter  108 | reward   -6.46/   3.84/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    3.89
+iter  109 | reward   -6.46/   3.85/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    3.89
+iter  110 | reward   -6.46/   3.85/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    3.89
+iter  111 | reward   -6.46/   3.54/   6.07 | target>=6 yes | max   60.7% | len  400.0 | best    3.89
+iter  112 | reward   -6.46/   3.50/   5.87 | target>=6  no | max   58.7% | len  400.0 | best    3.89
+iter  113 | reward   -6.07/   3.73/   5.87 | target>=6  no | max   58.7% | len  400.0 | best    3.89
+iter  114 | reward   -6.07/   3.74/   5.87 | target>=6  no | max   58.7% | len  400.0 | best    3.89
+iter  115 | reward   -6.07/   3.74/   6.07 | target>=6 yes | max   60.7% | len  400.0 | best    3.89
+iter  116 | reward   -5.68/   3.83/   6.07 | target>=6 yes | max   60.7% | len  400.0 | best    3.89
+iter  117 | reward   -5.68/   3.80/   6.07 | target>=6 yes | max   60.7% | len  400.0 | best    3.89
+iter  118 | reward   -5.68/   3.73/   6.07 | target>=6 yes | max   60.7% | len  400.0 | best    3.89
+iter  119 | reward   -5.68/   3.69/   6.07 | target>=6 yes | max   60.7% | len  400.0 | best    3.89
+iter  120 | reward   -7.39/   3.63/   6.07 | target>=6 yes | max   60.7% | len  400.0 | best    3.89
+iter  121 | reward   -7.51/   3.79/   6.07 | target>=6 yes | max   60.7% | len  400.0 | best    3.89
+iter  122 | reward   -7.51/   3.79/   6.07 | target>=6 yes | max   60.7% | len  400.0 | best    3.89
+iter  123 | reward   -7.51/   3.74/   6.07 | target>=6 yes | max   60.7% | len  400.0 | best    3.89
+iter  124 | reward   -7.51/   3.76/   6.07 | target>=6 yes | max   60.7% | len  400.0 | best    3.89
+iter  125 | reward   -7.51/   3.87/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    3.89
+iter  126 | reward   -7.51/   3.83/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    3.89
+iter  127 | reward   -7.51/   3.83/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    3.89
+Iteration 128: new best mean reward 3.97
+iter  128 | reward   -7.51/   3.97/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    3.97
+Iteration 129: new best mean reward 4.12
+iter  129 | reward   -7.51/   4.12/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    4.12
+Iteration 130: new best mean reward 4.23
+iter  130 | reward   -7.51/   4.23/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    4.23
+Iteration 131: new best mean reward 4.35
+iter  131 | reward   -4.89/   4.35/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    4.35
+Iteration 132: new best mean reward 4.38
+iter  132 | reward   -4.89/   4.38/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    4.38
+Iteration 133: new best mean reward 4.40
+iter  133 | reward   -4.89/   4.40/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    4.40
+Iteration 134: new best mean reward 4.43
+iter  134 | reward   -4.89/   4.43/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    4.43
+iter  135 | reward   -4.89/   4.33/   6.08 | target>=6 yes | max   60.8% | len  400.0 | best    4.43
+iter  136 | reward   -4.89/   4.32/   6.08 | target>=6 yes | max   60.8% | len  400.0 | best    4.43
+iter  137 | reward   -1.07/   4.40/   6.08 | target>=6 yes | max   60.8% | len  400.0 | best    4.43
+iter  138 | reward   -1.07/   4.35/   6.08 | target>=6 yes | max   60.8% | len  400.0 | best    4.43
+iter  139 | reward   -1.07/   4.38/   6.08 | target>=6 yes | max   60.8% | len  400.0 | best    4.43
+iter  140 | reward   -1.07/   4.31/   6.08 | target>=6 yes | max   60.8% | len  400.0 | best    4.43
+iter  141 | reward   -1.07/   4.31/   6.08 | target>=6 yes | max   60.8% | len  400.0 | best    4.43
+iter  142 | reward   -1.48/   4.24/   6.08 | target>=6 yes | max   60.8% | len  400.0 | best    4.43
+iter  143 | reward   -1.48/   4.23/   6.08 | target>=6 yes | max   60.8% | len  400.0 | best    4.43
+iter  144 | reward   -1.48/   4.23/   6.08 | target>=6 yes | max   60.8% | len  400.0 | best    4.43
+iter  145 | reward   -1.48/   4.22/   6.08 | target>=6 yes | max   60.8% | len  400.0 | best    4.43
+iter  146 | reward   -2.75/   4.12/   6.08 | target>=6 yes | max   60.8% | len  400.0 | best    4.43
+iter  147 | reward   -7.55/   3.83/   6.08 | target>=6 yes | max   60.8% | len  400.0 | best    4.43
+iter  148 | reward   -7.55/   3.78/   6.08 | target>=6 yes | max   60.8% | len  400.0 | best    4.43
+iter  149 | reward   -7.55/   3.70/   6.08 | target>=6 yes | max   60.8% | len  400.0 | best    4.43
+iter  150 | reward   -7.55/   3.73/   6.08 | target>=6 yes | max   60.8% | len  400.0 | best    4.43
+iter  151 | reward   -7.55/   3.76/   6.08 | target>=6 yes | max   60.8% | len  400.0 | best    4.43
+iter  152 | reward   -7.55/   3.83/   6.08 | target>=6 yes | max   60.8% | len  400.0 | best    4.43
+iter  153 | reward   -7.55/   3.85/   6.08 | target>=6 yes | max   60.8% | len  400.0 | best    4.43
+iter  154 | reward   -7.55/   3.77/   6.08 | target>=6 yes | max   60.8% | len  400.0 | best    4.43
+iter  155 | reward   -7.55/   3.82/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    4.43
+iter  156 | reward   -7.55/   4.00/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    4.43
+iter  157 | reward    0.48/   4.30/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    4.43
+iter  158 | reward    0.48/   4.40/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    4.43
+Iteration 159: new best mean reward 4.44
+iter  159 | reward    1.00/   4.44/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    4.44
+iter  160 | reward    1.00/   4.37/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    4.44
+iter  161 | reward    1.00/   4.37/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    4.44
+iter  162 | reward   -2.83/   4.20/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    4.44
+iter  163 | reward   -2.83/   4.13/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    4.44
+iter  164 | reward   -6.18/   3.60/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    4.44
+iter  165 | reward   -7.12/   3.16/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    4.44
+iter  166 | reward   -7.58/   2.37/   6.08 | target>=6 yes | max   60.8% | len  400.0 | best    4.44
+iter  167 | reward   -7.58/   1.05/   6.07 | target>=6 yes | max   60.7% | len  400.0 | best    4.44
+iter  168 | reward   -7.62/   0.77/   6.07 | target>=6 yes | max   60.7% | len  400.0 | best    4.44
+iter  169 | reward   -7.62/  -0.35/   6.07 | target>=6 yes | max   60.7% | len  400.0 | best    4.44
+iter  170 | reward   -7.62/  -0.54/   6.03 | target>=6 yes | max   60.3% | len  400.0 | best    4.44
+iter  171 | reward   -7.62/  -1.35/   6.03 | target>=6 yes | max   60.3% | len  400.0 | best    4.44
+iter  172 | reward   -7.62/  -2.55/   5.39 | target>=6  no | max   53.9% | len  400.0 | best    4.44
+iter  173 | reward   -7.62/  -2.84/   5.39 | target>=6  no | max   53.9% | len  400.0 | best    4.44
+iter  174 | reward   -7.62/  -2.71/   5.39 | target>=6  no | max   53.9% | len  400.0 | best    4.44
+iter  175 | reward   -7.62/  -2.52/   5.39 | target>=6  no | max   53.9% | len  400.0 | best    4.44
+iter  176 | reward   -7.62/  -2.68/   5.39 | target>=6  no | max   53.9% | len  400.0 | best    4.44
+iter  177 | reward   -7.62/  -2.67/   5.39 | target>=6  no | max   53.9% | len  400.0 | best    4.44
+iter  178 | reward   -7.60/  -2.48/   5.39 | target>=6  no | max   53.9% | len  400.0 | best    4.44
+iter  179 | reward   -7.60/  -2.29/   5.39 | target>=6  no | max   53.9% | len  400.0 | best    4.44
+iter  180 | reward   -7.60/  -2.51/   5.39 | target>=6  no | max   53.9% | len  400.0 | best    4.44
+iter  181 | reward   -7.60/  -2.52/   5.39 | target>=6  no | max   53.9% | len  400.0 | best    4.44
+iter  182 | reward   -7.58/  -2.26/   5.39 | target>=6  no | max   53.9% | len  400.0 | best    4.44
+iter  183 | reward   -7.58/  -2.18/   5.20 | target>=6  no | max   52.0% | len  400.0 | best    4.44
+iter  184 | reward   -7.60/  -2.40/   4.76 | target>=6  no | max   47.6% | len  400.0 | best    4.44
+iter  185 | reward   -7.60/  -2.51/   4.76 | target>=6  no | max   47.6% | len  400.0 | best    4.44
+iter  186 | reward   -7.60/  -2.70/   4.76 | target>=6  no | max   47.6% | len  400.0 | best    4.44
+iter  187 | reward   -7.60/  -2.56/   4.76 | target>=6  no | max   47.6% | len  400.0 | best    4.44
+iter  188 | reward   -7.60/  -2.60/   3.42 | target>=6  no | max   34.2% | len  400.0 | best    4.44
+iter  189 | reward   -7.60/  -2.14/   5.37 | target>=6  no | max   53.7% | len  400.0 | best    4.44
+iter  190 | reward   -7.60/  -1.82/   5.89 | target>=6  no | max   58.9% | len  400.0 | best    4.44
+iter  191 | reward   -7.60/  -1.69/   5.89 | target>=6  no | max   58.9% | len  400.0 | best    4.44
+iter  192 | reward   -7.60/  -1.42/   5.89 | target>=6  no | max   58.9% | len  400.0 | best    4.44
+iter  193 | reward   -7.58/  -1.16/   5.89 | target>=6  no | max   58.9% | len  400.0 | best    4.44
+iter  194 | reward   -7.58/  -1.10/   5.89 | target>=6  no | max   58.9% | len  400.0 | best    4.44
+iter  195 | reward   -7.58/  -0.14/   6.08 | target>=6 yes | max   60.8% | len  400.0 | best    4.44
+iter  196 | reward   -7.58/   0.65/   6.08 | target>=6 yes | max   60.8% | len  400.0 | best    4.44
+iter  197 | reward   -7.58/   0.81/   6.08 | target>=6 yes | max   60.8% | len  400.0 | best    4.44
+iter  198 | reward   -7.58/   1.18/   6.08 | target>=6 yes | max   60.8% | len  400.0 | best    4.44
+iter  199 | reward   -7.58/   1.25/   6.08 | target>=6 yes | max   60.8% | len  400.0 | best    4.44
+iter  200 | reward   -7.62/   1.05/   6.08 | target>=6 yes | max   60.8% | len  400.0 | best    4.44
+iter  201 | reward   -7.62/   1.24/   6.08 | target>=6 yes | max   60.8% | len  400.0 | best    4.44
+iter  202 | reward   -7.62/   0.97/   6.08 | target>=6 yes | max   60.8% | len  400.0 | best    4.44
+iter  203 | reward   -7.62/   0.91/   6.08 | target>=6 yes | max   60.8% | len  400.0 | best    4.44
+iter  204 | reward   -7.62/   0.94/   6.07 | target>=6 yes | max   60.7% | len  400.0 | best    4.44
+iter  205 | reward   -7.62/   1.22/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    4.44
+iter  206 | reward   -7.62/   0.68/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    4.44
+iter  207 | reward   -7.62/   0.86/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    4.44
+iter  208 | reward   -7.62/   0.60/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    4.44
+iter  209 | reward   -7.62/   0.72/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    4.44
+iter  210 | reward   -7.54/   0.89/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    4.44
+iter  211 | reward   -7.54/   0.93/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    4.44
+iter  212 | reward   -7.54/   1.13/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    4.44
+iter  213 | reward   -7.58/   1.06/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    4.44
+iter  214 | reward   -7.58/   0.83/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    4.44
+iter  215 | reward   -7.58/   0.44/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    4.44
+iter  216 | reward   -7.60/   0.26/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    4.44
+iter  217 | reward   -7.60/  -0.39/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    4.44
+iter  218 | reward   -7.60/  -0.71/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    4.44
+iter  219 | reward   -7.60/  -0.85/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    4.44
+iter  220 | reward   -7.60/  -1.33/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    4.44
+iter  221 | reward   -7.60/  -1.53/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    4.44
+iter  222 | reward   -7.60/  -1.95/   6.09 | target>=6 yes | max   60.9% | len  400.0 | best    4.44
+iter  223 | reward   -7.60/  -2.49/   4.96 | target>=6  no | max   49.6% | len  400.0 | best    4.44
+iter  224 | reward   -7.60/  -2.57/   2.31 | target>=6  no | max   23.1% | len  400.0 | best    4.44
+iter  225 | reward   -7.62/  -3.00/   1.32 | target>=6  no | max   13.2% | len  400.0 | best    4.44
+iter  226 | reward   -7.62/  -2.96/   1.32 | target>=6  no | max   13.2% | len  400.0 | best    4.44
+iter  227 | reward   -7.62/  -2.62/   4.39 | target>=6  no | max   43.9% | len  400.0 | best    4.44
+iter  228 | reward   -7.62/  -2.47/   4.39 | target>=6  no | max   43.9% | len  400.0 | best    4.44
+iter  229 | reward   -7.62/  -2.33/   4.39 | target>=6  no | max   43.9% | len  400.0 | best    4.44
+iter  230 | reward   -7.62/  -1.80/   4.40 | target>=6  no | max   44.0% | len  400.0 | best    4.44
+iter  231 | reward   -7.62/  -1.55/   4.40 | target>=6  no | max   44.0% | len  400.0 | best    4.44
+iter  232 | reward   -7.62/  -1.27/   5.35 | target>=6  no | max   53.5% | len  400.0 | best    4.44
+iter  233 | reward   -7.62/  -1.24/   5.35 | target>=6  no | max   53.5% | len  400.0 | best    4.44
+iter  234 | reward   -7.62/  -0.96/   5.35 | target>=6  no | max   53.5% | len  400.0 | best    4.44
+iter  235 | reward   -7.60/  -0.38/   5.35 | target>=6  no | max   53.5% | len  400.0 | best    4.44
+iter  236 | reward   -7.52/  -0.36/   5.35 | target>=6  no | max   53.5% | len  400.0 | best    4.44
+iter  237 | reward   -7.52/  -0.48/   5.35 | target>=6  no | max   53.5% | len  400.0 | best    4.44
+iter  238 | reward   -7.52/  -0.38/   5.35 | target>=6  no | max   53.5% | len  400.0 | best    4.44
+iter  239 | reward   -7.52/  -0.49/   5.35 | target>=6  no | max   53.5% | len  400.0 | best    4.44
+iter  240 | reward   -7.52/  -0.56/   5.35 | target>=6  no | max   53.5% | len  400.0 | best    4.44
+iter  241 | reward   -7.52/  -0.70/   5.35 | target>=6  no | max   53.5% | len  400.0 | best    4.44
+iter  242 | reward   -7.50/  -0.59/   5.29 | target>=6  no | max   52.9% | len  400.0 | best    4.44
+iter  243 | reward   -7.50/  -0.52/   5.32 | target>=6  no | max   53.2% | len  400.0 | best    4.44
+iter  244 | reward   -7.50/  -0.26/   5.32 | target>=6  no | max   53.2% | len  400.0 | best    4.44
+iter  245 | reward   -7.50/  -0.21/   5.32 | target>=6  no | max   53.2% | len  400.0 | best    4.44
+iter  246 | reward   -7.18/  -0.31/   5.32 | target>=6  no | max   53.2% | len  400.0 | best    4.44
+iter  247 | reward   -7.18/  -0.19/   5.32 | target>=6  no | max   53.2% | len  400.0 | best    4.44
+iter  248 | reward   -7.18/  -0.08/   5.32 | target>=6  no | max   53.2% | len  400.0 | best    4.44
+iter  249 | reward   -7.18/  -0.11/   5.32 | target>=6  no | max   53.2% | len  400.0 | best    4.44
+iter  250 | reward   -7.18/  -0.07/   5.35 | target>=6  no | max   53.5% | len  400.0 | best    4.44
+iter  251 | reward   -7.14/  -0.14/   5.35 | target>=6  no | max   53.5% | len  400.0 | best    4.44
+iter  252 | reward   -7.14/  -0.11/   5.35 | target>=6  no | max   53.5% | len  400.0 | best    4.44
+iter  253 | reward   -7.10/   0.02/   5.35 | target>=6  no | max   53.5% | len  400.0 | best    4.44
+iter  254 | reward   -7.10/   0.23/   5.35 | target>=6  no | max   53.5% | len  400.0 | best    4.44
+iter  255 | reward   -7.10/   0.37/   5.35 | target>=6  no | max   53.5% | len  400.0 | best    4.44
+iter  256 | reward   -6.22/   0.68/   5.86 | target>=6  no | max   58.6% | len  400.0 | best    4.44
+iter  257 | reward   -6.22/   0.68/   5.86 | target>=6  no | max   58.6% | len  400.0 | best    4.44
+iter  258 | reward   -6.22/   0.99/   5.86 | target>=6  no | max   58.6% | len  400.0 | best    4.44
+iter  259 | reward   -6.22/   1.42/   5.86 | target>=6  no | max   58.6% | len  400.0 | best    4.44
+iter  260 | reward   -6.22/   1.36/   5.86 | target>=6  no | max   58.6% | len  400.0 | best    4.44
+iter  261 | reward   -6.22/   1.59/   5.86 | target>=6  no | max   58.6% | len  400.0 | best    4.44
+iter  262 | reward   -6.22/   1.67/   5.86 | target>=6  no | max   58.6% | len  400.0 | best    4.44
+iter  263 | reward   -6.22/   1.76/   5.86 | target>=6  no | max   58.6% | len  400.0 | best    4.44
+iter  264 | reward   -6.22/   1.80/   5.86 | target>=6  no | max   58.6% | len  400.0 | best    4.44
+iter  265 | reward   -6.22/   1.62/   5.86 | target>=6  no | max   58.6% | len  400.0 | best    4.44
+iter  266 | reward   -6.24/   1.45/   5.36 | target>=6  no | max   53.6% | len  400.0 | best    4.44
+iter  267 | reward   -6.24/   1.31/   5.36 | target>=6  no | max   53.6% | len  400.0 | best    4.44
+iter  268 | reward   -6.24/   1.06/   5.36 | target>=6  no | max   53.6% | len  400.0 | best    4.44
+iter  269 | reward   -6.24/   0.97/   5.36 | target>=6  no | max   53.6% | len  400.0 | best    4.44
+iter  270 | reward   -6.24/   1.01/   5.36 | target>=6  no | max   53.6% | len  400.0 | best    4.44
+iter  271 | reward   -6.26/   1.06/   5.37 | target>=6  no | max   53.7% | len  400.0 | best    4.44
+iter  272 | reward   -6.26/   1.06/   5.37 | target>=6  no | max   53.7% | len  400.0 | best    4.44
+iter  273 | reward   -6.26/   1.15/   5.37 | target>=6  no | max   53.7% | len  400.0 | best    4.44
+iter  274 | reward   -6.26/   1.15/   5.37 | target>=6  no | max   53.7% | len  400.0 | best    4.44
+iter  275 | reward   -6.26/   1.41/   5.37 | target>=6  no | max   53.7% | len  400.0 | best    4.44
+iter  276 | reward   -6.26/   1.69/   5.88 | target>=6  no | max   58.8% | len  400.0 | best    4.44
+iter  277 | reward   -6.26/   1.73/   5.88 | target>=6  no | max   58.8% | len  400.0 | best    4.44
+iter  278 | reward   -6.26/   1.81/   5.88 | target>=6  no | max   58.8% | len  400.0 | best    4.44
+iter  279 | reward   -6.26/   1.81/   5.88 | target>=6  no | max   58.8% | len  400.0 | best    4.44
+iter  280 | reward   -6.24/   1.71/   5.88 | target>=6  no | max   58.8% | len  400.0 | best    4.44
+iter  281 | reward   -6.24/   1.76/   5.88 | target>=6  no | max   58.8% | len  400.0 | best    4.44
+iter  282 | reward   -6.22/   1.82/   5.88 | target>=6  no | max   58.8% | len  400.0 | best    4.44
+iter  283 | reward   -6.22/   1.62/   5.88 | target>=6  no | max   58.8% | len  400.0 | best    4.44
+iter  284 | reward   -6.22/   1.68/   5.88 | target>=6  no | max   58.8% | len  400.0 | best    4.44
+iter  285 | reward   -6.22/   1.45/   5.88 | target>=6  no | max   58.8% | len  400.0 | best    4.44
+iter  286 | reward   -6.22/   1.23/   5.88 | target>=6  no | max   58.8% | len  400.0 | best    4.44
+iter  287 | reward   -6.26/   1.20/   5.88 | target>=6  no | max   58.8% | len  400.0 | best    4.44
+iter  288 | reward   -6.26/   1.38/   5.88 | target>=6  no | max   58.8% | len  400.0 | best    4.44
+iter  289 | reward   -6.26/   1.29/   5.88 | target>=6  no | max   58.8% | len  400.0 | best    4.44
+iter  290 | reward   -6.26/   0.99/   5.86 | target>=6  no | max   58.6% | len  400.0 | best    4.44
+iter  291 | reward   -6.26/   0.99/   5.86 | target>=6  no | max   58.6% | len  400.0 | best    4.44
+iter  292 | reward   -6.26/   0.69/   5.86 | target>=6  no | max   58.6% | len  400.0 | best    4.44
+iter  293 | reward   -6.26/   0.81/   5.86 | target>=6  no | max   58.6% | len  400.0 | best    4.44
+iter  294 | reward   -6.26/   0.72/   5.86 | target>=6  no | max   58.6% | len  400.0 | best    4.44
+iter  295 | reward   -6.95/   0.50/   5.86 | target>=6  no | max   58.6% | len  400.0 | best    4.44
+iter  296 | reward   -6.95/   0.50/   5.86 | target>=6  no | max   58.6% | len  400.0 | best    4.44
+iter  297 | reward   -6.95/   0.56/   5.86 | target>=6  no | max   58.6% | len  400.0 | best    4.44
+iter  298 | reward   -6.95/   0.41/   5.86 | target>=6  no | max   58.6% | len  400.0 | best    4.44
+iter  299 | reward   -6.95/   0.51/   5.37 | target>=6  no | max   53.7% | len  400.0 | best    4.44
+iter  300 | reward   -6.95/   0.89/   5.37 | target>=6  no | max   53.7% | len  400.0 | best    4.44
+iter  301 | reward   -6.95/   0.89/   5.37 | target>=6  no | max   53.7% | len  400.0 | best    4.44
+iter  302 | reward   -6.95/   0.81/   5.37 | target>=6  no | max   53.7% | len  400.0 | best    4.44
+iter  303 | reward   -6.95/   0.55/   5.37 | target>=6  no | max   53.7% | len  400.0 | best    4.44
+iter  304 | reward   -6.95/   0.66/   5.37 | target>=6  no | max   53.7% | len  400.0 | best    4.44
+iter  305 | reward   -6.26/   1.04/   5.87 | target>=6  no | max   58.7% | len  400.0 | best    4.44
+iter  306 | reward   -6.26/   1.00/   5.87 | target>=6  no | max   58.7% | len  400.0 | best    4.44
+iter  307 | reward   -6.26/   1.07/   5.87 | target>=6  no | max   58.7% | len  400.0 | best    4.44
+iter  308 | reward   -6.26/   1.07/   5.87 | target>=6  no | max   58.7% | len  400.0 | best    4.44
+iter  309 | reward   -6.24/   1.21/   5.87 | target>=6  no | max   58.7% | len  400.0 | best    4.44
+iter  310 | reward   -6.24/   1.20/   5.87 | target>=6  no | max   58.7% | len  400.0 | best    4.44
+iter  311 | reward   -6.24/   1.24/   5.87 | target>=6  no | max   58.7% | len  400.0 | best    4.44
+iter  312 | reward   -6.24/   1.32/   5.87 | target>=6  no | max   58.7% | len  400.0 | best    4.44
+iter  313 | reward   -6.24/   1.32/   5.87 | target>=6  no | max   58.7% | len  400.0 | best    4.44
+iter  314 | reward   -6.25/   1.16/   5.87 | target>=6  no | max   58.7% | len  400.0 | best    4.44
+iter  315 | reward   -6.25/   0.98/   5.87 | target>=6  no | max   58.7% | len  400.0 | best    4.44
+iter  316 | reward   -6.25/   0.83/   5.87 | target>=6  no | max   58.7% | len  400.0 | best    4.44
+iter  317 | reward   -6.26/   0.85/   5.36 | target>=6  no | max   53.6% | len  400.0 | best    4.44
+iter  318 | reward   -6.26/   0.85/   5.36 | target>=6  no | max   53.6% | len  400.0 | best    4.44
+iter  319 | reward   -6.27/   0.93/   5.37 | target>=6  no | max   53.7% | len  400.0 | best    4.44
+iter  320 | reward   -6.27/   0.96/   5.37 | target>=6  no | max   53.7% | len  400.0 | best    4.44
+iter  321 | reward   -6.27/   0.99/   5.37 | target>=6  no | max   53.7% | len  400.0 | best    4.44
+iter  322 | reward   -6.27/   0.96/   5.37 | target>=6  no | max   53.7% | len  400.0 | best    4.44
+iter  323 | reward   -6.27/   1.11/   5.37 | target>=6  no | max   53.7% | len  400.0 | best    4.44
+iter  324 | reward   -6.27/   1.43/   5.37 | target>=6  no | max   53.7% | len  400.0 | best    4.44
+iter  325 | reward   -6.27/   1.43/   5.37 | target>=6  no | max   53.7% | len  400.0 | best    4.44
+iter  326 | reward   -6.27/   1.58/   5.38 | target>=6  no | max   53.8% | len  400.0 | best    4.44
+iter  327 | reward   -6.27/   1.34/   5.38 | target>=6  no | max   53.8% | len  400.0 | best    4.44
+iter  328 | reward   -6.27/   1.49/   5.38 | target>=6  no | max   53.8% | len  400.0 | best    4.44
+iter  329 | reward   -6.26/   1.58/   5.38 | target>=6  no | max   53.8% | len  400.0 | best    4.44
+iter  330 | reward   -6.26/   1.58/   5.38 | target>=6  no | max   53.8% | len  400.0 | best    4.44
+iter  331 | reward   -6.27/   1.54/   5.38 | target>=6  no | max   53.8% | len  400.0 | best    4.44
+iter  332 | reward   -6.27/   1.76/   5.55 | target>=6  no | max   55.5% | len  400.0 | best    4.44
+iter  333 | reward   -6.27/   1.49/   5.55 | target>=6  no | max   55.5% | len  400.0 | best    4.44
+iter  334 | reward   -6.27/   1.50/   5.55 | target>=6  no | max   55.5% | len  400.0 | best    4.44
+iter  335 | reward   -6.27/   1.50/   5.55 | target>=6  no | max   55.5% | len  400.0 | best    4.44
+iter  336 | reward   -6.27/   1.32/   5.55 | target>=6  no | max   55.5% | len  400.0 | best    4.44
+iter  337 | reward   -6.27/   1.32/   5.55 | target>=6  no | max   55.5% | len  400.0 | best    4.44
+iter  338 | reward   -6.27/   1.41/   5.55 | target>=6  no | max   55.5% | len  400.0 | best    4.44
+iter  339 | reward   -6.27/   1.34/   5.55 | target>=6  no | max   55.5% | len  400.0 | best    4.44
+iter  340 | reward   -6.27/   1.34/   5.55 | target>=6  no | max   55.5% | len  400.0 | best    4.44
+iter  341 | reward   -6.25/   1.26/   5.55 | target>=6  no | max   55.5% | len  400.0 | best    4.44
+iter  342 | reward   -6.25/   1.26/   5.55 | target>=6  no | max   55.5% | len  400.0 | best    4.44
+iter  343 | reward   -6.25/   1.59/   5.36 | target>=6  no | max   53.6% | len  400.0 | best    4.44
+iter  344 | reward   -6.25/   1.67/   5.36 | target>=6  no | max   53.6% | len  400.0 | best    4.44
+iter  345 | reward   -6.25/   1.70/   5.36 | target>=6  no | max   53.6% | len  400.0 | best    4.44
+iter  346 | reward   -6.26/   1.80/   5.36 | target>=6  no | max   53.6% | len  400.0 | best    4.44
+iter  347 | reward   -6.26/   1.80/   5.36 | target>=6  no | max   53.6% | len  400.0 | best    4.44
+iter  348 | reward   -6.26/   1.81/   5.36 | target>=6  no | max   53.6% | len  400.0 | best    4.44
+iter  349 | reward   -6.26/   1.96/   5.36 | target>=6  no | max   53.6% | len  400.0 | best    4.44
+iter  350 | reward   -6.26/   1.98/   5.36 | target>=6  no | max   53.6% | len  400.0 | best    4.44
+iter  351 | reward   -6.26/   2.18/   5.36 | target>=6  no | max   53.6% | len  400.0 | best    4.44
+iter  352 | reward   -6.26/   2.18/   5.36 | target>=6  no | max   53.6% | len  400.0 | best    4.44
+iter  353 | reward   -6.26/   1.58/   5.36 | target>=6  no | max   53.6% | len  400.0 | best    4.44
+iter  354 | reward   -6.26/   1.58/   5.36 | target>=6  no | max   53.6% | len  400.0 | best    4.44
+iter  355 | reward   -6.26/   1.31/   5.36 | target>=6  no | max   53.6% | len  400.0 | best    4.44
+iter  356 | reward   -6.25/   1.17/   5.36 | target>=6  no | max   53.6% | len  400.0 | best    4.44
+iter  357 | reward   -6.25/   1.17/   5.36 | target>=6  no | max   53.6% | len  400.0 | best    4.44
+iter  358 | reward   -6.25/   1.37/   5.84 | target>=6  no | max   58.4% | len  400.0 | best    4.44
+iter  359 | reward   -6.25/   1.37/   5.84 | target>=6  no | max   58.4% | len  400.0 | best    4.44
+iter  360 | reward   -6.25/   1.23/   5.84 | target>=6  no | max   58.4% | len  400.0 | best    4.44
+iter  361 | reward   -6.25/   0.89/   5.84 | target>=6  no | max   58.4% | len  400.0 | best    4.44
+iter  362 | reward   -6.25/   0.83/   5.84 | target>=6  no | max   58.4% | len  400.0 | best    4.44
+iter  363 | reward   -6.25/   1.28/   5.84 | target>=6  no | max   58.4% | len  400.0 | best    4.44
+iter  364 | reward   -6.25/   1.28/   5.84 | target>=6  no | max   58.4% | len  400.0 | best    4.44
+iter  365 | reward   -6.25/   1.33/   5.84 | target>=6  no | max   58.4% | len  400.0 | best    4.44
+iter  366 | reward   -6.25/   1.16/   5.84 | target>=6  no | max   58.4% | len  400.0 | best    4.44
+iter  367 | reward   -6.23/   1.36/   5.55 | target>=6  no | max   55.5% | len  400.0 | best    4.44
+iter  368 | reward   -6.23/   1.09/   5.55 | target>=6  no | max   55.5% | len  400.0 | best    4.44
+iter  369 | reward   -6.23/   1.09/   5.55 | target>=6  no | max   55.5% | len  400.0 | best    4.44
+iter  370 | reward   -6.27/   0.95/   5.55 | target>=6  no | max   55.5% | len  400.0 | best    4.44
+iter  371 | reward   -6.27/   0.95/   5.55 | target>=6  no | max   55.5% | len  400.0 | best    4.44

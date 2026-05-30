@@ -1,0 +1,53 @@
+============================================================
+Creating PPO hyperparameter sweep
+GPUs: 0 1
+Jobs per GPU: 3
+Total concurrent jobs: 6
+Rollout workers per job: 17
+GPU requested per job: 0.2
+============================================================
+
+Created 180 jobs.
+
+Starting slot 0 | GPU 0
+Starting slot 1 | GPU 0
+Starting slot 2 | GPU 0
+Starting slot 3 | GPU 1
+Starting slot 4 | GPU 1
+Starting slot 5 | GPU 1
+============================================================
+============================================================
+Slot 0 | GPU 0
+Slot 2 | GPU 0
+Starting: job_0_iter_500_batch_2000_sgd_3_entropy_0_0
+Starting: job_2_iter_500_batch_2000_sgd_3_entropy_0_05
+Log: logs/hparam_sweep/job_0_iter_500_batch_2000_sgd_3_entropy_0_0.log
+Log: logs/hparam_sweep/job_2_iter_500_batch_2000_sgd_3_entropy_0_05.log
+Checkpoint: tmp/hparam_sweep/job_0_iter_500_batch_2000_sgd_3_entropy_0_0
+Checkpoint: tmp/hparam_sweep/job_2_iter_500_batch_2000_sgd_3_entropy_0_05
+============================================================
+============================================================
+============================================================
+============================================================
+Slot 1 | GPU 0
+Starting: job_1_iter_500_batch_2000_sgd_3_entropy_0_1
+Slot 3 | GPU 1
+Log: logs/hparam_sweep/job_1_iter_500_batch_2000_sgd_3_entropy_0_1.log
+Starting: job_3_iter_500_batch_2000_sgd_3_entropy_0_2
+Checkpoint: tmp/hparam_sweep/job_1_iter_500_batch_2000_sgd_3_entropy_0_1
+Log: logs/hparam_sweep/job_3_iter_500_batch_2000_sgd_3_entropy_0_2.log
+============================================================
+Checkpoint: tmp/hparam_sweep/job_3_iter_500_batch_2000_sgd_3_entropy_0_2
+============================================================
+============================================================
+============================================================
+Slot 4 | GPU 1
+Starting: job_4_iter_500_batch_2000_sgd_3_entropy_0_3
+Slot 5 | GPU 1
+Starting: job_5_iter_500_batch_2000_sgd_5_entropy_0_0
+Log: logs/hparam_sweep/job_4_iter_500_batch_2000_sgd_3_entropy_0_3.log
+Log: logs/hparam_sweep/job_5_iter_500_batch_2000_sgd_5_entropy_0_0.log
+Checkpoint: tmp/hparam_sweep/job_4_iter_500_batch_2000_sgd_3_entropy_0_3
+============================================================
+Checkpoint: tmp/hparam_sweep/job_5_iter_500_batch_2000_sgd_5_entropy_0_0
+============================================================
