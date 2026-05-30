@@ -262,3 +262,5 @@ iter  179 | reward   -1.87/  -0.67/   0.80 | target>=6  no | max    8.0% | len  
 iter  180 | reward   -1.87/  -0.65/   0.80 | target>=6  no | max    8.0% | len  400.0 | best   -0.61
 iter  181 | reward   -1.87/  -0.66/   0.80 | target>=6  no | max    8.0% | len  400.0 | best   -0.61
 iter  182 | reward   -1.87/  -0.68/   0.80 | target>=6  no | max    8.0% | len  400.0 | best   -0.61
+iter  183 | reward   -1.87/  -0.68/   0.80 | target>=6  no | max    8.0% | len  400.0 | best   -0.61
+iter  184 | reward   -1.87/  -0.70/   0.80 | target>=6  no | max    8.0% | len  400.0 | best   -0.61

@@ -207,3 +207,6 @@ iter  119 | reward   -3.17/   3.27/   5.33 | target>=6  no | max   53.3% | len  
 iter  120 | reward   -3.17/   3.24/   5.33 | target>=6  no | max   53.3% | len  400.0 | best    3.52
 iter  121 | reward   -5.46/   3.15/   5.33 | target>=6  no | max   53.3% | len  400.0 | best    3.52
 iter  122 | reward   -5.46/   3.15/   5.33 | target>=6  no | max   53.3% | len  400.0 | best    3.52
+iter  123 | reward   -6.02/   3.04/   5.33 | target>=6  no | max   53.3% | len  400.0 | best    3.52
+iter  124 | reward   -6.02/   3.14/   5.33 | target>=6  no | max   53.3% | len  400.0 | best    3.52
+iter  125 | reward   -6.02/   3.20/   5.33 | target>=6  no | max   53.3% | len  400.0 | best    3.52

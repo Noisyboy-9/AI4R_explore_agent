@@ -470,3 +470,7 @@ iter  368 | reward   -6.23/   1.09/   5.55 | target>=6  no | max   55.5% | len  
 iter  369 | reward   -6.23/   1.09/   5.55 | target>=6  no | max   55.5% | len  400.0 | best    4.44
 iter  370 | reward   -6.27/   0.95/   5.55 | target>=6  no | max   55.5% | len  400.0 | best    4.44
 iter  371 | reward   -6.27/   0.95/   5.55 | target>=6  no | max   55.5% | len  400.0 | best    4.44
+iter  372 | reward   -6.27/   0.95/   5.55 | target>=6  no | max   55.5% | len  400.0 | best    4.44
+iter  373 | reward   -6.27/   0.89/   5.38 | target>=6  no | max   53.8% | len  400.0 | best    4.44
+iter  374 | reward   -6.27/   0.89/   5.38 | target>=6  no | max   53.8% | len  400.0 | best    4.44
+iter  375 | reward   -6.27/   0.87/   5.38 | target>=6  no | max   53.8% | len  400.0 | best    4.44
