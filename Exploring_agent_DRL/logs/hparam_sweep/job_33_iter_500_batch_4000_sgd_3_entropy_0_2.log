@@ -502,3 +502,6 @@ iter  411 | reward   -1.72/  -0.73/   0.67 | target>=6  no | max    6.7% | len  
 iter  412 | reward   -1.68/  -0.77/   0.28 | target>=6  no | max    2.8% | len  400.0 | best   -0.56
 iter  413 | reward   -1.68/  -0.77/   0.28 | target>=6  no | max    2.8% | len  400.0 | best   -0.56
 iter  414 | reward   -1.74/  -0.75/   0.28 | target>=6  no | max    2.8% | len  400.0 | best   -0.56
+iter  415 | reward   -1.74/  -0.75/   0.28 | target>=6  no | max    2.8% | len  400.0 | best   -0.56
+iter  416 | reward   -1.74/  -0.73/   0.28 | target>=6  no | max    2.8% | len  400.0 | best   -0.56
+iter  417 | reward   -1.74/  -0.74/   0.68 | target>=6  no | max    6.8% | len  400.0 | best   -0.56

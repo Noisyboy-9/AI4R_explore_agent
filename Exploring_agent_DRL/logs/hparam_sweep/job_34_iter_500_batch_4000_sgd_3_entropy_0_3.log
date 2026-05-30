@@ -421,3 +421,7 @@ iter  332 | reward   -2.02/  -0.68/   0.07 | target>=6  no | max    0.7% | len  
 iter  333 | reward   -2.02/  -0.67/   0.17 | target>=6  no | max    1.7% | len  400.0 | best   -0.57
 iter  334 | reward   -2.02/  -0.69/   0.17 | target>=6  no | max    1.7% | len  400.0 | best   -0.57
 iter  335 | reward   -2.02/  -0.69/   0.17 | target>=6  no | max    1.7% | len  400.0 | best   -0.57
+iter  336 | reward   -2.02/  -0.73/   0.17 | target>=6  no | max    1.7% | len  400.0 | best   -0.57
+iter  337 | reward   -2.02/  -0.73/   0.17 | target>=6  no | max    1.7% | len  400.0 | best   -0.57
+iter  338 | reward   -2.02/  -0.76/   0.17 | target>=6  no | max    1.7% | len  400.0 | best   -0.57
+iter  339 | reward   -2.02/  -0.71/   0.17 | target>=6  no | max    1.7% | len  400.0 | best   -0.57
