@@ -20,7 +20,6 @@ miniconda*/
 .micromamba/
 
 # RLlib/Ray training outputs and checkpoints
-Exploring_agent_DRL/tmp/
 Exploring_agent_DRL/ray_results/
 ray_results/
 **/ray_results/
