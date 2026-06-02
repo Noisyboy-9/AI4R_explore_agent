@@ -1,8 +1,1498 @@
-/usr/bin/python Explore_PPO_agent_training.py --iterations 1500 --num-workers 17 --num-gpus 0.5 --env-name 2d_checkpoint_exploration --reward-mode coverage --max-steps 400 --entropy-coeff 0.2 --checkpoint-dir tmp/hparam_sweep/job_103_iter_1500_batch_2000_sgd_10_entropy_0_2 --spawn-mode random --spawn-index 0 --train-batch-size 2000 --sgd-minibatch-size 256 --num-sgd-iter 10
+/opt/miniconda3/envs/aiar-rl-explore-gpu/bin/python Explore_PPO_agent_training.py --iterations 1500 --num-workers 17 --num-gpus 0.5 --env-name 2d_checkpoint_exploration --reward-mode coverage --max-steps 400 --entropy-coeff 0.2 --checkpoint-dir tmp/hparam_sweep/job_103_iter_1500_batch_2000_sgd_10_entropy_0_2 --spawn-mode random --spawn-index 0 --train-batch-size 2000 --sgd-minibatch-size 256 --num-sgd-iter 10
+/opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+  import pkg_resources
+
+Training PPO
+  environment: 2d_checkpoint_exploration
+  reward mode: coverage
+  max steps per episode: 400
+  rollout workers: 17
+  requested GPUs: 0.5
+  observation shape: (27,)
+  checkpoint layout: built-in
+  spawn mode: random
+  entropy coefficient: 0.2
+  PPO update: train batch 2000, minibatch 256, SGD passes 10
+  coverage task: 20 checkpoints x 0.50 reward = 10.00 max reward
+  exploration shaping: -0.004/step for hovering, -0.020/step when blocked by a wall, -0.002/step for no progress, bounded wall-contact penalty
+
+Log columns
+  iter: completed PPO training iteration
+  reward min/mean/max: episode return statistics from the latest training batch
+  train batch: environment steps collected before one PPO update
+  target>=6: whether the latest batch contains an episode above the submission threshold
+  max%: best episode reward in the latest batch as a percentage of the checkpoint reward maximum
+          idle penalties can reduce returns below the checkpoint score
+          early scores can be negative because collision has a penalty
+  len: mean episode length in environment steps
+  best: best mean reward saved after warmup iterations
+
+2026-06-01 14:07:03,707	INFO worker.py:1636 -- Started a local Ray instance.
+/opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/rllib/algorithms/algorithm.py:442: RayDeprecationWarning: This API is deprecated and may be removed in future Ray releases. You could suppress this warning by setting env variable PYTHONWARNINGS="ignore::DeprecationWarning"
+`UnifiedLogger` will be removed in Ray 2.7.
+  return UnifiedLogger(config, logdir, loggers=None)
+/opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/tune/logger/unified.py:53: RayDeprecationWarning: This API is deprecated and may be removed in future Ray releases. You could suppress this warning by setting env variable PYTHONWARNINGS="ignore::DeprecationWarning"
+The `JsonLogger interface is deprecated in favor of the `ray.tune.json.JsonLoggerCallback` interface and will be removed in Ray 2.7.
+  self._loggers.append(cls(self.config, self.logdir, self.trial))
+/opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/tune/logger/unified.py:53: RayDeprecationWarning: This API is deprecated and may be removed in future Ray releases. You could suppress this warning by setting env variable PYTHONWARNINGS="ignore::DeprecationWarning"
+The `CSVLogger interface is deprecated in favor of the `ray.tune.csv.CSVLoggerCallback` interface and will be removed in Ray 2.7.
+  self._loggers.append(cls(self.config, self.logdir, self.trial))
+/opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/tune/logger/unified.py:53: RayDeprecationWarning: This API is deprecated and may be removed in future Ray releases. You could suppress this warning by setting env variable PYTHONWARNINGS="ignore::DeprecationWarning"
+The `TBXLogger interface is deprecated in favor of the `ray.tune.tensorboardx.TBXLoggerCallback` interface and will be removed in Ray 2.7.
+  self._loggers.append(cls(self.config, self.logdir, self.trial))
+2026-06-01 14:07:07,533	INFO tensorboardx.py:48 -- pip install "ray[tune]" to see TensorBoard files.
+2026-06-01 14:07:07,533	WARNING unified.py:56 -- Could not instantiate TBXLogger: No module named 'tensorboardX'.
+2026-06-01 14:07:07,535	INFO algorithm.py:536 -- Current log_level is WARN. For more information, set 'log_level': 'INFO' / 'DEBUG' or use the -v and -vv flags.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[36m(RolloutWorker pid=1791236)[0m 2026-06-01 14:07:14,362	WARNING env.py:155 -- Your env doesn't have a .spec.max_episode_steps attribute. Your horizon will default to infinity, and your environment will not be reset.
+2026-06-01 14:07:16,073	WARNING util.py:68 -- Install gputil for GPU system monitoring.
+iter    1 | reward     nan/    nan/    nan | target>=6  no | max    nan% | len    nan | best    0.00
+iter    2 | reward     nan/    nan/    nan | target>=6  no | max    nan% | len    nan | best    0.00
+iter    3 | reward     nan/    nan/    nan | target>=6  no | max    nan% | len    nan | best    0.00
+iter    4 | reward   -1.60/  -0.49/   0.77 | target>=6  no | max    7.7% | len  400.0 | best    0.00
+iter    5 | reward   -1.60/  -0.49/   0.77 | target>=6  no | max    7.7% | len  400.0 | best    0.00
+iter    6 | reward   -1.60/  -0.49/   0.77 | target>=6  no | max    7.7% | len  400.0 | best    0.00
+iter    7 | reward   -1.60/  -0.52/   0.77 | target>=6  no | max    7.7% | len  400.0 | best    0.00
+iter    8 | reward   -1.60/  -0.52/   0.77 | target>=6  no | max    7.7% | len  400.0 | best    0.00
+iter    9 | reward   -1.60/  -0.52/   0.77 | target>=6  no | max    7.7% | len  400.0 | best    0.00
+iter   10 | reward   -1.60/  -0.52/   0.77 | target>=6  no | max    7.7% | len  400.0 | best    0.00
+iter   11 | reward   -1.60/  -0.53/   0.77 | target>=6  no | max    7.7% | len  400.0 | best    0.00
+iter   12 | reward   -1.60/  -0.53/   0.77 | target>=6  no | max    7.7% | len  400.0 | best    0.00
+iter   13 | reward   -1.60/  -0.53/   0.77 | target>=6  no | max    7.7% | len  400.0 | best    0.00
+iter   14 | reward   -1.64/  -0.58/   0.77 | target>=6  no | max    7.7% | len  400.0 | best    0.00
+iter   15 | reward   -1.64/  -0.58/   0.77 | target>=6  no | max    7.7% | len  400.0 | best    0.00
+iter   16 | reward   -1.64/  -0.58/   0.77 | target>=6  no | max    7.7% | len  400.0 | best    0.00
+iter   17 | reward   -1.64/  -0.56/   0.77 | target>=6  no | max    7.7% | len  400.0 | best    0.00
+iter   18 | reward   -1.64/  -0.55/   0.77 | target>=6  no | max    7.7% | len  400.0 | best    0.00
+iter   19 | reward   -1.64/  -0.55/   0.77 | target>=6  no | max    7.7% | len  400.0 | best    0.00
+iter   20 | reward   -1.64/  -0.55/   0.77 | target>=6  no | max    7.7% | len  400.0 | best    0.00
+iter   21 | reward   -1.64/  -0.54/   0.84 | target>=6  no | max    8.4% | len  400.0 | best    0.00
+iter   22 | reward   -1.64/  -0.54/   0.84 | target>=6  no | max    8.4% | len  400.0 | best    0.00
+iter   23 | reward   -1.64/  -0.54/   0.84 | target>=6  no | max    8.4% | len  400.0 | best    0.00
+iter   24 | reward   -1.64/  -0.55/   0.84 | target>=6  no | max    8.4% | len  400.0 | best    0.00
+iter   25 | reward   -1.64/  -0.55/   0.84 | target>=6  no | max    8.4% | len  400.0 | best    0.00
+iter   26 | reward   -1.64/  -0.55/   0.84 | target>=6  no | max    8.4% | len  400.0 | best    0.00
+iter   27 | reward   -1.64/  -0.55/   0.84 | target>=6  no | max    8.4% | len  400.0 | best    0.00
+iter   28 | reward   -1.84/  -0.61/   0.84 | target>=6  no | max    8.4% | len  400.0 | best    0.00
+iter   29 | reward   -1.84/  -0.61/   0.84 | target>=6  no | max    8.4% | len  400.0 | best    0.00
+iter   30 | reward   -1.84/  -0.61/   0.84 | target>=6  no | max    8.4% | len  400.0 | best    0.00
+iter   31 | reward   -1.84/  -0.66/   0.84 | target>=6  no | max    8.4% | len  400.0 | best    0.00
+iter   32 | reward   -1.84/  -0.66/   0.84 | target>=6  no | max    8.4% | len  400.0 | best    0.00
+iter   33 | reward   -1.84/  -0.66/   0.84 | target>=6  no | max    8.4% | len  400.0 | best    0.00
+iter   34 | reward   -1.84/  -0.63/   0.84 | target>=6  no | max    8.4% | len  400.0 | best    0.00
+iter   35 | reward   -1.84/  -0.64/   0.84 | target>=6  no | max    8.4% | len  400.0 | best    0.00
+iter   36 | reward   -1.84/  -0.64/   0.84 | target>=6  no | max    8.4% | len  400.0 | best    0.00
+iter   37 | reward   -1.84/  -0.64/   0.84 | target>=6  no | max    8.4% | len  400.0 | best    0.00
+iter   38 | reward   -1.84/  -0.67/   0.84 | target>=6  no | max    8.4% | len  400.0 | best    0.00
+iter   39 | reward   -1.84/  -0.67/   0.84 | target>=6  no | max    8.4% | len  400.0 | best    0.00
+iter   40 | reward   -1.84/  -0.67/   0.84 | target>=6  no | max    8.4% | len  400.0 | best    0.00
+iter   41 | reward   -1.84/  -0.67/   0.60 | target>=6  no | max    6.0% | len  400.0 | best    0.00
+iter   42 | reward   -1.84/  -0.65/   0.62 | target>=6  no | max    6.2% | len  400.0 | best    0.00
+iter   43 | reward   -1.84/  -0.65/   0.62 | target>=6  no | max    6.2% | len  400.0 | best    0.00
+iter   44 | reward   -1.84/  -0.65/   0.62 | target>=6  no | max    6.2% | len  400.0 | best    0.00
+iter   45 | reward   -1.84/  -0.65/   0.62 | target>=6  no | max    6.2% | len  400.0 | best    0.00
+iter   46 | reward   -1.84/  -0.65/   0.62 | target>=6  no | max    6.2% | len  400.0 | best    0.00
+iter   47 | reward   -1.84/  -0.65/   0.62 | target>=6  no | max    6.2% | len  400.0 | best    0.00
+iter   48 | reward   -1.54/  -0.64/   0.62 | target>=6  no | max    6.2% | len  400.0 | best    0.00
+iter   49 | reward   -1.54/  -0.64/   0.62 | target>=6  no | max    6.2% | len  400.0 | best    0.00
+iter   50 | reward   -1.54/  -0.64/   0.62 | target>=6  no | max    6.2% | len  400.0 | best    0.00
+Iteration 51: new best mean reward -0.66
+iter   51 | reward   -1.56/  -0.66/   0.62 | target>=6  no | max    6.2% | len  400.0 | best   -0.66
+Iteration 52: new best mean reward -0.66
+iter   52 | reward   -1.56/  -0.66/   0.62 | target>=6  no | max    6.2% | len  400.0 | best   -0.66
+iter   53 | reward   -1.56/  -0.66/   0.62 | target>=6  no | max    6.2% | len  400.0 | best   -0.66
+iter   54 | reward   -1.56/  -0.66/   0.62 | target>=6  no | max    6.2% | len  400.0 | best   -0.66
+iter   55 | reward   -1.56/  -0.66/   0.62 | target>=6  no | max    6.2% | len  400.0 | best   -0.66
+iter   56 | reward   -1.56/  -0.66/   0.62 | target>=6  no | max    6.2% | len  400.0 | best   -0.66
+iter   57 | reward   -1.56/  -0.66/   0.62 | target>=6  no | max    6.2% | len  400.0 | best   -0.66
+iter   58 | reward   -1.70/  -0.66/   0.75 | target>=6  no | max    7.5% | len  400.0 | best   -0.66
+iter   59 | reward   -1.70/  -0.66/   0.75 | target>=6  no | max    7.5% | len  400.0 | best   -0.66
+iter   60 | reward   -1.70/  -0.66/   0.75 | target>=6  no | max    7.5% | len  400.0 | best   -0.66
+iter   61 | reward   -1.70/  -0.66/   0.75 | target>=6  no | max    7.5% | len  400.0 | best   -0.66
+iter   62 | reward   -1.70/  -0.72/   0.75 | target>=6  no | max    7.5% | len  400.0 | best   -0.66
+iter   63 | reward   -1.70/  -0.72/   0.75 | target>=6  no | max    7.5% | len  400.0 | best   -0.66
+iter   64 | reward   -1.70/  -0.72/   0.75 | target>=6  no | max    7.5% | len  400.0 | best   -0.66
+iter   65 | reward   -1.70/  -0.70/   0.75 | target>=6  no | max    7.5% | len  400.0 | best   -0.66
+iter   66 | reward   -1.70/  -0.70/   0.75 | target>=6  no | max    7.5% | len  400.0 | best   -0.66
+iter   67 | reward   -1.70/  -0.70/   0.75 | target>=6  no | max    7.5% | len  400.0 | best   -0.66
+iter   68 | reward   -1.70/  -0.69/   0.75 | target>=6  no | max    7.5% | len  400.0 | best   -0.66
+iter   69 | reward   -1.70/  -0.70/   0.75 | target>=6  no | max    7.5% | len  400.0 | best   -0.66
+iter   70 | reward   -1.70/  -0.70/   0.75 | target>=6  no | max    7.5% | len  400.0 | best   -0.66
+iter   71 | reward   -1.70/  -0.70/   0.75 | target>=6  no | max    7.5% | len  400.0 | best   -0.66
+iter   72 | reward   -1.79/  -0.70/   0.75 | target>=6  no | max    7.5% | len  400.0 | best   -0.66
+iter   73 | reward   -1.79/  -0.70/   0.75 | target>=6  no | max    7.5% | len  400.0 | best   -0.66
+iter   74 | reward   -1.79/  -0.70/   0.75 | target>=6  no | max    7.5% | len  400.0 | best   -0.66
+iter   75 | reward   -1.79/  -0.71/   0.75 | target>=6  no | max    7.5% | len  400.0 | best   -0.66
+iter   76 | reward   -1.79/  -0.72/   0.72 | target>=6  no | max    7.2% | len  400.0 | best   -0.66
+iter   77 | reward   -1.79/  -0.72/   0.72 | target>=6  no | max    7.2% | len  400.0 | best   -0.66
+iter   78 | reward   -1.79/  -0.71/   0.72 | target>=6  no | max    7.2% | len  400.0 | best   -0.66
+iter   79 | reward   -1.79/  -0.72/   0.72 | target>=6  no | max    7.2% | len  400.0 | best   -0.66
+iter   80 | reward   -1.79/  -0.72/   0.72 | target>=6  no | max    7.2% | len  400.0 | best   -0.66
+iter   81 | reward   -1.79/  -0.72/   0.72 | target>=6  no | max    7.2% | len  400.0 | best   -0.66
+iter   82 | reward   -1.79/  -0.67/   0.72 | target>=6  no | max    7.2% | len  400.0 | best   -0.66
+iter   83 | reward   -1.79/  -0.66/   0.72 | target>=6  no | max    7.2% | len  400.0 | best   -0.66
+iter   84 | reward   -1.79/  -0.66/   0.72 | target>=6  no | max    7.2% | len  400.0 | best   -0.66
+iter   85 | reward   -1.79/  -0.68/   0.57 | target>=6  no | max    5.7% | len  400.0 | best   -0.66
+iter   86 | reward   -1.79/  -0.70/   0.57 | target>=6  no | max    5.7% | len  400.0 | best   -0.66
+iter   87 | reward   -1.79/  -0.70/   0.57 | target>=6  no | max    5.7% | len  400.0 | best   -0.66
+iter   88 | reward   -1.79/  -0.70/   0.57 | target>=6  no | max    5.7% | len  400.0 | best   -0.66
+iter   89 | reward   -1.79/  -0.67/   0.57 | target>=6  no | max    5.7% | len  400.0 | best   -0.66
+iter   90 | reward   -1.79/  -0.67/   0.57 | target>=6  no | max    5.7% | len  400.0 | best   -0.66
+iter   91 | reward   -1.79/  -0.67/   0.57 | target>=6  no | max    5.7% | len  400.0 | best   -0.66
+iter   92 | reward   -1.74/  -0.66/   0.57 | target>=6  no | max    5.7% | len  400.0 | best   -0.66
+iter   93 | reward   -1.74/  -0.66/   0.57 | target>=6  no | max    5.7% | len  400.0 | best   -0.66
+iter   94 | reward   -1.74/  -0.66/   0.57 | target>=6  no | max    5.7% | len  400.0 | best   -0.66
+iter   95 | reward   -1.74/  -0.71/   0.57 | target>=6  no | max    5.7% | len  400.0 | best   -0.66
+iter   96 | reward   -1.74/  -0.71/   0.57 | target>=6  no | max    5.7% | len  400.0 | best   -0.66
+iter   97 | reward   -1.74/  -0.71/   0.57 | target>=6  no | max    5.7% | len  400.0 | best   -0.66
+iter   98 | reward   -1.74/  -0.71/   0.57 | target>=6  no | max    5.7% | len  400.0 | best   -0.66
+iter   99 | reward   -1.74/  -0.71/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.66
+iter  100 | reward   -1.74/  -0.73/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.66
+iter  101 | reward   -1.74/  -0.73/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.66
+iter  102 | reward   -1.74/  -0.79/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.66
+iter  103 | reward   -1.74/  -0.79/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.66
+iter  104 | reward   -1.74/  -0.79/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.66
+iter  105 | reward   -1.74/  -0.79/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.66
+iter  106 | reward   -1.74/  -0.78/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.66
+iter  107 | reward   -1.74/  -0.78/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.66
+iter  108 | reward   -1.74/  -0.78/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.66
+iter  109 | reward   -1.60/  -0.78/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.66
+iter  110 | reward   -1.60/  -0.81/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.66
+iter  111 | reward   -1.60/  -0.81/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.66
+iter  112 | reward   -1.60/  -0.80/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.66
+iter  113 | reward   -1.65/  -0.80/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.66
+iter  114 | reward   -1.65/  -0.80/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.66
+iter  115 | reward   -1.65/  -0.80/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.66
+iter  116 | reward   -1.65/  -0.74/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.66
+iter  117 | reward   -1.65/  -0.75/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.66
+iter  118 | reward   -1.65/  -0.75/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.66
+iter  119 | reward   -1.65/  -0.73/   0.49 | target>=6  no | max    4.9% | len  400.0 | best   -0.66
+iter  120 | reward   -1.65/  -0.72/   0.49 | target>=6  no | max    4.9% | len  400.0 | best   -0.66
+iter  121 | reward   -1.65/  -0.72/   0.49 | target>=6  no | max    4.9% | len  400.0 | best   -0.66
+iter  122 | reward   -1.65/  -0.72/   0.49 | target>=6  no | max    4.9% | len  400.0 | best   -0.66
+iter  123 | reward   -1.65/  -0.70/   0.59 | target>=6  no | max    5.9% | len  400.0 | best   -0.66
+iter  124 | reward   -1.65/  -0.70/   0.59 | target>=6  no | max    5.9% | len  400.0 | best   -0.66
+iter  125 | reward   -1.65/  -0.70/   0.59 | target>=6  no | max    5.9% | len  400.0 | best   -0.66
+iter  126 | reward   -1.65/  -0.67/   0.59 | target>=6  no | max    5.9% | len  400.0 | best   -0.66
+iter  127 | reward   -1.65/  -0.68/   0.59 | target>=6  no | max    5.9% | len  400.0 | best   -0.66
+iter  128 | reward   -1.65/  -0.68/   0.59 | target>=6  no | max    5.9% | len  400.0 | best   -0.66
+iter  129 | reward   -1.65/  -0.67/   0.59 | target>=6  no | max    5.9% | len  400.0 | best   -0.66
+Iteration 130: new best mean reward -0.65
+iter  130 | reward   -1.65/  -0.65/   0.59 | target>=6  no | max    5.9% | len  400.0 | best   -0.65
+iter  131 | reward   -1.65/  -0.65/   0.59 | target>=6  no | max    5.9% | len  400.0 | best   -0.65
+iter  132 | reward   -1.65/  -0.65/   0.59 | target>=6  no | max    5.9% | len  400.0 | best   -0.65
+Iteration 133: new best mean reward -0.64
+iter  133 | reward   -1.60/  -0.64/   0.59 | target>=6  no | max    5.9% | len  400.0 | best   -0.64
+iter  134 | reward   -1.63/  -0.66/   0.59 | target>=6  no | max    5.9% | len  400.0 | best   -0.64
+iter  135 | reward   -1.63/  -0.66/   0.59 | target>=6  no | max    5.9% | len  400.0 | best   -0.64
+iter  136 | reward   -1.63/  -0.68/   0.59 | target>=6  no | max    5.9% | len  400.0 | best   -0.64
+iter  137 | reward   -1.63/  -0.68/   0.59 | target>=6  no | max    5.9% | len  400.0 | best   -0.64
+iter  138 | reward   -1.63/  -0.68/   0.59 | target>=6  no | max    5.9% | len  400.0 | best   -0.64
+iter  139 | reward   -1.63/  -0.69/   0.59 | target>=6  no | max    5.9% | len  400.0 | best   -0.64
+iter  140 | reward   -1.63/  -0.69/   0.59 | target>=6  no | max    5.9% | len  400.0 | best   -0.64
+iter  141 | reward   -1.63/  -0.70/   0.59 | target>=6  no | max    5.9% | len  400.0 | best   -0.64
+iter  142 | reward   -1.63/  -0.70/   0.59 | target>=6  no | max    5.9% | len  400.0 | best   -0.64
+iter  143 | reward   -1.63/  -0.72/   0.66 | target>=6  no | max    6.6% | len  400.0 | best   -0.64
+iter  144 | reward   -1.63/  -0.70/   0.66 | target>=6  no | max    6.6% | len  400.0 | best   -0.64
+iter  145 | reward   -1.63/  -0.70/   0.66 | target>=6  no | max    6.6% | len  400.0 | best   -0.64
+iter  146 | reward   -1.88/  -0.77/   0.66 | target>=6  no | max    6.6% | len  400.0 | best   -0.64
+iter  147 | reward   -1.88/  -0.77/   0.66 | target>=6  no | max    6.6% | len  400.0 | best   -0.64
+iter  148 | reward   -1.88/  -0.74/   0.66 | target>=6  no | max    6.6% | len  400.0 | best   -0.64
+iter  149 | reward   -1.88/  -0.74/   0.66 | target>=6  no | max    6.6% | len  400.0 | best   -0.64
+iter  150 | reward   -1.88/  -0.74/   0.66 | target>=6  no | max    6.6% | len  400.0 | best   -0.64
+iter  151 | reward   -1.92/  -0.77/   0.66 | target>=6  no | max    6.6% | len  400.0 | best   -0.64
+iter  152 | reward   -1.92/  -0.77/   0.66 | target>=6  no | max    6.6% | len  400.0 | best   -0.64
+iter  153 | reward   -1.92/  -0.72/   0.66 | target>=6  no | max    6.6% | len  400.0 | best   -0.64
+iter  154 | reward   -1.92/  -0.71/   0.66 | target>=6  no | max    6.6% | len  400.0 | best   -0.64
+iter  155 | reward   -1.92/  -0.71/   0.66 | target>=6  no | max    6.6% | len  400.0 | best   -0.64
+iter  156 | reward   -1.92/  -0.71/   0.66 | target>=6  no | max    6.6% | len  400.0 | best   -0.64
+iter  157 | reward   -1.92/  -0.71/   0.66 | target>=6  no | max    6.6% | len  400.0 | best   -0.64
+iter  158 | reward   -1.92/  -0.70/   0.66 | target>=6  no | max    6.6% | len  400.0 | best   -0.64
+iter  159 | reward   -1.92/  -0.70/   0.66 | target>=6  no | max    6.6% | len  400.0 | best   -0.64
+iter  160 | reward   -1.92/  -0.72/   0.66 | target>=6  no | max    6.6% | len  400.0 | best   -0.64
+iter  161 | reward   -1.92/  -0.73/   0.66 | target>=6  no | max    6.6% | len  400.0 | best   -0.64
+iter  162 | reward   -1.92/  -0.73/   0.66 | target>=6  no | max    6.6% | len  400.0 | best   -0.64
+iter  163 | reward   -1.92/  -0.70/   0.16 | target>=6  no | max    1.6% | len  400.0 | best   -0.64
+iter  164 | reward   -1.92/  -0.70/   0.16 | target>=6  no | max    1.6% | len  400.0 | best   -0.64
+iter  165 | reward   -1.92/  -0.66/   0.16 | target>=6  no | max    1.6% | len  400.0 | best   -0.64
+iter  166 | reward   -1.92/  -0.66/   0.16 | target>=6  no | max    1.6% | len  400.0 | best   -0.64
+iter  167 | reward   -1.94/  -0.65/   0.16 | target>=6  no | max    1.6% | len  400.0 | best   -0.64
+iter  168 | reward   -1.94/  -0.67/   0.16 | target>=6  no | max    1.6% | len  400.0 | best   -0.64
+iter  169 | reward   -1.94/  -0.67/   0.16 | target>=6  no | max    1.6% | len  400.0 | best   -0.64
+iter  170 | reward   -1.94/  -0.66/   0.16 | target>=6  no | max    1.6% | len  400.0 | best   -0.64
+iter  171 | reward   -1.94/  -0.68/   0.16 | target>=6  no | max    1.6% | len  400.0 | best   -0.64
+iter  172 | reward   -1.94/  -0.68/   0.16 | target>=6  no | max    1.6% | len  400.0 | best   -0.64
+iter  173 | reward   -1.94/  -0.69/   0.50 | target>=6  no | max    5.0% | len  400.0 | best   -0.64
+iter  174 | reward   -1.94/  -0.69/   0.50 | target>=6  no | max    5.0% | len  400.0 | best   -0.64
+iter  175 | reward   -1.94/  -0.69/   0.50 | target>=6  no | max    5.0% | len  400.0 | best   -0.64
+iter  176 | reward   -1.94/  -0.69/   0.50 | target>=6  no | max    5.0% | len  400.0 | best   -0.64
+iter  177 | reward   -1.94/  -0.71/   0.50 | target>=6  no | max    5.0% | len  400.0 | best   -0.64
+iter  178 | reward   -1.94/  -0.71/   0.50 | target>=6  no | max    5.0% | len  400.0 | best   -0.64
+iter  179 | reward   -1.94/  -0.71/   0.50 | target>=6  no | max    5.0% | len  400.0 | best   -0.64
+iter  180 | reward   -1.94/  -0.70/   0.57 | target>=6  no | max    5.7% | len  400.0 | best   -0.64
+iter  181 | reward   -1.94/  -0.70/   0.57 | target>=6  no | max    5.7% | len  400.0 | best   -0.64
+iter  182 | reward   -1.94/  -0.67/   0.57 | target>=6  no | max    5.7% | len  400.0 | best   -0.64
+iter  183 | reward   -1.94/  -0.67/   0.57 | target>=6  no | max    5.7% | len  400.0 | best   -0.64
+iter  184 | reward   -1.94/  -0.70/   0.57 | target>=6  no | max    5.7% | len  400.0 | best   -0.64
+iter  185 | reward   -1.78/  -0.70/   0.57 | target>=6  no | max    5.7% | len  400.0 | best   -0.64
+iter  186 | reward   -1.78/  -0.70/   0.57 | target>=6  no | max    5.7% | len  400.0 | best   -0.64
+iter  187 | reward   -1.78/  -0.69/   0.57 | target>=6  no | max    5.7% | len  400.0 | best   -0.64
+iter  188 | reward   -1.78/  -0.69/   0.57 | target>=6  no | max    5.7% | len  400.0 | best   -0.64
+iter  189 | reward   -1.78/  -0.69/   0.57 | target>=6  no | max    5.7% | len  400.0 | best   -0.64
+iter  190 | reward   -1.78/  -0.68/   0.57 | target>=6  no | max    5.7% | len  400.0 | best   -0.64
+iter  191 | reward   -1.78/  -0.68/   0.57 | target>=6  no | max    5.7% | len  400.0 | best   -0.64
+iter  192 | reward   -1.59/  -0.66/   0.57 | target>=6  no | max    5.7% | len  400.0 | best   -0.64
+iter  193 | reward   -1.59/  -0.66/   0.57 | target>=6  no | max    5.7% | len  400.0 | best   -0.64
+iter  194 | reward   -1.59/  -0.66/   0.57 | target>=6  no | max    5.7% | len  400.0 | best   -0.64
+iter  195 | reward   -1.69/  -0.67/   0.57 | target>=6  no | max    5.7% | len  400.0 | best   -0.64
+iter  196 | reward   -1.69/  -0.67/   0.57 | target>=6  no | max    5.7% | len  400.0 | best   -0.64
+iter  197 | reward   -1.69/  -0.64/   0.57 | target>=6  no | max    5.7% | len  400.0 | best   -0.64
+iter  198 | reward   -1.69/  -0.64/   0.57 | target>=6  no | max    5.7% | len  400.0 | best   -0.64
+iter  199 | reward   -1.69/  -0.65/   0.57 | target>=6  no | max    5.7% | len  400.0 | best   -0.64
+iter  200 | reward   -1.69/  -0.68/   0.20 | target>=6  no | max    2.0% | len  400.0 | best   -0.64
+iter  201 | reward   -1.69/  -0.68/   0.20 | target>=6  no | max    2.0% | len  400.0 | best   -0.64
+iter  202 | reward   -1.69/  -0.71/   0.20 | target>=6  no | max    2.0% | len  400.0 | best   -0.64
+iter  203 | reward   -1.69/  -0.71/   0.20 | target>=6  no | max    2.0% | len  400.0 | best   -0.64
+iter  204 | reward   -1.69/  -0.71/   0.20 | target>=6  no | max    2.0% | len  400.0 | best   -0.64
+iter  205 | reward   -1.69/  -0.71/   0.20 | target>=6  no | max    2.0% | len  400.0 | best   -0.64
+iter  206 | reward   -1.69/  -0.73/   0.20 | target>=6  no | max    2.0% | len  400.0 | best   -0.64
+iter  207 | reward   -1.69/  -0.73/   0.31 | target>=6  no | max    3.1% | len  400.0 | best   -0.64
+iter  208 | reward   -1.69/  -0.73/   0.31 | target>=6  no | max    3.1% | len  400.0 | best   -0.64
+iter  209 | reward   -1.69/  -0.73/   0.31 | target>=6  no | max    3.1% | len  400.0 | best   -0.64
+iter  210 | reward   -1.69/  -0.73/   0.31 | target>=6  no | max    3.1% | len  400.0 | best   -0.64
+iter  211 | reward   -1.69/  -0.72/   0.31 | target>=6  no | max    3.1% | len  400.0 | best   -0.64
+iter  212 | reward   -1.69/  -0.72/   0.31 | target>=6  no | max    3.1% | len  400.0 | best   -0.64
+iter  213 | reward   -1.69/  -0.72/   0.31 | target>=6  no | max    3.1% | len  400.0 | best   -0.64
+iter  214 | reward   -2.02/  -0.74/   0.31 | target>=6  no | max    3.1% | len  400.0 | best   -0.64
+iter  215 | reward   -2.02/  -0.74/   0.31 | target>=6  no | max    3.1% | len  400.0 | best   -0.64
+iter  216 | reward   -2.02/  -0.70/   0.31 | target>=6  no | max    3.1% | len  400.0 | best   -0.64
+iter  217 | reward   -2.02/  -0.71/   0.31 | target>=6  no | max    3.1% | len  400.0 | best   -0.64
+iter  218 | reward   -2.02/  -0.71/   0.31 | target>=6  no | max    3.1% | len  400.0 | best   -0.64
+iter  219 | reward   -2.02/  -0.70/   0.31 | target>=6  no | max    3.1% | len  400.0 | best   -0.64
+iter  220 | reward   -2.02/  -0.70/   0.31 | target>=6  no | max    3.1% | len  400.0 | best   -0.64
+iter  221 | reward   -2.02/  -0.72/   0.31 | target>=6  no | max    3.1% | len  400.0 | best   -0.64
+iter  222 | reward   -2.02/  -0.72/   0.31 | target>=6  no | max    3.1% | len  400.0 | best   -0.64
+iter  223 | reward   -2.02/  -0.72/   0.31 | target>=6  no | max    3.1% | len  400.0 | best   -0.64
+iter  224 | reward   -2.02/  -0.71/   0.31 | target>=6  no | max    3.1% | len  400.0 | best   -0.64
+iter  225 | reward   -2.02/  -0.71/   0.31 | target>=6  no | max    3.1% | len  400.0 | best   -0.64
+iter  226 | reward   -2.02/  -0.69/   0.31 | target>=6  no | max    3.1% | len  400.0 | best   -0.64
+iter  227 | reward   -2.02/  -0.69/   0.31 | target>=6  no | max    3.1% | len  400.0 | best   -0.64
+iter  228 | reward   -2.02/  -0.71/   0.19 | target>=6  no | max    1.9% | len  400.0 | best   -0.64
+iter  229 | reward   -2.02/  -0.71/   0.19 | target>=6  no | max    1.9% | len  400.0 | best   -0.64
+iter  230 | reward   -2.02/  -0.70/   0.19 | target>=6  no | max    1.9% | len  400.0 | best   -0.64
+iter  231 | reward   -2.02/  -0.70/   0.56 | target>=6  no | max    5.6% | len  400.0 | best   -0.64
+iter  232 | reward   -2.02/  -0.70/   0.56 | target>=6  no | max    5.6% | len  400.0 | best   -0.64
+iter  233 | reward   -1.76/  -0.70/   0.56 | target>=6  no | max    5.6% | len  400.0 | best   -0.64
+iter  234 | reward   -1.76/  -0.69/   0.56 | target>=6  no | max    5.6% | len  400.0 | best   -0.64
+iter  235 | reward   -1.76/  -0.69/   0.56 | target>=6  no | max    5.6% | len  400.0 | best   -0.64
+iter  236 | reward   -1.76/  -0.72/   0.56 | target>=6  no | max    5.6% | len  400.0 | best   -0.64
+iter  237 | reward   -1.76/  -0.72/   0.56 | target>=6  no | max    5.6% | len  400.0 | best   -0.64
+iter  238 | reward   -1.76/  -0.72/   0.56 | target>=6  no | max    5.6% | len  400.0 | best   -0.64
+iter  239 | reward   -1.76/  -0.72/   0.56 | target>=6  no | max    5.6% | len  400.0 | best   -0.64
+iter  240 | reward   -1.76/  -0.73/   0.56 | target>=6  no | max    5.6% | len  400.0 | best   -0.64
+iter  241 | reward   -1.98/  -0.71/   0.56 | target>=6  no | max    5.6% | len  400.0 | best   -0.64
+iter  242 | reward   -1.98/  -0.71/   0.56 | target>=6  no | max    5.6% | len  400.0 | best   -0.64
+iter  243 | reward   -1.98/  -0.70/   0.56 | target>=6  no | max    5.6% | len  400.0 | best   -0.64
+iter  244 | reward   -1.98/  -0.70/   0.56 | target>=6  no | max    5.6% | len  400.0 | best   -0.64
+iter  245 | reward   -1.98/  -0.70/   0.56 | target>=6  no | max    5.6% | len  400.0 | best   -0.64
+iter  246 | reward   -1.98/  -0.70/   0.56 | target>=6  no | max    5.6% | len  400.0 | best   -0.64
+iter  247 | reward   -1.98/  -0.68/   0.56 | target>=6  no | max    5.6% | len  400.0 | best   -0.64
+iter  248 | reward   -1.98/  -0.68/   0.56 | target>=6  no | max    5.6% | len  400.0 | best   -0.64
+iter  249 | reward   -1.98/  -0.68/   0.56 | target>=6  no | max    5.6% | len  400.0 | best   -0.64
+iter  250 | reward   -1.98/  -0.68/   0.56 | target>=6  no | max    5.6% | len  400.0 | best   -0.64
+iter  251 | reward   -1.98/  -0.66/   0.34 | target>=6  no | max    3.4% | len  400.0 | best   -0.64
+iter  252 | reward   -1.98/  -0.66/   0.34 | target>=6  no | max    3.4% | len  400.0 | best   -0.64
+Iteration 253: new best mean reward -0.62
+iter  253 | reward   -1.98/  -0.62/   0.34 | target>=6  no | max    3.4% | len  400.0 | best   -0.62
+iter  254 | reward   -1.98/  -0.62/   0.34 | target>=6  no | max    3.4% | len  400.0 | best   -0.62
+Iteration 255: new best mean reward -0.62
+iter  255 | reward   -1.98/  -0.62/   0.34 | target>=6  no | max    3.4% | len  400.0 | best   -0.62
+iter  256 | reward   -1.98/  -0.62/   0.34 | target>=6  no | max    3.4% | len  400.0 | best   -0.62
+iter  257 | reward   -1.98/  -0.62/   0.34 | target>=6  no | max    3.4% | len  400.0 | best   -0.62
+Iteration 258: new best mean reward -0.61
+iter  258 | reward   -1.98/  -0.61/   0.18 | target>=6  no | max    1.8% | len  400.0 | best   -0.61
+iter  259 | reward   -1.98/  -0.61/   0.18 | target>=6  no | max    1.8% | len  400.0 | best   -0.61
+iter  260 | reward   -1.98/  -0.61/   0.18 | target>=6  no | max    1.8% | len  400.0 | best   -0.61
+iter  261 | reward   -1.98/  -0.61/   0.18 | target>=6  no | max    1.8% | len  400.0 | best   -0.61
+Iteration 262: new best mean reward -0.58
+iter  262 | reward   -1.72/  -0.58/   0.18 | target>=6  no | max    1.8% | len  400.0 | best   -0.58
+iter  263 | reward   -1.72/  -0.58/   0.18 | target>=6  no | max    1.8% | len  400.0 | best   -0.58
+iter  264 | reward   -1.72/  -0.58/   0.18 | target>=6  no | max    1.8% | len  400.0 | best   -0.58
+iter  265 | reward   -1.72/  -0.58/   0.18 | target>=6  no | max    1.8% | len  400.0 | best   -0.58
+iter  266 | reward   -1.72/  -0.58/   0.18 | target>=6  no | max    1.8% | len  400.0 | best   -0.58
+Iteration 267: new best mean reward -0.55
+iter  267 | reward   -1.72/  -0.55/   0.18 | target>=6  no | max    1.8% | len  400.0 | best   -0.55
+iter  268 | reward   -1.67/  -0.57/   0.48 | target>=6  no | max    4.8% | len  400.0 | best   -0.55
+iter  269 | reward   -1.67/  -0.57/   0.48 | target>=6  no | max    4.8% | len  400.0 | best   -0.55
+iter  270 | reward   -1.67/  -0.57/   0.48 | target>=6  no | max    4.8% | len  400.0 | best   -0.55
+iter  271 | reward   -1.67/  -0.59/   0.48 | target>=6  no | max    4.8% | len  400.0 | best   -0.55
+iter  272 | reward   -1.68/  -0.64/   0.48 | target>=6  no | max    4.8% | len  400.0 | best   -0.55
+iter  273 | reward   -1.68/  -0.64/   0.48 | target>=6  no | max    4.8% | len  400.0 | best   -0.55
+iter  274 | reward   -1.68/  -0.63/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.55
+iter  275 | reward   -1.68/  -0.68/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.55
+iter  276 | reward   -1.68/  -0.68/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.55
+iter  277 | reward   -1.68/  -0.68/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.55
+iter  278 | reward   -1.68/  -0.68/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.55
+iter  279 | reward   -1.68/  -0.68/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.55
+iter  280 | reward   -1.68/  -0.68/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.55
+iter  281 | reward   -1.68/  -0.66/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.55
+iter  282 | reward   -1.68/  -0.68/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.55
+iter  283 | reward   -1.68/  -0.68/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.55
+iter  284 | reward   -1.68/  -0.67/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.55
+iter  285 | reward   -1.95/  -0.71/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.55
+iter  286 | reward   -1.95/  -0.71/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.55
+iter  287 | reward   -1.95/  -0.71/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.55
+iter  288 | reward   -1.95/  -0.74/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.55
+iter  289 | reward   -1.95/  -0.75/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.55
+iter  290 | reward   -1.95/  -0.75/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.55
+iter  291 | reward   -1.95/  -0.73/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.55
+iter  292 | reward   -1.95/  -0.69/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.55
+iter  293 | reward   -1.95/  -0.69/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.55
+iter  294 | reward   -1.95/  -0.69/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.55
+iter  295 | reward   -1.95/  -0.73/   0.11 | target>=6  no | max    1.1% | len  400.0 | best   -0.55
+iter  296 | reward   -1.95/  -0.73/   0.11 | target>=6  no | max    1.1% | len  400.0 | best   -0.55
+iter  297 | reward   -1.95/  -0.73/   0.11 | target>=6  no | max    1.1% | len  400.0 | best   -0.55
+iter  298 | reward   -1.95/  -0.73/   0.38 | target>=6  no | max    3.8% | len  400.0 | best   -0.55
+iter  299 | reward   -1.95/  -0.74/   0.38 | target>=6  no | max    3.8% | len  400.0 | best   -0.55
+iter  300 | reward   -1.95/  -0.74/   0.38 | target>=6  no | max    3.8% | len  400.0 | best   -0.55
+iter  301 | reward   -1.95/  -0.73/   0.38 | target>=6  no | max    3.8% | len  400.0 | best   -0.55
+iter  302 | reward   -1.95/  -0.73/   0.38 | target>=6  no | max    3.8% | len  400.0 | best   -0.55
+iter  303 | reward   -1.95/  -0.73/   0.38 | target>=6  no | max    3.8% | len  400.0 | best   -0.55
+iter  304 | reward   -1.95/  -0.73/   0.38 | target>=6  no | max    3.8% | len  400.0 | best   -0.55
+iter  305 | reward   -2.08/  -0.75/   0.38 | target>=6  no | max    3.8% | len  400.0 | best   -0.55
+iter  306 | reward   -2.08/  -0.72/   0.38 | target>=6  no | max    3.8% | len  400.0 | best   -0.55
+iter  307 | reward   -2.08/  -0.72/   0.38 | target>=6  no | max    3.8% | len  400.0 | best   -0.55
+iter  308 | reward   -2.08/  -0.71/   0.38 | target>=6  no | max    3.8% | len  400.0 | best   -0.55
+iter  309 | reward   -2.08/  -0.68/   0.38 | target>=6  no | max    3.8% | len  400.0 | best   -0.55
+iter  310 | reward   -2.08/  -0.68/   0.38 | target>=6  no | max    3.8% | len  400.0 | best   -0.55
+iter  311 | reward   -2.08/  -0.68/   0.38 | target>=6  no | max    3.8% | len  400.0 | best   -0.55
+iter  312 | reward   -2.08/  -0.67/   0.87 | target>=6  no | max    8.7% | len  400.0 | best   -0.55
+iter  313 | reward   -2.08/  -0.67/   0.87 | target>=6  no | max    8.7% | len  400.0 | best   -0.55
+iter  314 | reward   -2.08/  -0.67/   0.87 | target>=6  no | max    8.7% | len  400.0 | best   -0.55
+iter  315 | reward   -2.08/  -0.68/   0.87 | target>=6  no | max    8.7% | len  400.0 | best   -0.55
+iter  316 | reward   -2.08/  -0.67/   0.87 | target>=6  no | max    8.7% | len  400.0 | best   -0.55
+iter  317 | reward   -2.08/  -0.67/   0.87 | target>=6  no | max    8.7% | len  400.0 | best   -0.55
+iter  318 | reward   -2.08/  -0.68/   0.87 | target>=6  no | max    8.7% | len  400.0 | best   -0.55
+iter  319 | reward   -2.08/  -0.68/   0.87 | target>=6  no | max    8.7% | len  400.0 | best   -0.55
+iter  320 | reward   -2.08/  -0.68/   0.87 | target>=6  no | max    8.7% | len  400.0 | best   -0.55
+iter  321 | reward   -2.08/  -0.68/   0.87 | target>=6  no | max    8.7% | len  400.0 | best   -0.55
+iter  322 | reward   -2.08/  -0.68/   0.87 | target>=6  no | max    8.7% | len  400.0 | best   -0.55
+iter  323 | reward   -2.08/  -0.69/   0.87 | target>=6  no | max    8.7% | len  400.0 | best   -0.55
+iter  324 | reward   -2.08/  -0.69/   0.87 | target>=6  no | max    8.7% | len  400.0 | best   -0.55
+iter  325 | reward   -1.83/  -0.68/   0.87 | target>=6  no | max    8.7% | len  400.0 | best   -0.55
+iter  326 | reward   -1.83/  -0.70/   0.87 | target>=6  no | max    8.7% | len  400.0 | best   -0.55
+iter  327 | reward   -1.83/  -0.70/   0.87 | target>=6  no | max    8.7% | len  400.0 | best   -0.55
+iter  328 | reward   -1.83/  -0.70/   0.87 | target>=6  no | max    8.7% | len  400.0 | best   -0.55
+iter  329 | reward   -1.83/  -0.75/   0.87 | target>=6  no | max    8.7% | len  400.0 | best   -0.55
+iter  330 | reward   -1.83/  -0.75/   0.87 | target>=6  no | max    8.7% | len  400.0 | best   -0.55
+iter  331 | reward   -1.83/  -0.75/   0.87 | target>=6  no | max    8.7% | len  400.0 | best   -0.55
+iter  332 | reward   -1.83/  -0.77/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.55
+iter  333 | reward   -1.83/  -0.74/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.55
+iter  334 | reward   -1.83/  -0.74/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.55
+iter  335 | reward   -1.83/  -0.74/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.55
+iter  336 | reward   -1.66/  -0.76/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.55
+iter  337 | reward   -1.66/  -0.76/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.55
+iter  338 | reward   -1.66/  -0.76/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.55
+iter  339 | reward   -1.66/  -0.75/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.55
+iter  340 | reward   -1.66/  -0.75/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.55
+iter  341 | reward   -1.66/  -0.75/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.55
+iter  342 | reward   -1.66/  -0.78/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.55
+iter  343 | reward   -1.91/  -0.75/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.55
+iter  344 | reward   -1.91/  -0.75/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.55
+iter  345 | reward   -1.91/  -0.75/   0.70 | target>=6  no | max    7.0% | len  400.0 | best   -0.55
+iter  346 | reward   -1.91/  -0.74/   0.84 | target>=6  no | max    8.4% | len  400.0 | best   -0.55
+iter  347 | reward   -1.91/  -0.74/   0.84 | target>=6  no | max    8.4% | len  400.0 | best   -0.55
+iter  348 | reward   -1.91/  -0.74/   0.84 | target>=6  no | max    8.4% | len  400.0 | best   -0.55
+iter  349 | reward   -1.91/  -0.73/   0.84 | target>=6  no | max    8.4% | len  400.0 | best   -0.55
+iter  350 | reward   -1.91/  -0.74/   0.84 | target>=6  no | max    8.4% | len  400.0 | best   -0.55
+iter  351 | reward   -1.91/  -0.74/   0.84 | target>=6  no | max    8.4% | len  400.0 | best   -0.55
+iter  352 | reward   -1.91/  -0.74/   0.84 | target>=6  no | max    8.4% | len  400.0 | best   -0.55
+iter  353 | reward   -1.91/  -0.74/   0.84 | target>=6  no | max    8.4% | len  400.0 | best   -0.55
+iter  354 | reward   -1.91/  -0.74/   0.84 | target>=6  no | max    8.4% | len  400.0 | best   -0.55
+iter  355 | reward   -1.91/  -0.74/   0.84 | target>=6  no | max    8.4% | len  400.0 | best   -0.55
+iter  356 | reward   -1.91/  -0.69/   0.84 | target>=6  no | max    8.4% | len  400.0 | best   -0.55
+iter  357 | reward   -1.91/  -0.69/   0.84 | target>=6  no | max    8.4% | len  400.0 | best   -0.55
+iter  358 | reward   -1.91/  -0.69/   0.84 | target>=6  no | max    8.4% | len  400.0 | best   -0.55
+iter  359 | reward   -1.91/  -0.68/   0.84 | target>=6  no | max    8.4% | len  400.0 | best   -0.55
+iter  360 | reward   -1.91/  -0.69/   0.84 | target>=6  no | max    8.4% | len  400.0 | best   -0.55
+iter  361 | reward   -1.91/  -0.69/   0.84 | target>=6  no | max    8.4% | len  400.0 | best   -0.55
+iter  362 | reward   -1.91/  -0.69/   0.84 | target>=6  no | max    8.4% | len  400.0 | best   -0.55
+iter  363 | reward   -1.57/  -0.64/   0.84 | target>=6  no | max    8.4% | len  400.0 | best   -0.55
+iter  364 | reward   -1.57/  -0.64/   0.84 | target>=6  no | max    8.4% | len  400.0 | best   -0.55
+iter  365 | reward   -1.57/  -0.64/   0.84 | target>=6  no | max    8.4% | len  400.0 | best   -0.55
+iter  366 | reward   -1.67/  -0.66/   0.67 | target>=6  no | max    6.7% | len  400.0 | best   -0.55
+iter  367 | reward   -2.17/  -0.69/   0.67 | target>=6  no | max    6.7% | len  400.0 | best   -0.55
+iter  368 | reward   -2.17/  -0.69/   0.67 | target>=6  no | max    6.7% | len  400.0 | best   -0.55
+iter  369 | reward   -2.17/  -0.69/   0.67 | target>=6  no | max    6.7% | len  400.0 | best   -0.55
+iter  370 | reward   -2.17/  -0.71/   0.67 | target>=6  no | max    6.7% | len  400.0 | best   -0.55
+iter  371 | reward   -2.17/  -0.71/   0.67 | target>=6  no | max    6.7% | len  400.0 | best   -0.55
+iter  372 | reward   -2.17/  -0.71/   0.67 | target>=6  no | max    6.7% | len  400.0 | best   -0.55
+iter  373 | reward   -2.17/  -0.75/   0.67 | target>=6  no | max    6.7% | len  400.0 | best   -0.55
+iter  374 | reward   -2.17/  -0.75/   0.67 | target>=6  no | max    6.7% | len  400.0 | best   -0.55
+iter  375 | reward   -2.17/  -0.75/   0.67 | target>=6  no | max    6.7% | len  400.0 | best   -0.55
+iter  376 | reward   -2.17/  -0.75/   0.67 | target>=6  no | max    6.7% | len  400.0 | best   -0.55
+iter  377 | reward   -2.17/  -0.78/   0.73 | target>=6  no | max    7.3% | len  400.0 | best   -0.55
+iter  378 | reward   -2.17/  -0.78/   0.73 | target>=6  no | max    7.3% | len  400.0 | best   -0.55
+iter  379 | reward   -2.17/  -0.78/   0.73 | target>=6  no | max    7.3% | len  400.0 | best   -0.55
+iter  380 | reward   -2.17/  -0.73/   0.82 | target>=6  no | max    8.2% | len  400.0 | best   -0.55
+iter  381 | reward   -2.17/  -0.73/   0.82 | target>=6  no | max    8.2% | len  400.0 | best   -0.55
+iter  382 | reward   -2.17/  -0.73/   0.82 | target>=6  no | max    8.2% | len  400.0 | best   -0.55
+iter  383 | reward   -2.17/  -0.75/   0.82 | target>=6  no | max    8.2% | len  400.0 | best   -0.55
+iter  384 | reward   -2.17/  -0.77/   0.82 | target>=6  no | max    8.2% | len  400.0 | best   -0.55
+iter  385 | reward   -2.17/  -0.77/   0.82 | target>=6  no | max    8.2% | len  400.0 | best   -0.55
+iter  386 | reward   -2.17/  -0.77/   0.82 | target>=6  no | max    8.2% | len  400.0 | best   -0.55
+iter  387 | reward   -1.59/  -0.72/   0.82 | target>=6  no | max    8.2% | len  400.0 | best   -0.55
+iter  388 | reward   -1.59/  -0.72/   0.82 | target>=6  no | max    8.2% | len  400.0 | best   -0.55
+iter  389 | reward   -1.59/  -0.72/   0.82 | target>=6  no | max    8.2% | len  400.0 | best   -0.55
+iter  390 | reward   -1.53/  -0.70/   0.82 | target>=6  no | max    8.2% | len  400.0 | best   -0.55
+iter  391 | reward   -1.53/  -0.70/   0.82 | target>=6  no | max    8.2% | len  400.0 | best   -0.55
+iter  392 | reward   -1.53/  -0.70/   0.82 | target>=6  no | max    8.2% | len  400.0 | best   -0.55
+iter  393 | reward   -1.53/  -0.70/   0.82 | target>=6  no | max    8.2% | len  400.0 | best   -0.55
+iter  394 | reward   -1.57/  -0.68/   0.82 | target>=6  no | max    8.2% | len  400.0 | best   -0.55
+iter  395 | reward   -1.57/  -0.68/   0.82 | target>=6  no | max    8.2% | len  400.0 | best   -0.55
+iter  396 | reward   -1.57/  -0.68/   0.82 | target>=6  no | max    8.2% | len  400.0 | best   -0.55
+iter  397 | reward   -1.57/  -0.65/   0.82 | target>=6  no | max    8.2% | len  400.0 | best   -0.55
+iter  398 | reward   -1.57/  -0.65/   0.82 | target>=6  no | max    8.2% | len  400.0 | best   -0.55
+iter  399 | reward   -1.57/  -0.65/   0.82 | target>=6  no | max    8.2% | len  400.0 | best   -0.55
+iter  400 | reward   -1.59/  -0.70/   0.42 | target>=6  no | max    4.2% | len  400.0 | best   -0.55
+iter  401 | reward   -1.59/  -0.70/   0.42 | target>=6  no | max    4.2% | len  400.0 | best   -0.55
+iter  402 | reward   -1.59/  -0.70/   0.42 | target>=6  no | max    4.2% | len  400.0 | best   -0.55
+iter  403 | reward   -1.59/  -0.70/   0.42 | target>=6  no | max    4.2% | len  400.0 | best   -0.55
+iter  404 | reward   -1.59/  -0.67/   0.16 | target>=6  no | max    1.6% | len  400.0 | best   -0.55
+iter  405 | reward   -1.59/  -0.67/   0.16 | target>=6  no | max    1.6% | len  400.0 | best   -0.55
+iter  406 | reward   -1.59/  -0.67/   0.16 | target>=6  no | max    1.6% | len  400.0 | best   -0.55
+iter  407 | reward   -1.59/  -0.70/   0.16 | target>=6  no | max    1.6% | len  400.0 | best   -0.55
+iter  408 | reward   -1.59/  -0.70/   0.16 | target>=6  no | max    1.6% | len  400.0 | best   -0.55
+iter  409 | reward   -1.59/  -0.70/   0.16 | target>=6  no | max    1.6% | len  400.0 | best   -0.55
+iter  410 | reward   -1.59/  -0.70/   0.16 | target>=6  no | max    1.6% | len  400.0 | best   -0.55
+iter  411 | reward   -1.59/  -0.70/   0.16 | target>=6  no | max    1.6% | len  400.0 | best   -0.55
+iter  412 | reward   -1.59/  -0.70/   0.16 | target>=6  no | max    1.6% | len  400.0 | best   -0.55
+iter  413 | reward   -1.59/  -0.70/   0.16 | target>=6  no | max    1.6% | len  400.0 | best   -0.55
+iter  414 | reward   -1.59/  -0.71/   0.16 | target>=6  no | max    1.6% | len  400.0 | best   -0.55
+iter  415 | reward   -1.59/  -0.71/   0.16 | target>=6  no | max    1.6% | len  400.0 | best   -0.55
+iter  416 | reward   -1.59/  -0.71/   0.16 | target>=6  no | max    1.6% | len  400.0 | best   -0.55
+iter  417 | reward   -1.59/  -0.70/   0.14 | target>=6  no | max    1.4% | len  400.0 | best   -0.55
+iter  418 | reward   -1.59/  -0.71/   0.14 | target>=6  no | max    1.4% | len  400.0 | best   -0.55
+iter  419 | reward   -1.59/  -0.71/   0.14 | target>=6  no | max    1.4% | len  400.0 | best   -0.55
+iter  420 | reward   -1.59/  -0.71/   0.14 | target>=6  no | max    1.4% | len  400.0 | best   -0.55
+iter  421 | reward   -1.54/  -0.69/   0.14 | target>=6  no | max    1.4% | len  400.0 | best   -0.55
+iter  422 | reward   -1.54/  -0.69/   0.14 | target>=6  no | max    1.4% | len  400.0 | best   -0.55
+iter  423 | reward   -1.54/  -0.69/   0.14 | target>=6  no | max    1.4% | len  400.0 | best   -0.55
+iter  424 | reward   -1.55/  -0.71/   0.19 | target>=6  no | max    1.9% | len  400.0 | best   -0.55
+iter  425 | reward   -1.55/  -0.71/   0.19 | target>=6  no | max    1.9% | len  400.0 | best   -0.55
+iter  426 | reward   -1.55/  -0.71/   0.19 | target>=6  no | max    1.9% | len  400.0 | best   -0.55
+iter  427 | reward   -1.55/  -0.71/   0.19 | target>=6  no | max    1.9% | len  400.0 | best   -0.55
+iter  428 | reward   -1.55/  -0.70/   0.67 | target>=6  no | max    6.7% | len  400.0 | best   -0.55
+iter  429 | reward   -1.55/  -0.70/   0.67 | target>=6  no | max    6.7% | len  400.0 | best   -0.55
+iter  430 | reward   -1.55/  -0.70/   0.67 | target>=6  no | max    6.7% | len  400.0 | best   -0.55
+iter  431 | reward   -1.55/  -0.68/   0.67 | target>=6  no | max    6.7% | len  400.0 | best   -0.55
+iter  432 | reward   -1.55/  -0.68/   0.67 | target>=6  no | max    6.7% | len  400.0 | best   -0.55
+iter  433 | reward   -1.55/  -0.68/   0.67 | target>=6  no | max    6.7% | len  400.0 | best   -0.55
+iter  434 | reward   -1.55/  -0.67/   0.67 | target>=6  no | max    6.7% | len  400.0 | best   -0.55
+iter  435 | reward   -1.55/  -0.67/   0.67 | target>=6  no | max    6.7% | len  400.0 | best   -0.55
+iter  436 | reward   -1.55/  -0.67/   0.67 | target>=6  no | max    6.7% | len  400.0 | best   -0.55
+iter  437 | reward   -1.55/  -0.67/   0.67 | target>=6  no | max    6.7% | len  400.0 | best   -0.55
+iter  438 | reward   -1.55/  -0.67/   0.67 | target>=6  no | max    6.7% | len  400.0 | best   -0.55
+iter  439 | reward   -1.55/  -0.67/   0.67 | target>=6  no | max    6.7% | len  400.0 | best   -0.55
+iter  440 | reward   -1.55/  -0.67/   0.67 | target>=6  no | max    6.7% | len  400.0 | best   -0.55
+iter  441 | reward   -1.74/  -0.67/   0.67 | target>=6  no | max    6.7% | len  400.0 | best   -0.55
+iter  442 | reward   -1.74/  -0.67/   0.67 | target>=6  no | max    6.7% | len  400.0 | best   -0.55
+iter  443 | reward   -1.74/  -0.67/   0.67 | target>=6  no | max    6.7% | len  400.0 | best   -0.55
+iter  444 | reward   -1.74/  -0.67/   0.67 | target>=6  no | max    6.7% | len  400.0 | best   -0.55
+iter  445 | reward   -1.74/  -0.65/   0.67 | target>=6  no | max    6.7% | len  400.0 | best   -0.55
+iter  446 | reward   -1.74/  -0.65/   0.67 | target>=6  no | max    6.7% | len  400.0 | best   -0.55
+iter  447 | reward   -1.74/  -0.65/   0.67 | target>=6  no | max    6.7% | len  400.0 | best   -0.55
+iter  448 | reward   -1.74/  -0.66/   0.42 | target>=6  no | max    4.2% | len  400.0 | best   -0.55
+iter  449 | reward   -1.74/  -0.66/   0.42 | target>=6  no | max    4.2% | len  400.0 | best   -0.55
+iter  450 | reward   -1.74/  -0.66/   0.42 | target>=6  no | max    4.2% | len  400.0 | best   -0.55
+iter  451 | reward   -1.74/  -0.65/   0.42 | target>=6  no | max    4.2% | len  400.0 | best   -0.55
+iter  452 | reward   -1.74/  -0.68/   0.42 | target>=6  no | max    4.2% | len  400.0 | best   -0.55
+iter  453 | reward   -1.74/  -0.68/   0.42 | target>=6  no | max    4.2% | len  400.0 | best   -0.55
+iter  454 | reward   -1.74/  -0.68/   0.42 | target>=6  no | max    4.2% | len  400.0 | best   -0.55
+iter  455 | reward   -1.74/  -0.68/   0.18 | target>=6  no | max    1.8% | len  400.0 | best   -0.55
+iter  456 | reward   -1.74/  -0.68/   0.18 | target>=6  no | max    1.8% | len  400.0 | best   -0.55
+iter  457 | reward   -1.74/  -0.68/   0.18 | target>=6  no | max    1.8% | len  400.0 | best   -0.55
+iter  458 | reward   -1.74/  -0.68/   0.18 | target>=6  no | max    1.8% | len  400.0 | best   -0.55
+iter  459 | reward   -1.74/  -0.69/   0.18 | target>=6  no | max    1.8% | len  400.0 | best   -0.55
+iter  460 | reward   -1.74/  -0.69/   0.18 | target>=6  no | max    1.8% | len  400.0 | best   -0.55
+iter  461 | reward   -1.74/  -0.69/   0.18 | target>=6  no | max    1.8% | len  400.0 | best   -0.55
+iter  462 | reward   -2.00/  -0.67/   0.77 | target>=6  no | max    7.7% | len  400.0 | best   -0.55
+iter  463 | reward   -2.00/  -0.67/   0.77 | target>=6  no | max    7.7% | len  400.0 | best   -0.55
+iter  464 | reward   -2.00/  -0.67/   0.77 | target>=6  no | max    7.7% | len  400.0 | best   -0.55
+iter  465 | reward   -2.00/  -0.67/   0.77 | target>=6  no | max    7.7% | len  400.0 | best   -0.55
+iter  466 | reward   -2.00/  -0.67/   0.77 | target>=6  no | max    7.7% | len  400.0 | best   -0.55
+iter  467 | reward   -2.00/  -0.67/   0.77 | target>=6  no | max    7.7% | len  400.0 | best   -0.55
+iter  468 | reward   -2.00/  -0.67/   0.77 | target>=6  no | max    7.7% | len  400.0 | best   -0.55
+iter  469 | reward   -2.00/  -0.68/   0.77 | target>=6  no | max    7.7% | len  400.0 | best   -0.55
+iter  470 | reward   -2.00/  -0.68/   0.77 | target>=6  no | max    7.7% | len  400.0 | best   -0.55
+iter  471 | reward   -2.00/  -0.68/   0.77 | target>=6  no | max    7.7% | len  400.0 | best   -0.55
+iter  472 | reward   -2.00/  -0.65/   0.77 | target>=6  no | max    7.7% | len  400.0 | best   -0.55
+iter  473 | reward   -2.00/  -0.65/   0.77 | target>=6  no | max    7.7% | len  400.0 | best   -0.55
+iter  474 | reward   -2.00/  -0.65/   0.77 | target>=6  no | max    7.7% | len  400.0 | best   -0.55
+iter  475 | reward   -2.00/  -0.65/   0.77 | target>=6  no | max    7.7% | len  400.0 | best   -0.55
+iter  476 | reward   -2.00/  -0.65/   0.77 | target>=6  no | max    7.7% | len  400.0 | best   -0.55
+iter  477 | reward   -2.00/  -0.65/   0.77 | target>=6  no | max    7.7% | len  400.0 | best   -0.55
+iter  478 | reward   -2.00/  -0.67/   0.77 | target>=6  no | max    7.7% | len  400.0 | best   -0.55
+iter  479 | reward   -2.00/  -0.69/   0.77 | target>=6  no | max    7.7% | len  400.0 | best   -0.55
+iter  480 | reward   -2.00/  -0.69/   0.77 | target>=6  no | max    7.7% | len  400.0 | best   -0.55
+iter  481 | reward   -2.00/  -0.69/   0.77 | target>=6  no | max    7.7% | len  400.0 | best   -0.55
+iter  482 | reward   -2.00/  -0.73/   0.16 | target>=6  no | max    1.6% | len  400.0 | best   -0.55
+iter  483 | reward   -1.70/  -0.75/   0.16 | target>=6  no | max    1.6% | len  400.0 | best   -0.55
+iter  484 | reward   -1.70/  -0.75/   0.16 | target>=6  no | max    1.6% | len  400.0 | best   -0.55
+iter  485 | reward   -1.70/  -0.73/   0.97 | target>=6  no | max    9.7% | len  400.0 | best   -0.55
+iter  486 | reward   -1.70/  -0.73/   0.97 | target>=6  no | max    9.7% | len  400.0 | best   -0.55
+iter  487 | reward   -1.70/  -0.73/   0.97 | target>=6  no | max    9.7% | len  400.0 | best   -0.55
+iter  488 | reward   -1.70/  -0.73/   0.97 | target>=6  no | max    9.7% | len  400.0 | best   -0.55
+iter  489 | reward   -1.70/  -0.70/   0.97 | target>=6  no | max    9.7% | len  400.0 | best   -0.55
+iter  490 | reward   -1.70/  -0.70/   0.97 | target>=6  no | max    9.7% | len  400.0 | best   -0.55
+iter  491 | reward   -1.70/  -0.70/   0.97 | target>=6  no | max    9.7% | len  400.0 | best   -0.55
+iter  492 | reward   -1.70/  -0.72/   0.97 | target>=6  no | max    9.7% | len  400.0 | best   -0.55
+iter  493 | reward   -1.70/  -0.73/   0.97 | target>=6  no | max    9.7% | len  400.0 | best   -0.55
+iter  494 | reward   -1.70/  -0.73/   0.97 | target>=6  no | max    9.7% | len  400.0 | best   -0.55
+iter  495 | reward   -1.70/  -0.74/   0.97 | target>=6  no | max    9.7% | len  400.0 | best   -0.55
+iter  496 | reward   -1.70/  -0.73/   0.97 | target>=6  no | max    9.7% | len  400.0 | best   -0.55
+iter  497 | reward   -1.70/  -0.73/   0.97 | target>=6  no | max    9.7% | len  400.0 | best   -0.55
+iter  498 | reward   -1.70/  -0.73/   0.97 | target>=6  no | max    9.7% | len  400.0 | best   -0.55
+iter  499 | reward   -1.70/  -0.74/   0.97 | target>=6  no | max    9.7% | len  400.0 | best   -0.55
+iter  500 | reward   -1.70/  -0.72/   0.97 | target>=6  no | max    9.7% | len  400.0 | best   -0.55
+iter  501 | reward   -1.70/  -0.72/   0.97 | target>=6  no | max    9.7% | len  400.0 | best   -0.55
+iter  502 | reward   -1.70/  -0.73/   0.97 | target>=6  no | max    9.7% | len  400.0 | best   -0.55
+iter  503 | reward   -1.59/  -0.69/   0.97 | target>=6  no | max    9.7% | len  400.0 | best   -0.55
+iter  504 | reward   -1.59/  -0.69/   0.97 | target>=6  no | max    9.7% | len  400.0 | best   -0.55
+iter  505 | reward   -1.59/  -0.69/   0.97 | target>=6  no | max    9.7% | len  400.0 | best   -0.55
+iter  506 | reward   -1.59/  -0.73/   0.29 | target>=6  no | max    2.9% | len  400.0 | best   -0.55
+iter  507 | reward   -1.59/  -0.73/   0.29 | target>=6  no | max    2.9% | len  400.0 | best   -0.55
+iter  508 | reward   -1.59/  -0.73/   0.29 | target>=6  no | max    2.9% | len  400.0 | best   -0.55
+iter  509 | reward   -1.59/  -0.75/   0.29 | target>=6  no | max    2.9% | len  400.0 | best   -0.55
+iter  510 | reward   -1.59/  -0.77/   0.29 | target>=6  no | max    2.9% | len  400.0 | best   -0.55
+iter  511 | reward   -1.59/  -0.77/   0.29 | target>=6  no | max    2.9% | len  400.0 | best   -0.55
+iter  512 | reward   -1.59/  -0.75/   0.29 | target>=6  no | max    2.9% | len  400.0 | best   -0.55
+iter  513 | reward   -1.81/  -0.76/   0.29 | target>=6  no | max    2.9% | len  400.0 | best   -0.55
+iter  514 | reward   -1.81/  -0.76/   0.29 | target>=6  no | max    2.9% | len  400.0 | best   -0.55
+iter  515 | reward   -1.81/  -0.76/   0.29 | target>=6  no | max    2.9% | len  400.0 | best   -0.55
+iter  516 | reward   -1.86/  -0.78/   0.29 | target>=6  no | max    2.9% | len  400.0 | best   -0.55
+iter  517 | reward   -1.86/  -0.74/   0.29 | target>=6  no | max    2.9% | len  400.0 | best   -0.55
+iter  518 | reward   -1.86/  -0.74/   0.29 | target>=6  no | max    2.9% | len  400.0 | best   -0.55
+iter  519 | reward   -1.86/  -0.73/   0.10 | target>=6  no | max    1.0% | len  400.0 | best   -0.55
+iter  520 | reward   -1.86/  -0.75/   0.10 | target>=6  no | max    1.0% | len  400.0 | best   -0.55
+iter  521 | reward   -1.86/  -0.75/   0.10 | target>=6  no | max    1.0% | len  400.0 | best   -0.55
+iter  522 | reward   -1.86/  -0.75/   0.10 | target>=6  no | max    1.0% | len  400.0 | best   -0.55
+iter  523 | reward   -1.86/  -0.74/   0.13 | target>=6  no | max    1.3% | len  400.0 | best   -0.55
+iter  524 | reward   -1.86/  -0.75/   0.13 | target>=6  no | max    1.3% | len  400.0 | best   -0.55
+iter  525 | reward   -1.86/  -0.75/   0.13 | target>=6  no | max    1.3% | len  400.0 | best   -0.55
+iter  526 | reward   -1.86/  -0.72/   0.13 | target>=6  no | max    1.3% | len  400.0 | best   -0.55
+iter  527 | reward   -1.86/  -0.73/   0.13 | target>=6  no | max    1.3% | len  400.0 | best   -0.55
+iter  528 | reward   -1.86/  -0.73/   0.13 | target>=6  no | max    1.3% | len  400.0 | best   -0.55
+iter  529 | reward   -1.86/  -0.72/   0.13 | target>=6  no | max    1.3% | len  400.0 | best   -0.55
+iter  530 | reward   -1.86/  -0.70/   0.13 | target>=6  no | max    1.3% | len  400.0 | best   -0.55
+iter  531 | reward   -1.86/  -0.70/   0.13 | target>=6  no | max    1.3% | len  400.0 | best   -0.55
+iter  532 | reward   -1.86/  -0.70/   0.13 | target>=6  no | max    1.3% | len  400.0 | best   -0.55
+iter  533 | reward   -1.86/  -0.68/   0.23 | target>=6  no | max    2.3% | len  400.0 | best   -0.55
+iter  534 | reward   -1.86/  -0.68/   0.23 | target>=6  no | max    2.3% | len  400.0 | best   -0.55
+iter  535 | reward   -1.86/  -0.68/   0.23 | target>=6  no | max    2.3% | len  400.0 | best   -0.55
+iter  536 | reward   -1.70/  -0.66/   0.23 | target>=6  no | max    2.3% | len  400.0 | best   -0.55
+iter  537 | reward   -1.70/  -0.67/   0.23 | target>=6  no | max    2.3% | len  400.0 | best   -0.55
+iter  538 | reward   -1.70/  -0.67/   0.23 | target>=6  no | max    2.3% | len  400.0 | best   -0.55
+iter  539 | reward   -1.70/  -0.67/   0.23 | target>=6  no | max    2.3% | len  400.0 | best   -0.55
+iter  540 | reward   -1.70/  -0.67/   0.23 | target>=6  no | max    2.3% | len  400.0 | best   -0.55
+iter  541 | reward   -1.69/  -0.67/   0.23 | target>=6  no | max    2.3% | len  400.0 | best   -0.55
+iter  542 | reward   -1.69/  -0.67/   0.23 | target>=6  no | max    2.3% | len  400.0 | best   -0.55
+iter  543 | reward   -1.69/  -0.65/   0.23 | target>=6  no | max    2.3% | len  400.0 | best   -0.55
+iter  544 | reward   -1.69/  -0.63/   0.23 | target>=6  no | max    2.3% | len  400.0 | best   -0.55
+iter  545 | reward   -1.69/  -0.63/   0.23 | target>=6  no | max    2.3% | len  400.0 | best   -0.55
+iter  546 | reward   -1.69/  -0.65/   0.23 | target>=6  no | max    2.3% | len  400.0 | best   -0.55
+iter  547 | reward   -1.69/  -0.65/   0.23 | target>=6  no | max    2.3% | len  400.0 | best   -0.55
+iter  548 | reward   -1.69/  -0.65/   0.23 | target>=6  no | max    2.3% | len  400.0 | best   -0.55
+iter  549 | reward   -1.69/  -0.65/   0.23 | target>=6  no | max    2.3% | len  400.0 | best   -0.55
+iter  550 | reward   -1.69/  -0.65/   0.23 | target>=6  no | max    2.3% | len  400.0 | best   -0.55
+iter  551 | reward   -1.69/  -0.65/   0.23 | target>=6  no | max    2.3% | len  400.0 | best   -0.55
+iter  552 | reward   -1.69/  -0.65/   0.23 | target>=6  no | max    2.3% | len  400.0 | best   -0.55
+iter  553 | reward   -1.69/  -0.66/   0.23 | target>=6  no | max    2.3% | len  400.0 | best   -0.55
+iter  554 | reward   -1.62/  -0.66/   0.23 | target>=6  no | max    2.3% | len  400.0 | best   -0.55
+iter  555 | reward   -1.62/  -0.66/   0.23 | target>=6  no | max    2.3% | len  400.0 | best   -0.55
+iter  556 | reward   -1.62/  -0.68/   0.23 | target>=6  no | max    2.3% | len  400.0 | best   -0.55
+iter  557 | reward   -1.62/  -0.68/   0.23 | target>=6  no | max    2.3% | len  400.0 | best   -0.55
+iter  558 | reward   -1.63/  -0.70/   0.23 | target>=6  no | max    2.3% | len  400.0 | best   -0.55
+iter  559 | reward   -1.63/  -0.70/   0.23 | target>=6  no | max    2.3% | len  400.0 | best   -0.55
+iter  560 | reward   -1.63/  -0.69/   0.34 | target>=6  no | max    3.4% | len  400.0 | best   -0.55
+iter  561 | reward   -1.63/  -0.65/   0.76 | target>=6  no | max    7.6% | len  400.0 | best   -0.55
+iter  562 | reward   -1.63/  -0.65/   0.76 | target>=6  no | max    7.6% | len  400.0 | best   -0.55
+iter  563 | reward   -1.75/  -0.70/   0.76 | target>=6  no | max    7.6% | len  400.0 | best   -0.55
+iter  564 | reward   -1.75/  -0.70/   0.76 | target>=6  no | max    7.6% | len  400.0 | best   -0.55
+iter  565 | reward   -1.75/  -0.71/   0.76 | target>=6  no | max    7.6% | len  400.0 | best   -0.55
+iter  566 | reward   -1.75/  -0.71/   0.76 | target>=6  no | max    7.6% | len  400.0 | best   -0.55
+iter  567 | reward   -1.75/  -0.71/   0.76 | target>=6  no | max    7.6% | len  400.0 | best   -0.55
+iter  568 | reward   -1.75/  -0.72/   0.76 | target>=6  no | max    7.6% | len  400.0 | best   -0.55
+iter  569 | reward   -1.75/  -0.72/   0.76 | target>=6  no | max    7.6% | len  400.0 | best   -0.55
+iter  570 | reward   -1.75/  -0.71/   0.76 | target>=6  no | max    7.6% | len  400.0 | best   -0.55
+iter  571 | reward   -1.75/  -0.70/   0.76 | target>=6  no | max    7.6% | len  400.0 | best   -0.55
+iter  572 | reward   -1.75/  -0.70/   0.76 | target>=6  no | max    7.6% | len  400.0 | best   -0.55
+iter  573 | reward   -1.75/  -0.69/   0.76 | target>=6  no | max    7.6% | len  400.0 | best   -0.55
+iter  574 | reward   -1.75/  -0.69/   0.76 | target>=6  no | max    7.6% | len  400.0 | best   -0.55
+iter  575 | reward   -1.75/  -0.67/   0.76 | target>=6  no | max    7.6% | len  400.0 | best   -0.55
+iter  576 | reward   -1.75/  -0.67/   0.76 | target>=6  no | max    7.6% | len  400.0 | best   -0.55
+iter  577 | reward   -1.75/  -0.65/   0.76 | target>=6  no | max    7.6% | len  400.0 | best   -0.55
+iter  578 | reward   -1.75/  -0.63/   0.76 | target>=6  no | max    7.6% | len  400.0 | best   -0.55
+iter  579 | reward   -1.75/  -0.63/   0.76 | target>=6  no | max    7.6% | len  400.0 | best   -0.55
+iter  580 | reward   -1.75/  -0.62/   0.58 | target>=6  no | max    5.8% | len  400.0 | best   -0.55
+iter  581 | reward   -1.75/  -0.62/   0.58 | target>=6  no | max    5.8% | len  400.0 | best   -0.55
+iter  582 | reward   -1.75/  -0.60/   0.58 | target>=6  no | max    5.8% | len  400.0 | best   -0.55
+iter  583 | reward   -1.75/  -0.60/   0.58 | target>=6  no | max    5.8% | len  400.0 | best   -0.55
+iter  584 | reward   -1.74/  -0.61/   0.58 | target>=6  no | max    5.8% | len  400.0 | best   -0.55
+iter  585 | reward   -1.74/  -0.59/   0.58 | target>=6  no | max    5.8% | len  400.0 | best   -0.55
+iter  586 | reward   -1.74/  -0.59/   0.58 | target>=6  no | max    5.8% | len  400.0 | best   -0.55
 Traceback (most recent call last):
-  File "/home/jovyan/Desktop/dev/sina/AI4R_explore_agent/Exploring_agent_DRL/Explore_PPO_agent_training.py", line 7, in <module>
-    import ray
-ModuleNotFoundError: No module named 'ray'
+  File "/opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/rllib/policy/torch_policy_v2.py", line 1235, in _worker
+    self.loss(model, self.dist_class, sample_batch)
+  File "/opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/rllib/algorithms/ppo/ppo_torch_policy.py", line 85, in loss
+    curr_action_dist = dist_class(logits, model)
+  File "/opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/rllib/models/torch/torch_action_dist.py", line 250, in __init__
+    self.dist = torch.distributions.normal.Normal(mean, torch.exp(log_std))
+  File "/opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/torch/distributions/normal.py", line 56, in __init__
+    super().__init__(batch_shape, validate_args=validate_args)
+  File "/opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/torch/distributions/distribution.py", line 62, in __init__
+    raise ValueError(
+ValueError: Expected parameter loc (Tensor of shape (256, 2)) of distribution Normal(loc: torch.Size([256, 2]), scale: torch.Size([256, 2])) to satisfy the constraint Real(), but found invalid values:
+tensor([[nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan]], device='cuda:0', grad_fn=<SplitBackward0>)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/jovyan/Desktop/dev/sina/AI4R_explore_agent/Exploring_agent_DRL/Explore_PPO_agent_training.py", line 269, in <module>
+    main()
+  File "/home/jovyan/Desktop/dev/sina/AI4R_explore_agent/Exploring_agent_DRL/Explore_PPO_agent_training.py", line 249, in main
+    result = agent.train()
+  File "/opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/tune/trainable/trainable.py", line 389, in train
+    raise skipped from exception_cause(skipped)
+  File "/opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/tune/trainable/trainable.py", line 386, in train
+    result = self.step()
+  File "/opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/rllib/algorithms/algorithm.py", line 803, in step
+    results, train_iter_ctx = self._run_one_training_iteration()
+  File "/opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/rllib/algorithms/algorithm.py", line 2853, in _run_one_training_iteration
+    results = self.training_step()
+  File "/opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/rllib/algorithms/ppo/ppo.py", line 432, in training_step
+    train_results = multi_gpu_train_one_step(self, train_batch)
+  File "/opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/rllib/execution/train_ops.py", line 163, in multi_gpu_train_one_step
+    results = policy.learn_on_loaded_batch(
+  File "/opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/rllib/policy/torch_policy_v2.py", line 811, in learn_on_loaded_batch
+    tower_outputs = self._multi_gpu_parallel_grad_calc(device_batches)
+  File "/opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/rllib/policy/torch_policy_v2.py", line 1320, in _multi_gpu_parallel_grad_calc
+    raise last_result[0] from last_result[1]
+ValueError: Expected parameter loc (Tensor of shape (256, 2)) of distribution Normal(loc: torch.Size([256, 2]), scale: torch.Size([256, 2])) to satisfy the constraint Real(), but found invalid values:
+tensor([[nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan]], device='cuda:0', grad_fn=<SplitBackward0>)
+ tracebackTraceback (most recent call last):
+  File "/opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/rllib/policy/torch_policy_v2.py", line 1235, in _worker
+    self.loss(model, self.dist_class, sample_batch)
+  File "/opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/rllib/algorithms/ppo/ppo_torch_policy.py", line 85, in loss
+    curr_action_dist = dist_class(logits, model)
+  File "/opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/rllib/models/torch/torch_action_dist.py", line 250, in __init__
+    self.dist = torch.distributions.normal.Normal(mean, torch.exp(log_std))
+  File "/opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/torch/distributions/normal.py", line 56, in __init__
+    super().__init__(batch_shape, validate_args=validate_args)
+  File "/opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/torch/distributions/distribution.py", line 62, in __init__
+    raise ValueError(
+ValueError: Expected parameter loc (Tensor of shape (256, 2)) of distribution Normal(loc: torch.Size([256, 2]), scale: torch.Size([256, 2])) to satisfy the constraint Real(), but found invalid values:
+tensor([[nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan],
+        [nan, nan]], device='cuda:0', grad_fn=<SplitBackward0>)
+
+In tower 0 on device cuda:0
 Traceback (most recent call last):
   File "/home/jovyan/Desktop/dev/sina/AI4R_explore_agent/Exploring_agent_DRL/run_assignment.py", line 180, in <module>
     raise SystemExit(main())
@@ -10,6 +1500,6 @@ Traceback (most recent call last):
     return run_command(command)
   File "/home/jovyan/Desktop/dev/sina/AI4R_explore_agent/Exploring_agent_DRL/run_assignment.py", line 8, in run_command
     return subprocess.run(command, check=True).returncode
-  File "/usr/lib/python3.10/subprocess.py", line 526, in run
+  File "/opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/subprocess.py", line 526, in run
     raise CalledProcessError(retcode, process.args,
-subprocess.CalledProcessError: Command '['/usr/bin/python', 'Explore_PPO_agent_training.py', '--iterations', '1500', '--num-workers', '17', '--num-gpus', '0.5', '--env-name', '2d_checkpoint_exploration', '--reward-mode', 'coverage', '--max-steps', '400', '--entropy-coeff', '0.2', '--checkpoint-dir', 'tmp/hparam_sweep/job_103_iter_1500_batch_2000_sgd_10_entropy_0_2', '--spawn-mode', 'random', '--spawn-index', '0', '--train-batch-size', '2000', '--sgd-minibatch-size', '256', '--num-sgd-iter', '10']' returned non-zero exit status 1.
+subprocess.CalledProcessError: Command '['/opt/miniconda3/envs/aiar-rl-explore-gpu/bin/python', 'Explore_PPO_agent_training.py', '--iterations', '1500', '--num-workers', '17', '--num-gpus', '0.5', '--env-name', '2d_checkpoint_exploration', '--reward-mode', 'coverage', '--max-steps', '400', '--entropy-coeff', '0.2', '--checkpoint-dir', 'tmp/hparam_sweep/job_103_iter_1500_batch_2000_sgd_10_entropy_0_2', '--spawn-mode', 'random', '--spawn-index', '0', '--train-batch-size', '2000', '--sgd-minibatch-size', '256', '--num-sgd-iter', '10']' returned non-zero exit status 1.
