@@ -11,32 +11,108 @@ Skipping previously completed job_8
 Skipping previously completed job_9
 Skipping previously completed job_10
 Skipping previously completed job_11
-Starting job_12_iter_500_batch_2000_sgd_10_entropy_0_05 on GPU 2
-Starting job_13_iter_500_batch_2000_sgd_10_entropy_0_2 on GPU 3
+Skipping previously completed job_12
+Skipping previously completed job_13
 Skipping previously completed job_14
-Starting job_15_iter_500_batch_3000_sgd_3_entropy_0_0 on GPU 5
-Starting job_16_iter_500_batch_3000_sgd_3_entropy_0_1 on GPU 2
+Skipping previously completed job_15
+Skipping previously completed job_16
 Skipping previously completed job_17
-Starting job_18_iter_500_batch_3000_sgd_3_entropy_0_2 on GPU 4
-Starting job_19_iter_500_batch_3000_sgd_3_entropy_0_3 on GPU 5
+Skipping previously completed job_18
+Skipping previously completed job_19
 Skipping previously completed job_20
-Starting job_21_iter_500_batch_3000_sgd_5_entropy_0_1 on GPU 3
-Starting job_22_iter_500_batch_3000_sgd_5_entropy_0_05 on GPU 4
+Skipping previously completed job_21
+Skipping previously completed job_22
 Skipping previously completed job_23
-Starting job_24_iter_500_batch_3000_sgd_5_entropy_0_3 on GPU 2
-Starting job_25_iter_500_batch_3000_sgd_10_entropy_0_0 on GPU 3
+Skipping previously completed job_24
+Skipping previously completed job_25
 Skipping previously completed job_26
-Starting job_27_iter_500_batch_3000_sgd_10_entropy_0_05 on GPU 5
-Starting job_28_iter_500_batch_3000_sgd_10_entropy_0_2 on GPU 2
-Starting job_29_iter_500_batch_3000_sgd_10_entropy_0_3 on GPU 3
-Starting job_30_iter_500_batch_4000_sgd_3_entropy_0_0 on GPU 4
-Starting job_31_iter_500_batch_4000_sgd_3_entropy_0_1 on GPU 5
-Starting job_32_iter_500_batch_4000_sgd_3_entropy_0_05 on GPU 2
-Starting job_33_iter_500_batch_4000_sgd_3_entropy_0_2 on GPU 3
-Starting job_34_iter_500_batch_4000_sgd_3_entropy_0_3 on GPU 4
-Starting job_35_iter_500_batch_4000_sgd_5_entropy_0_0 on GPU 5
-Starting job_36_iter_500_batch_4000_sgd_5_entropy_0_1 on GPU 2
-Starting job_37_iter_500_batch_4000_sgd_5_entropy_0_05 on GPU 3
-Starting job_38_iter_500_batch_4000_sgd_5_entropy_0_2 on GPU 4
-Starting job_39_iter_500_batch_4000_sgd_5_entropy_0_3 on GPU 5
-Starting job_40_iter_500_batch_4000_sgd_10_entropy_0_0 on GPU 2
+Skipping previously completed job_27
+Skipping previously completed job_28
+Skipping previously completed job_29
+Skipping previously completed job_30
+Skipping previously completed job_31
+Skipping previously completed job_32
+Skipping previously completed job_33
+Skipping previously completed job_34
+Skipping previously completed job_35
+Skipping previously completed job_36
+Skipping previously completed job_37
+Skipping previously completed job_38
+Skipping previously completed job_39
+Skipping previously completed job_40
+Skipping previously completed job_41
+Skipping previously completed job_42
+Skipping previously completed job_43
+Skipping previously completed job_44
+Skipping previously completed job_45
+Skipping previously completed job_46
+Skipping previously completed job_47
+Skipping previously completed job_48
+Skipping previously completed job_49
+Skipping previously completed job_50
+Skipping previously completed job_51
+Skipping previously completed job_52
+Skipping previously completed job_53
+Skipping previously completed job_54
+Skipping previously completed job_55
+Skipping previously completed job_56
+Skipping previously completed job_57
+Skipping previously completed job_58
+Skipping previously completed job_59
+Skipping previously completed job_60
+Skipping previously completed job_61
+Skipping previously completed job_62
+Skipping previously completed job_63
+Skipping previously completed job_64
+Skipping previously completed job_65
+Skipping previously completed job_66
+Skipping previously completed job_67
+Skipping previously completed job_68
+Skipping previously completed job_69
+Skipping previously completed job_70
+Skipping previously completed job_71
+Skipping previously completed job_72
+Skipping previously completed job_73
+Skipping previously completed job_74
+Skipping previously completed job_75
+Skipping previously completed job_76
+Skipping previously completed job_77
+Skipping previously completed job_78
+Skipping previously completed job_79
+Skipping previously completed job_80
+Skipping previously completed job_81
+Skipping previously completed job_82
+Skipping previously completed job_83
+Skipping previously completed job_84
+Skipping previously completed job_85
+Skipping previously completed job_86
+Skipping previously completed job_87
+Skipping previously completed job_88
+Skipping previously completed job_89
+Skipping previously completed job_90
+Skipping previously completed job_91
+Skipping previously completed job_92
+Skipping previously completed job_93
+Skipping previously completed job_94
+Skipping previously completed job_95
+Skipping previously completed job_96
+Skipping previously completed job_97
+Skipping previously completed job_98
+Skipping previously completed job_99
+Skipping previously completed job_100
+Skipping previously completed job_101
+Skipping previously completed job_102
+Skipping previously completed job_103
+Skipping previously completed job_104
+Starting job_105_iter_1500_batch_3000_sgd_3_entropy_0_0 on CPU slot 3
+Skipping previously completed job_106
+Skipping previously completed job_107
+Skipping previously completed job_108
+Skipping previously completed job_109
+Starting job_110_iter_1500_batch_3000_sgd_5_entropy_0_0 on CPU slot 4
+Starting job_111_iter_1500_batch_3000_sgd_5_entropy_0_1 on CPU slot 5
+Starting job_112_iter_1500_batch_3000_sgd_5_entropy_0_05 on CPU slot 2
+Starting job_113_iter_1500_batch_3000_sgd_5_entropy_0_2 on CPU slot 3
+Starting job_114_iter_1500_batch_3000_sgd_5_entropy_0_3 on CPU slot 4
+Starting job_115_iter_1500_batch_3000_sgd_10_entropy_0_0 on CPU slot 5
+Starting job_116_iter_1500_batch_3000_sgd_10_entropy_0_1 on CPU slot 2

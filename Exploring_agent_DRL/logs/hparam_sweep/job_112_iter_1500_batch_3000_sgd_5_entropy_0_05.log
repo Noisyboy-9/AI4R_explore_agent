@@ -1,19 +1,84 @@
-/opt/miniconda3/envs/aiar-rl-explore-gpu/bin/python Explore_PPO_agent_training.py --iterations 1500 --num-workers 17 --num-gpus 0.5 --env-name 2d_checkpoint_exploration --reward-mode coverage --max-steps 400 --entropy-coeff 0.05 --checkpoint-dir tmp/hparam_sweep/job_112_iter_1500_batch_3000_sgd_5_entropy_0_05 --spawn-mode random --spawn-index 0 --train-batch-size 3000 --sgd-minibatch-size 256 --num-sgd-iter 5
-/opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+/opt/miniconda3/envs/aiar-rl-explore/bin/python Explore_PPO_agent_training.py --iterations 1500 --num-workers 16 --num-gpus 0.0 --env-name 2d_checkpoint_exploration --reward-mode coverage --max-steps 400 --entropy-coeff 0.05 --checkpoint-dir tmp/hparam_sweep/job_112_iter_1500_batch_3000_sgd_5_entropy_0_05 --spawn-mode random --spawn-index 0 --train-batch-size 3000 --sgd-minibatch-size 256 --num-sgd-iter 5
+/opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
   import pkg_resources
-Traceback (most recent call last):
-  File "/home/jovyan/Desktop/dev/sina/AI4R_explore_agent/Exploring_agent_DRL/Explore_PPO_agent_training.py", line 269, in <module>
-    main()
-  File "/home/jovyan/Desktop/dev/sina/AI4R_explore_agent/Exploring_agent_DRL/Explore_PPO_agent_training.py", line 191, in main
-    raise RuntimeError(
-RuntimeError: GPU training was requested with --num-gpus > 0, but this environment has CPU-only PyTorch. Install a CUDA-enabled PyTorch build or run with --num-gpus 0.
-Traceback (most recent call last):
-  File "/home/jovyan/Desktop/dev/sina/AI4R_explore_agent/Exploring_agent_DRL/run_assignment.py", line 180, in <module>
-    raise SystemExit(main())
-  File "/home/jovyan/Desktop/dev/sina/AI4R_explore_agent/Exploring_agent_DRL/run_assignment.py", line 108, in main
-    return run_command(command)
-  File "/home/jovyan/Desktop/dev/sina/AI4R_explore_agent/Exploring_agent_DRL/run_assignment.py", line 8, in run_command
-    return subprocess.run(command, check=True).returncode
-  File "/opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/subprocess.py", line 526, in run
-    raise CalledProcessError(retcode, process.args,
-subprocess.CalledProcessError: Command '['/opt/miniconda3/envs/aiar-rl-explore-gpu/bin/python', 'Explore_PPO_agent_training.py', '--iterations', '1500', '--num-workers', '17', '--num-gpus', '0.5', '--env-name', '2d_checkpoint_exploration', '--reward-mode', 'coverage', '--max-steps', '400', '--entropy-coeff', '0.05', '--checkpoint-dir', 'tmp/hparam_sweep/job_112_iter_1500_batch_3000_sgd_5_entropy_0_05', '--spawn-mode', 'random', '--spawn-index', '0', '--train-batch-size', '3000', '--sgd-minibatch-size', '256', '--num-sgd-iter', '5']' returned non-zero exit status 1.
+
+Training PPO
+  environment: 2d_checkpoint_exploration
+  reward mode: coverage
+  max steps per episode: 400
+  rollout workers: 16
+  requested GPUs: 0.0
+  observation shape: (27,)
+  checkpoint layout: built-in
+  spawn mode: random
+  entropy coefficient: 0.05
+  PPO update: train batch 3000, minibatch 256, SGD passes 5
+  coverage task: 20 checkpoints x 0.50 reward = 10.00 max reward
+  exploration shaping: -0.004/step for hovering, -0.020/step when blocked by a wall, -0.002/step for no progress, bounded wall-contact penalty
+
+Log columns
+  iter: completed PPO training iteration
+  reward min/mean/max: episode return statistics from the latest training batch
+  train batch: environment steps collected before one PPO update
+  target>=6: whether the latest batch contains an episode above the submission threshold
+  max%: best episode reward in the latest batch as a percentage of the checkpoint reward maximum
+          idle penalties can reduce returns below the checkpoint score
+          early scores can be negative because collision has a penalty
+  len: mean episode length in environment steps
+  best: best mean reward saved after warmup iterations
+
+2026-06-02 16:10:25,186	INFO worker.py:1636 -- Started a local Ray instance.
+/opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/rllib/algorithms/algorithm.py:442: RayDeprecationWarning: This API is deprecated and may be removed in future Ray releases. You could suppress this warning by setting env variable PYTHONWARNINGS="ignore::DeprecationWarning"
+`UnifiedLogger` will be removed in Ray 2.7.
+  return UnifiedLogger(config, logdir, loggers=None)
+/opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/tune/logger/unified.py:53: RayDeprecationWarning: This API is deprecated and may be removed in future Ray releases. You could suppress this warning by setting env variable PYTHONWARNINGS="ignore::DeprecationWarning"
+The `JsonLogger interface is deprecated in favor of the `ray.tune.json.JsonLoggerCallback` interface and will be removed in Ray 2.7.
+  self._loggers.append(cls(self.config, self.logdir, self.trial))
+/opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/tune/logger/unified.py:53: RayDeprecationWarning: This API is deprecated and may be removed in future Ray releases. You could suppress this warning by setting env variable PYTHONWARNINGS="ignore::DeprecationWarning"
+The `CSVLogger interface is deprecated in favor of the `ray.tune.csv.CSVLoggerCallback` interface and will be removed in Ray 2.7.
+  self._loggers.append(cls(self.config, self.logdir, self.trial))
+/opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/tune/logger/unified.py:53: RayDeprecationWarning: This API is deprecated and may be removed in future Ray releases. You could suppress this warning by setting env variable PYTHONWARNINGS="ignore::DeprecationWarning"
+The `TBXLogger interface is deprecated in favor of the `ray.tune.tensorboardx.TBXLoggerCallback` interface and will be removed in Ray 2.7.
+  self._loggers.append(cls(self.config, self.logdir, self.trial))
+2026-06-02 16:10:37,853	INFO tensorboardx.py:48 -- pip install "ray[tune]" to see TensorBoard files.
+2026-06-02 16:10:37,853	WARNING unified.py:56 -- Could not instantiate TBXLogger: No module named 'tensorboardX'.
+2026-06-02 16:10:37,855	INFO algorithm.py:536 -- Current log_level is WARN. For more information, set 'log_level': 'INFO' / 'DEBUG' or use the -v and -vv flags.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[36m(RolloutWorker pid=61397)[0m 2026-06-02 16:10:47,074	WARNING env.py:155 -- Your env doesn't have a .spec.max_episode_steps attribute. Your horizon will default to infinity, and your environment will not be reset.
+2026-06-02 16:10:52,877	INFO trainable.py:173 -- Trainable.setup took 15.024 seconds. If your trainable is slow to initialize, consider setting reuse_actors=True to reduce actor creation overheads.
+2026-06-02 16:10:52,877	WARNING util.py:68 -- Install gputil for GPU system monitoring.
+iter    1 | reward     nan/    nan/    nan | target>=6  no | max    nan% | len    nan | best    0.00
+iter    2 | reward     nan/    nan/    nan | target>=6  no | max    nan% | len    nan | best    0.00
+iter    3 | reward   -1.44/  -0.78/  -0.07 | target>=6  no | max   -0.7% | len  400.0 | best    0.00
+iter    4 | reward   -1.44/  -0.78/  -0.07 | target>=6  no | max   -0.7% | len  400.0 | best    0.00
