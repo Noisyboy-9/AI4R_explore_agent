@@ -116,3 +116,5 @@ Starting job_113_iter_1500_batch_3000_sgd_5_entropy_0_2 on CPU slot 3
 Starting job_114_iter_1500_batch_3000_sgd_5_entropy_0_3 on CPU slot 4
 Starting job_115_iter_1500_batch_3000_sgd_10_entropy_0_0 on CPU slot 5
 Starting job_116_iter_1500_batch_3000_sgd_10_entropy_0_1 on CPU slot 2
+Starting job_117_iter_1500_batch_3000_sgd_10_entropy_0_05 on CPU slot 3
+Starting job_118_iter_1500_batch_3000_sgd_10_entropy_0_2 on CPU slot 4
