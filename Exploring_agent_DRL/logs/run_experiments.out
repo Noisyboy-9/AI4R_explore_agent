@@ -1,4 +1,4 @@
-Starting PPO hyperparameter sweep with up to 8 concurrent jobs.
+Starting PPO hyperparameter sweep with up to 7 concurrent jobs.
 Skipping previously completed job_0
 Skipping previously completed job_1
 Skipping previously completed job_2
@@ -104,17 +104,16 @@ Skipping previously completed job_101
 Skipping previously completed job_102
 Skipping previously completed job_103
 Skipping previously completed job_104
-Starting job_105_iter_1500_batch_3000_sgd_3_entropy_0_0 on CPU slot 3
+Starting job_105_iter_1500_batch_3000_sgd_3_entropy_0_0 on GPU 5
 Skipping previously completed job_106
 Skipping previously completed job_107
 Skipping previously completed job_108
 Skipping previously completed job_109
-Starting job_110_iter_1500_batch_3000_sgd_5_entropy_0_0 on CPU slot 4
-Starting job_111_iter_1500_batch_3000_sgd_5_entropy_0_1 on CPU slot 5
-Starting job_112_iter_1500_batch_3000_sgd_5_entropy_0_05 on CPU slot 2
-Starting job_113_iter_1500_batch_3000_sgd_5_entropy_0_2 on CPU slot 3
-Starting job_114_iter_1500_batch_3000_sgd_5_entropy_0_3 on CPU slot 4
-Starting job_115_iter_1500_batch_3000_sgd_10_entropy_0_0 on CPU slot 5
-Starting job_116_iter_1500_batch_3000_sgd_10_entropy_0_1 on CPU slot 2
-Starting job_117_iter_1500_batch_3000_sgd_10_entropy_0_05 on CPU slot 3
-Starting job_118_iter_1500_batch_3000_sgd_10_entropy_0_2 on CPU slot 4
+Starting job_110_iter_1500_batch_3000_sgd_5_entropy_0_0 on GPU 4
+Starting job_111_iter_1500_batch_3000_sgd_5_entropy_0_1 on GPU 5
+Starting job_112_iter_1500_batch_3000_sgd_5_entropy_0_05 on GPU 6
+Skipping previously completed job_113
+Skipping previously completed job_114
+Starting job_115_iter_1500_batch_3000_sgd_10_entropy_0_0 on GPU 3
+Starting job_116_iter_1500_batch_3000_sgd_10_entropy_0_1 on GPU 4
+Starting job_117_iter_1500_batch_3000_sgd_10_entropy_0_05 on GPU 5

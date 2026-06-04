@@ -1,13 +1,13 @@
-/opt/miniconda3/envs/aiar-rl-explore/bin/python Explore_PPO_agent_training.py --iterations 1500 --num-workers 16 --num-gpus 0.0 --env-name 2d_checkpoint_exploration --reward-mode coverage --max-steps 400 --entropy-coeff 0.05 --checkpoint-dir tmp/hparam_sweep/job_117_iter_1500_batch_3000_sgd_10_entropy_0_05 --spawn-mode random --spawn-index 0 --train-batch-size 3000 --sgd-minibatch-size 256 --num-sgd-iter 10
-/opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+/opt/miniconda3/envs/aiar-rl-explore-gpu/bin/python Explore_PPO_agent_training.py --iterations 1500 --num-workers 20 --num-gpus 1.0 --env-name 2d_checkpoint_exploration --reward-mode coverage --max-steps 400 --entropy-coeff 0.05 --checkpoint-dir tmp/hparam_sweep/job_117_iter_1500_batch_3000_sgd_10_entropy_0_05 --spawn-mode random --spawn-index 0 --train-batch-size 3000 --sgd-minibatch-size 256 --num-sgd-iter 10
+/opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
   import pkg_resources
 
 Training PPO
   environment: 2d_checkpoint_exploration
   reward mode: coverage
   max steps per episode: 400
-  rollout workers: 16
-  requested GPUs: 0.0
+  rollout workers: 20
+  requested GPUs: 1.0
   observation shape: (27,)
   checkpoint layout: built-in
   spawn mode: random
@@ -27,126 +27,191 @@ Log columns
   len: mean episode length in environment steps
   best: best mean reward saved after warmup iterations
 
-2026-06-02 21:25:59,210	INFO worker.py:1636 -- Started a local Ray instance.
-/opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/rllib/algorithms/algorithm.py:442: RayDeprecationWarning: This API is deprecated and may be removed in future Ray releases. You could suppress this warning by setting env variable PYTHONWARNINGS="ignore::DeprecationWarning"
+2026-06-03 09:32:45,553	INFO worker.py:1636 -- Started a local Ray instance.
+/opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/rllib/algorithms/algorithm.py:442: RayDeprecationWarning: This API is deprecated and may be removed in future Ray releases. You could suppress this warning by setting env variable PYTHONWARNINGS="ignore::DeprecationWarning"
 `UnifiedLogger` will be removed in Ray 2.7.
   return UnifiedLogger(config, logdir, loggers=None)
-/opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/tune/logger/unified.py:53: RayDeprecationWarning: This API is deprecated and may be removed in future Ray releases. You could suppress this warning by setting env variable PYTHONWARNINGS="ignore::DeprecationWarning"
+/opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/tune/logger/unified.py:53: RayDeprecationWarning: This API is deprecated and may be removed in future Ray releases. You could suppress this warning by setting env variable PYTHONWARNINGS="ignore::DeprecationWarning"
 The `JsonLogger interface is deprecated in favor of the `ray.tune.json.JsonLoggerCallback` interface and will be removed in Ray 2.7.
   self._loggers.append(cls(self.config, self.logdir, self.trial))
-/opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/tune/logger/unified.py:53: RayDeprecationWarning: This API is deprecated and may be removed in future Ray releases. You could suppress this warning by setting env variable PYTHONWARNINGS="ignore::DeprecationWarning"
+/opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/tune/logger/unified.py:53: RayDeprecationWarning: This API is deprecated and may be removed in future Ray releases. You could suppress this warning by setting env variable PYTHONWARNINGS="ignore::DeprecationWarning"
 The `CSVLogger interface is deprecated in favor of the `ray.tune.csv.CSVLoggerCallback` interface and will be removed in Ray 2.7.
   self._loggers.append(cls(self.config, self.logdir, self.trial))
-/opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/tune/logger/unified.py:53: RayDeprecationWarning: This API is deprecated and may be removed in future Ray releases. You could suppress this warning by setting env variable PYTHONWARNINGS="ignore::DeprecationWarning"
+/opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/tune/logger/unified.py:53: RayDeprecationWarning: This API is deprecated and may be removed in future Ray releases. You could suppress this warning by setting env variable PYTHONWARNINGS="ignore::DeprecationWarning"
 The `TBXLogger interface is deprecated in favor of the `ray.tune.tensorboardx.TBXLoggerCallback` interface and will be removed in Ray 2.7.
   self._loggers.append(cls(self.config, self.logdir, self.trial))
-2026-06-02 21:26:01,623	INFO tensorboardx.py:48 -- pip install "ray[tune]" to see TensorBoard files.
-2026-06-02 21:26:01,624	WARNING unified.py:56 -- Could not instantiate TBXLogger: No module named 'tensorboardX'.
-2026-06-02 21:26:01,625	INFO algorithm.py:536 -- Current log_level is WARN. For more information, set 'log_level': 'INFO' / 'DEBUG' or use the -v and -vv flags.
-[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+2026-06-03 09:32:59,756	INFO tensorboardx.py:48 -- pip install "ray[tune]" to see TensorBoard files.
+2026-06-03 09:32:59,756	WARNING unified.py:56 -- Could not instantiate TBXLogger: No module named 'tensorboardX'.
+2026-06-03 09:32:59,758	INFO algorithm.py:536 -- Current log_level is WARN. For more information, set 'log_level': 'INFO' / 'DEBUG' or use the -v and -vv flags.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
 [2m[33m(raylet)[0m   import pkg_resources
-[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
 [2m[33m(raylet)[0m   import pkg_resources
-[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
 [2m[33m(raylet)[0m   import pkg_resources
-[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
 [2m[33m(raylet)[0m   import pkg_resources
-[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
 [2m[33m(raylet)[0m   import pkg_resources
-[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
 [2m[33m(raylet)[0m   import pkg_resources
-[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
 [2m[33m(raylet)[0m   import pkg_resources
-[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
 [2m[33m(raylet)[0m   import pkg_resources
-[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
 [2m[33m(raylet)[0m   import pkg_resources
-[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
 [2m[33m(raylet)[0m   import pkg_resources
-[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
 [2m[33m(raylet)[0m   import pkg_resources
-[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
 [2m[33m(raylet)[0m   import pkg_resources
-[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
 [2m[33m(raylet)[0m   import pkg_resources
-[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
 [2m[33m(raylet)[0m   import pkg_resources
-[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
 [2m[33m(raylet)[0m   import pkg_resources
-[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
 [2m[33m(raylet)[0m   import pkg_resources
-[2m[36m(RolloutWorker pid=150909)[0m 2026-06-02 21:26:07,555	WARNING env.py:155 -- Your env doesn't have a .spec.max_episode_steps attribute. Your horizon will default to infinity, and your environment will not be reset.
-2026-06-02 21:26:08,246	WARNING util.py:68 -- Install gputil for GPU system monitoring.
-iter    1 | reward     nan/    nan/    nan | target>=6  no | max    nan% | len    nan | best    0.00
-iter    2 | reward     nan/    nan/    nan | target>=6  no | max    nan% | len    nan | best    0.00
-iter    3 | reward   -1.59/  -0.79/   0.09 | target>=6  no | max    0.9% | len  400.0 | best    0.00
-iter    4 | reward   -1.59/  -0.79/   0.09 | target>=6  no | max    0.9% | len  400.0 | best    0.00
-iter    5 | reward   -1.59/  -0.52/   0.93 | target>=6  no | max    9.3% | len  400.0 | best    0.00
-iter    6 | reward   -1.59/  -0.52/   0.93 | target>=6  no | max    9.3% | len  400.0 | best    0.00
-iter    7 | reward   -1.67/  -0.24/   2.35 | target>=6  no | max   23.5% | len  400.0 | best    0.00
-iter    8 | reward   -1.67/  -0.24/   2.35 | target>=6  no | max   23.5% | len  400.0 | best    0.00
-iter    9 | reward   -1.67/   0.07/   2.35 | target>=6  no | max   23.5% | len  400.0 | best    0.00
-iter   10 | reward   -1.67/   0.07/   2.35 | target>=6  no | max   23.5% | len  400.0 | best    0.00
-iter   11 | reward   -1.67/   0.34/   3.44 | target>=6  no | max   34.4% | len  400.0 | best    0.00
-iter   12 | reward   -1.67/   0.34/   3.44 | target>=6  no | max   34.4% | len  400.0 | best    0.00
-iter   13 | reward   -1.67/   0.57/   3.44 | target>=6  no | max   34.4% | len  400.0 | best    0.00
-iter   14 | reward   -1.67/   0.57/   3.44 | target>=6  no | max   34.4% | len  400.0 | best    0.00
-iter   15 | reward   -1.67/   1.01/   3.44 | target>=6  no | max   34.4% | len  400.0 | best    0.00
-iter   16 | reward   -1.67/   1.01/   3.44 | target>=6  no | max   34.4% | len  400.0 | best    0.00
-iter   17 | reward   -1.67/   1.01/   3.44 | target>=6  no | max   34.4% | len  400.0 | best    0.00
-iter   18 | reward   -1.67/   1.44/   3.44 | target>=6  no | max   34.4% | len  400.0 | best    0.00
-iter   19 | reward   -1.67/   1.44/   3.44 | target>=6  no | max   34.4% | len  400.0 | best    0.00
-iter   20 | reward   -2.16/   1.68/   3.97 | target>=6  no | max   39.7% | len  400.0 | best    0.00
-iter   21 | reward   -2.16/   1.68/   3.97 | target>=6  no | max   39.7% | len  400.0 | best    0.00
-iter   22 | reward   -2.16/   1.92/   3.97 | target>=6  no | max   39.7% | len  400.0 | best    0.00
-iter   23 | reward   -2.16/   1.92/   3.97 | target>=6  no | max   39.7% | len  400.0 | best    0.00
-iter   24 | reward   -2.16/   2.08/   3.97 | target>=6  no | max   39.7% | len  400.0 | best    0.00
-iter   25 | reward   -2.16/   2.08/   3.97 | target>=6  no | max   39.7% | len  400.0 | best    0.00
-iter   26 | reward   -2.16/   2.10/   3.97 | target>=6  no | max   39.7% | len  400.0 | best    0.00
-iter   27 | reward   -2.16/   2.10/   3.97 | target>=6  no | max   39.7% | len  400.0 | best    0.00
-iter   28 | reward   -2.16/   2.19/   3.97 | target>=6  no | max   39.7% | len  400.0 | best    0.00
-iter   29 | reward   -2.16/   2.19/   3.97 | target>=6  no | max   39.7% | len  400.0 | best    0.00
-iter   30 | reward   -2.16/   2.17/   3.97 | target>=6  no | max   39.7% | len  400.0 | best    0.00
-iter   31 | reward   -2.16/   2.17/   3.97 | target>=6  no | max   39.7% | len  400.0 | best    0.00
-iter   32 | reward   -1.63/   2.17/   3.97 | target>=6  no | max   39.7% | len  400.0 | best    0.00
-iter   33 | reward   -1.63/   2.21/   3.92 | target>=6  no | max   39.2% | len  400.0 | best    0.00
-iter   34 | reward   -1.63/   2.21/   3.92 | target>=6  no | max   39.2% | len  400.0 | best    0.00
-iter   35 | reward   -2.77/   2.07/   3.92 | target>=6  no | max   39.2% | len  400.0 | best    0.00
-iter   36 | reward   -2.77/   2.07/   3.92 | target>=6  no | max   39.2% | len  400.0 | best    0.00
-iter   37 | reward   -2.77/   1.96/   3.92 | target>=6  no | max   39.2% | len  400.0 | best    0.00
-iter   38 | reward   -2.77/   1.96/   3.92 | target>=6  no | max   39.2% | len  400.0 | best    0.00
-iter   39 | reward   -2.77/   1.92/   3.91 | target>=6  no | max   39.1% | len  400.0 | best    0.00
-iter   40 | reward   -2.77/   1.92/   3.91 | target>=6  no | max   39.1% | len  400.0 | best    0.00
-iter   41 | reward   -2.77/   1.96/   3.91 | target>=6  no | max   39.1% | len  400.0 | best    0.00
-iter   42 | reward   -2.77/   1.96/   3.91 | target>=6  no | max   39.1% | len  400.0 | best    0.00
-iter   43 | reward   -2.77/   1.82/   3.91 | target>=6  no | max   39.1% | len  400.0 | best    0.00
-iter   44 | reward   -2.77/   1.82/   3.91 | target>=6  no | max   39.1% | len  400.0 | best    0.00
-iter   45 | reward   -2.77/   1.76/   3.82 | target>=6  no | max   38.2% | len  400.0 | best    0.00
-iter   46 | reward   -2.77/   1.76/   3.82 | target>=6  no | max   38.2% | len  400.0 | best    0.00
-iter   47 | reward   -2.77/   1.77/   3.85 | target>=6  no | max   38.5% | len  400.0 | best    0.00
-iter   48 | reward   -0.76/   1.88/   4.01 | target>=6  no | max   40.1% | len  400.0 | best    0.00
-iter   49 | reward   -0.76/   1.82/   4.01 | target>=6  no | max   40.1% | len  400.0 | best    0.00
-iter   50 | reward   -0.76/   1.86/   4.01 | target>=6  no | max   40.1% | len  400.0 | best    0.00
-Iteration 51: new best mean reward 1.86
-iter   51 | reward   -0.76/   1.86/   4.01 | target>=6  no | max   40.1% | len  400.0 | best    1.86
-Iteration 52: new best mean reward 1.89
-iter   52 | reward   -0.42/   1.89/   4.01 | target>=6  no | max   40.1% | len  400.0 | best    1.89
-iter   53 | reward   -0.42/   1.89/   4.01 | target>=6  no | max   40.1% | len  400.0 | best    1.89
-iter   54 | reward   -0.53/   1.85/   4.01 | target>=6  no | max   40.1% | len  400.0 | best    1.89
-iter   55 | reward   -0.53/   1.85/   4.01 | target>=6  no | max   40.1% | len  400.0 | best    1.89
-Iteration 56: new best mean reward 1.90
-iter   56 | reward   -0.53/   1.90/   4.01 | target>=6  no | max   40.1% | len  400.0 | best    1.90
-iter   57 | reward   -0.53/   1.90/   4.01 | target>=6  no | max   40.1% | len  400.0 | best    1.90
-iter   58 | reward   -0.53/   1.84/   4.01 | target>=6  no | max   40.1% | len  400.0 | best    1.90
-iter   59 | reward   -0.53/   1.84/   4.01 | target>=6  no | max   40.1% | len  400.0 | best    1.90
-iter   60 | reward   -0.53/   1.75/   3.98 | target>=6  no | max   39.8% | len  400.0 | best    1.90
-iter   61 | reward   -0.53/   1.75/   3.98 | target>=6  no | max   39.8% | len  400.0 | best    1.90
-iter   62 | reward   -2.18/   1.77/   3.98 | target>=6  no | max   39.8% | len  400.0 | best    1.90
-iter   63 | reward   -2.18/   1.73/   3.98 | target>=6  no | max   39.8% | len  400.0 | best    1.90
-iter   64 | reward   -2.18/   1.63/   3.98 | target>=6  no | max   39.8% | len  400.0 | best    1.90
-iter   65 | reward   -2.18/   1.55/   3.98 | target>=6  no | max   39.8% | len  400.0 | best    1.90
-iter   66 | reward   -2.18/   1.41/   3.37 | target>=6  no | max   33.7% | len  400.0 | best    1.90
-iter   67 | reward   -2.18/   1.33/   3.37 | target>=6  no | max   33.7% | len  400.0 | best    1.90
-iter   68 | reward   -2.18/   1.33/   3.37 | target>=6  no | max   33.7% | len  400.0 | best    1.90
-iter   69 | reward   -2.18/   1.14/   3.37 | target>=6  no | max   33.7% | len  400.0 | best    1.90
-iter   70 | reward   -2.18/   1.14/   3.37 | target>=6  no | max   33.7% | len  400.0 | best    1.90
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[36m(RolloutWorker pid=61383)[0m 2026-06-03 09:33:13,016	WARNING env.py:155 -- Your env doesn't have a .spec.max_episode_steps attribute. Your horizon will default to infinity, and your environment will not be reset.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m [2026-06-03 09:33:47,409 E 3523 3523] (raylet) node_manager.cc:3069: 9 Workers (tasks / actors) killed due to memory pressure (OOM), 0 Workers crashed due to other reasons at node (ID: c111ca0ea58c87743a6e19c78ba5576aacfdba8ad05fd0192a311e5c, IP: 172.18.0.6) over the last time period. To see more information about the Workers killed on this node, use `ray logs raylet.out -ip 172.18.0.6`
+[2m[33m(raylet)[0m 
+[2m[33m(raylet)[0m Refer to the documentation on how to address the out of memory issue: https://docs.ray.io/en/latest/ray-core/scheduling/ray-oom-prevention.html. Consider provisioning more memory on this node or reducing task parallelism by requesting more CPUs per task. To adjust the kill threshold, set the environment variable `RAY_memory_usage_threshold` when starting Ray. To disable worker killing, set the environment variable `RAY_memory_monitor_refresh_ms` to zero.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m [2026-06-03 09:34:49,750 E 3523 3523] (raylet) node_manager.cc:3069: 14 Workers (tasks / actors) killed due to memory pressure (OOM), 0 Workers crashed due to other reasons at node (ID: c111ca0ea58c87743a6e19c78ba5576aacfdba8ad05fd0192a311e5c, IP: 172.18.0.6) over the last time period. To see more information about the Workers killed on this node, use `ray logs raylet.out -ip 172.18.0.6`
+[2m[33m(raylet)[0m 
+[2m[33m(raylet)[0m Refer to the documentation on how to address the out of memory issue: https://docs.ray.io/en/latest/ray-core/scheduling/ray-oom-prevention.html. Consider provisioning more memory on this node or reducing task parallelism by requesting more CPUs per task. To adjust the kill threshold, set the environment variable `RAY_memory_usage_threshold` when starting Ray. To disable worker killing, set the environment variable `RAY_memory_monitor_refresh_ms` to zero.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m [2026-06-03 09:35:51,990 E 3523 3523] (raylet) node_manager.cc:3069: 14 Workers (tasks / actors) killed due to memory pressure (OOM), 0 Workers crashed due to other reasons at node (ID: c111ca0ea58c87743a6e19c78ba5576aacfdba8ad05fd0192a311e5c, IP: 172.18.0.6) over the last time period. To see more information about the Workers killed on this node, use `ray logs raylet.out -ip 172.18.0.6`
+[2m[33m(raylet)[0m 
+[2m[33m(raylet)[0m Refer to the documentation on how to address the out of memory issue: https://docs.ray.io/en/latest/ray-core/scheduling/ray-oom-prevention.html. Consider provisioning more memory on this node or reducing task parallelism by requesting more CPUs per task. To adjust the kill threshold, set the environment variable `RAY_memory_usage_threshold` when starting Ray. To disable worker killing, set the environment variable `RAY_memory_monitor_refresh_ms` to zero.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m [2026-06-03 09:36:53,414 E 3523 3523] (raylet) node_manager.cc:3069: 16 Workers (tasks / actors) killed due to memory pressure (OOM), 0 Workers crashed due to other reasons at node (ID: c111ca0ea58c87743a6e19c78ba5576aacfdba8ad05fd0192a311e5c, IP: 172.18.0.6) over the last time period. To see more information about the Workers killed on this node, use `ray logs raylet.out -ip 172.18.0.6`
+[2m[33m(raylet)[0m 
+[2m[33m(raylet)[0m Refer to the documentation on how to address the out of memory issue: https://docs.ray.io/en/latest/ray-core/scheduling/ray-oom-prevention.html. Consider provisioning more memory on this node or reducing task parallelism by requesting more CPUs per task. To adjust the kill threshold, set the environment variable `RAY_memory_usage_threshold` when starting Ray. To disable worker killing, set the environment variable `RAY_memory_monitor_refresh_ms` to zero.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m [2026-06-03 09:45:49,900 E 3523 3523] (raylet) node_manager.cc:3069: 7 Workers (tasks / actors) killed due to memory pressure (OOM), 0 Workers crashed due to other reasons at node (ID: c111ca0ea58c87743a6e19c78ba5576aacfdba8ad05fd0192a311e5c, IP: 172.18.0.6) over the last time period. To see more information about the Workers killed on this node, use `ray logs raylet.out -ip 172.18.0.6`
+[2m[33m(raylet)[0m 
+[2m[33m(raylet)[0m Refer to the documentation on how to address the out of memory issue: https://docs.ray.io/en/latest/ray-core/scheduling/ray-oom-prevention.html. Consider provisioning more memory on this node or reducing task parallelism by requesting more CPUs per task. To adjust the kill threshold, set the environment variable `RAY_memory_usage_threshold` when starting Ray. To disable worker killing, set the environment variable `RAY_memory_monitor_refresh_ms` to zero.
+[2m[33m(raylet)[0m [2026-06-03 09:45:49,900 E 3523 3523] (raylet) worker_pool.cc:544: Some workers of the worker process(104012) have not registered within the timeout. The process is still alive, probably it's hanging during start.
+[2m[33m(raylet)[0m [2026-06-03 09:45:49,908 E 3523 3523] (raylet) worker_pool.cc:544: Some workers of the worker process(104227) have not registered within the timeout. The process is still alive, probably it's hanging during start.

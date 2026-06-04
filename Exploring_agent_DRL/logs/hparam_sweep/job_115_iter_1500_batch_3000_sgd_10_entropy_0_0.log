@@ -1,13 +1,13 @@
-/opt/miniconda3/envs/aiar-rl-explore/bin/python Explore_PPO_agent_training.py --iterations 1500 --num-workers 16 --num-gpus 0.0 --env-name 2d_checkpoint_exploration --reward-mode coverage --max-steps 400 --entropy-coeff 0.0 --checkpoint-dir tmp/hparam_sweep/job_115_iter_1500_batch_3000_sgd_10_entropy_0_0 --spawn-mode random --spawn-index 0 --train-batch-size 3000 --sgd-minibatch-size 256 --num-sgd-iter 10
-/opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+/opt/miniconda3/envs/aiar-rl-explore-gpu/bin/python Explore_PPO_agent_training.py --iterations 1500 --num-workers 20 --num-gpus 1.0 --env-name 2d_checkpoint_exploration --reward-mode coverage --max-steps 400 --entropy-coeff 0.0 --checkpoint-dir tmp/hparam_sweep/job_115_iter_1500_batch_3000_sgd_10_entropy_0_0 --spawn-mode random --spawn-index 0 --train-batch-size 3000 --sgd-minibatch-size 256 --num-sgd-iter 10
+/opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
   import pkg_resources
 
 Training PPO
   environment: 2d_checkpoint_exploration
   reward mode: coverage
   max steps per episode: 400
-  rollout workers: 16
-  requested GPUs: 0.0
+  rollout workers: 20
+  requested GPUs: 1.0
   observation shape: (27,)
   checkpoint layout: built-in
   spawn mode: random
@@ -27,824 +27,201 @@ Log columns
   len: mean episode length in environment steps
   best: best mean reward saved after warmup iterations
 
-2026-06-02 16:10:23,345	INFO worker.py:1636 -- Started a local Ray instance.
-/opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/rllib/algorithms/algorithm.py:442: RayDeprecationWarning: This API is deprecated and may be removed in future Ray releases. You could suppress this warning by setting env variable PYTHONWARNINGS="ignore::DeprecationWarning"
+2026-06-03 09:32:46,578	INFO worker.py:1636 -- Started a local Ray instance.
+/opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/rllib/algorithms/algorithm.py:442: RayDeprecationWarning: This API is deprecated and may be removed in future Ray releases. You could suppress this warning by setting env variable PYTHONWARNINGS="ignore::DeprecationWarning"
 `UnifiedLogger` will be removed in Ray 2.7.
   return UnifiedLogger(config, logdir, loggers=None)
-/opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/tune/logger/unified.py:53: RayDeprecationWarning: This API is deprecated and may be removed in future Ray releases. You could suppress this warning by setting env variable PYTHONWARNINGS="ignore::DeprecationWarning"
+/opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/tune/logger/unified.py:53: RayDeprecationWarning: This API is deprecated and may be removed in future Ray releases. You could suppress this warning by setting env variable PYTHONWARNINGS="ignore::DeprecationWarning"
 The `JsonLogger interface is deprecated in favor of the `ray.tune.json.JsonLoggerCallback` interface and will be removed in Ray 2.7.
   self._loggers.append(cls(self.config, self.logdir, self.trial))
-/opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/tune/logger/unified.py:53: RayDeprecationWarning: This API is deprecated and may be removed in future Ray releases. You could suppress this warning by setting env variable PYTHONWARNINGS="ignore::DeprecationWarning"
+/opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/tune/logger/unified.py:53: RayDeprecationWarning: This API is deprecated and may be removed in future Ray releases. You could suppress this warning by setting env variable PYTHONWARNINGS="ignore::DeprecationWarning"
 The `CSVLogger interface is deprecated in favor of the `ray.tune.csv.CSVLoggerCallback` interface and will be removed in Ray 2.7.
   self._loggers.append(cls(self.config, self.logdir, self.trial))
-/opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/tune/logger/unified.py:53: RayDeprecationWarning: This API is deprecated and may be removed in future Ray releases. You could suppress this warning by setting env variable PYTHONWARNINGS="ignore::DeprecationWarning"
+/opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/tune/logger/unified.py:53: RayDeprecationWarning: This API is deprecated and may be removed in future Ray releases. You could suppress this warning by setting env variable PYTHONWARNINGS="ignore::DeprecationWarning"
 The `TBXLogger interface is deprecated in favor of the `ray.tune.tensorboardx.TBXLoggerCallback` interface and will be removed in Ray 2.7.
   self._loggers.append(cls(self.config, self.logdir, self.trial))
-2026-06-02 16:10:37,757	INFO tensorboardx.py:48 -- pip install "ray[tune]" to see TensorBoard files.
-2026-06-02 16:10:37,757	WARNING unified.py:56 -- Could not instantiate TBXLogger: No module named 'tensorboardX'.
-2026-06-02 16:10:37,758	INFO algorithm.py:536 -- Current log_level is WARN. For more information, set 'log_level': 'INFO' / 'DEBUG' or use the -v and -vv flags.
-[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+2026-06-03 09:33:00,388	INFO tensorboardx.py:48 -- pip install "ray[tune]" to see TensorBoard files.
+2026-06-03 09:33:00,388	WARNING unified.py:56 -- Could not instantiate TBXLogger: No module named 'tensorboardX'.
+2026-06-03 09:33:00,390	INFO algorithm.py:536 -- Current log_level is WARN. For more information, set 'log_level': 'INFO' / 'DEBUG' or use the -v and -vv flags.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
 [2m[33m(raylet)[0m   import pkg_resources
-[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
 [2m[33m(raylet)[0m   import pkg_resources
-[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
 [2m[33m(raylet)[0m   import pkg_resources
-[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
 [2m[33m(raylet)[0m   import pkg_resources
-[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
 [2m[33m(raylet)[0m   import pkg_resources
-[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
 [2m[33m(raylet)[0m   import pkg_resources
-[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
 [2m[33m(raylet)[0m   import pkg_resources
-[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
 [2m[33m(raylet)[0m   import pkg_resources
-[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
 [2m[33m(raylet)[0m   import pkg_resources
-[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
 [2m[33m(raylet)[0m   import pkg_resources
-[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
 [2m[33m(raylet)[0m   import pkg_resources
-[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
 [2m[33m(raylet)[0m   import pkg_resources
-[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
 [2m[33m(raylet)[0m   import pkg_resources
-[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
 [2m[33m(raylet)[0m   import pkg_resources
-[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
 [2m[33m(raylet)[0m   import pkg_resources
-[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
 [2m[33m(raylet)[0m   import pkg_resources
-[2m[36m(RolloutWorker pid=61267)[0m 2026-06-02 16:10:46,839	WARNING env.py:155 -- Your env doesn't have a .spec.max_episode_steps attribute. Your horizon will default to infinity, and your environment will not be reset.
-2026-06-02 16:10:52,915	INFO trainable.py:173 -- Trainable.setup took 15.158 seconds. If your trainable is slow to initialize, consider setting reuse_actors=True to reduce actor creation overheads.
-2026-06-02 16:10:52,915	WARNING util.py:68 -- Install gputil for GPU system monitoring.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[36m(RolloutWorker pid=62644)[0m 2026-06-03 09:33:12,926	WARNING env.py:155 -- Your env doesn't have a .spec.max_episode_steps attribute. Your horizon will default to infinity, and your environment will not be reset.
+2026-06-03 09:33:15,434	INFO trainable.py:173 -- Trainable.setup took 15.045 seconds. If your trainable is slow to initialize, consider setting reuse_actors=True to reduce actor creation overheads.
+2026-06-03 09:33:15,434	WARNING util.py:68 -- Install gputil for GPU system monitoring.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m [2026-06-03 09:33:47,064 E 3704 3704] (raylet) node_manager.cc:3069: 9 Workers (tasks / actors) killed due to memory pressure (OOM), 0 Workers crashed due to other reasons at node (ID: bb4a0655e86ced08b97c2d6d17bb148fa8f19e73aeec0bb53c4958b7, IP: 172.18.0.6) over the last time period. To see more information about the Workers killed on this node, use `ray logs raylet.out -ip 172.18.0.6`
+[2m[33m(raylet)[0m 
+[2m[33m(raylet)[0m Refer to the documentation on how to address the out of memory issue: https://docs.ray.io/en/latest/ray-core/scheduling/ray-oom-prevention.html. Consider provisioning more memory on this node or reducing task parallelism by requesting more CPUs per task. To adjust the kill threshold, set the environment variable `RAY_memory_usage_threshold` when starting Ray. To disable worker killing, set the environment variable `RAY_memory_monitor_refresh_ms` to zero.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+2026-06-03 09:33:48,290	ERROR actor_manager.py:507 -- Ray error, taking actor 7 out of service. The actor died unexpectedly before finishing this task.
+2026-06-03 09:33:48,295	ERROR actor_manager.py:507 -- Ray error, taking actor 17 out of service. The actor died unexpectedly before finishing this task.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
 iter    1 | reward     nan/    nan/    nan | target>=6  no | max    nan% | len    nan | best    0.00
-iter    2 | reward     nan/    nan/    nan | target>=6  no | max    nan% | len    nan | best    0.00
-iter    3 | reward   -1.95/  -0.79/   0.13 | target>=6  no | max    1.3% | len  400.0 | best    0.00
-iter    4 | reward   -1.95/  -0.79/   0.13 | target>=6  no | max    1.3% | len  400.0 | best    0.00
-iter    5 | reward   -1.95/  -0.66/   1.33 | target>=6  no | max   13.3% | len  400.0 | best    0.00
-iter    6 | reward   -1.95/  -0.66/   1.33 | target>=6  no | max   13.3% | len  400.0 | best    0.00
-iter    7 | reward   -1.95/  -0.33/   2.12 | target>=6  no | max   21.2% | len  400.0 | best    0.00
-iter    8 | reward   -1.95/  -0.33/   2.12 | target>=6  no | max   21.2% | len  400.0 | best    0.00
-iter    9 | reward   -1.95/   0.19/   3.92 | target>=6  no | max   39.2% | len  400.0 | best    0.00
-iter   10 | reward   -1.95/   0.19/   3.92 | target>=6  no | max   39.2% | len  400.0 | best    0.00
-iter   11 | reward   -1.95/   0.48/   3.97 | target>=6  no | max   39.7% | len  400.0 | best    0.00
-iter   12 | reward   -1.95/   0.48/   3.97 | target>=6  no | max   39.7% | len  400.0 | best    0.00
-iter   13 | reward   -1.95/   0.66/   3.97 | target>=6  no | max   39.7% | len  400.0 | best    0.00
-iter   14 | reward   -1.95/   0.66/   3.97 | target>=6  no | max   39.7% | len  400.0 | best    0.00
-iter   15 | reward   -1.88/   1.18/   4.02 | target>=6  no | max   40.2% | len  400.0 | best    0.00
-iter   16 | reward   -1.88/   1.18/   4.02 | target>=6  no | max   40.2% | len  400.0 | best    0.00
-iter   17 | reward   -1.88/   1.18/   4.02 | target>=6  no | max   40.2% | len  400.0 | best    0.00
-iter   18 | reward   -2.07/   1.73/   4.04 | target>=6  no | max   40.4% | len  400.0 | best    0.00
-iter   19 | reward   -2.07/   1.73/   4.04 | target>=6  no | max   40.4% | len  400.0 | best    0.00
-iter   20 | reward   -2.07/   2.12/   4.04 | target>=6  no | max   40.4% | len  400.0 | best    0.00
-iter   21 | reward   -2.07/   2.12/   4.04 | target>=6  no | max   40.4% | len  400.0 | best    0.00
-iter   22 | reward   -2.07/   2.30/   4.04 | target>=6  no | max   40.4% | len  400.0 | best    0.00
-iter   23 | reward   -2.07/   2.30/   4.04 | target>=6  no | max   40.4% | len  400.0 | best    0.00
-iter   24 | reward   -2.07/   2.47/   4.04 | target>=6  no | max   40.4% | len  400.0 | best    0.00
-iter   25 | reward   -2.07/   2.47/   4.04 | target>=6  no | max   40.4% | len  400.0 | best    0.00
-iter   26 | reward   -2.07/   2.51/   4.04 | target>=6  no | max   40.4% | len  400.0 | best    0.00
-iter   27 | reward   -2.07/   2.51/   4.04 | target>=6  no | max   40.4% | len  400.0 | best    0.00
-iter   28 | reward   -2.07/   2.57/   4.04 | target>=6  no | max   40.4% | len  400.0 | best    0.00
-iter   29 | reward   -2.07/   2.57/   4.04 | target>=6  no | max   40.4% | len  400.0 | best    0.00
-iter   30 | reward   -2.07/   2.50/   4.03 | target>=6  no | max   40.3% | len  400.0 | best    0.00
-iter   31 | reward   -2.07/   2.50/   4.03 | target>=6  no | max   40.3% | len  400.0 | best    0.00
-iter   32 | reward   -1.14/   2.56/   4.03 | target>=6  no | max   40.3% | len  400.0 | best    0.00
-iter   33 | reward   -2.28/   2.56/   4.30 | target>=6  no | max   43.0% | len  400.0 | best    0.00
-iter   34 | reward   -2.28/   2.56/   4.30 | target>=6  no | max   43.0% | len  400.0 | best    0.00
-iter   35 | reward   -2.28/   2.60/   4.91 | target>=6  no | max   49.1% | len  400.0 | best    0.00
-iter   36 | reward   -2.28/   2.60/   4.91 | target>=6  no | max   49.1% | len  400.0 | best    0.00
-iter   37 | reward   -2.28/   2.74/   4.99 | target>=6  no | max   49.9% | len  400.0 | best    0.00
-iter   38 | reward   -2.28/   2.74/   4.99 | target>=6  no | max   49.9% | len  400.0 | best    0.00
-iter   39 | reward   -2.28/   2.86/   4.99 | target>=6  no | max   49.9% | len  400.0 | best    0.00
-iter   40 | reward   -2.28/   2.86/   4.99 | target>=6  no | max   49.9% | len  400.0 | best    0.00
-iter   41 | reward   -2.28/   2.89/   4.99 | target>=6  no | max   49.9% | len  400.0 | best    0.00
-iter   42 | reward   -2.28/   2.89/   4.99 | target>=6  no | max   49.9% | len  400.0 | best    0.00
-iter   43 | reward   -6.36/   2.83/   4.99 | target>=6  no | max   49.9% | len  400.0 | best    0.00
-iter   44 | reward   -6.36/   2.83/   4.99 | target>=6  no | max   49.9% | len  400.0 | best    0.00
-iter   45 | reward   -6.36/   2.78/   4.99 | target>=6  no | max   49.9% | len  400.0 | best    0.00
-iter   46 | reward   -6.36/   2.78/   4.99 | target>=6  no | max   49.9% | len  400.0 | best    0.00
-iter   47 | reward   -6.36/   2.86/   4.99 | target>=6  no | max   49.9% | len  400.0 | best    0.00
-iter   48 | reward   -6.36/   2.83/   4.99 | target>=6  no | max   49.9% | len  400.0 | best    0.00
-iter   49 | reward   -6.36/   2.82/   4.99 | target>=6  no | max   49.9% | len  400.0 | best    0.00
-iter   50 | reward   -6.36/   2.89/   4.99 | target>=6  no | max   49.9% | len  400.0 | best    0.00
-Iteration 51: new best mean reward 2.89
-iter   51 | reward   -6.36/   2.89/   4.99 | target>=6  no | max   49.9% | len  400.0 | best    2.89
-iter   52 | reward   -6.36/   2.83/   4.73 | target>=6  no | max   47.3% | len  400.0 | best    2.89
-iter   53 | reward   -6.36/   2.83/   4.73 | target>=6  no | max   47.3% | len  400.0 | best    2.89
-Iteration 54: new best mean reward 2.89
-iter   54 | reward   -6.36/   2.89/   4.73 | target>=6  no | max   47.3% | len  400.0 | best    2.89
-iter   55 | reward   -6.36/   2.89/   4.73 | target>=6  no | max   47.3% | len  400.0 | best    2.89
-Iteration 56: new best mean reward 3.02
-iter   56 | reward   -4.94/   3.02/   4.73 | target>=6  no | max   47.3% | len  400.0 | best    3.02
-iter   57 | reward   -4.94/   3.02/   4.73 | target>=6  no | max   47.3% | len  400.0 | best    3.02
-Iteration 58: new best mean reward 3.16
-iter   58 | reward   -4.94/   3.16/   4.62 | target>=6  no | max   46.2% | len  400.0 | best    3.16
-iter   59 | reward   -4.94/   3.16/   4.62 | target>=6  no | max   46.2% | len  400.0 | best    3.16
-Iteration 60: new best mean reward 3.20
-iter   60 | reward   -4.94/   3.20/   4.62 | target>=6  no | max   46.2% | len  400.0 | best    3.20
-iter   61 | reward   -4.94/   3.20/   4.62 | target>=6  no | max   46.2% | len  400.0 | best    3.20
-Iteration 62: new best mean reward 3.28
-iter   62 | reward   -2.70/   3.28/   4.62 | target>=6  no | max   46.2% | len  400.0 | best    3.28
-iter   63 | reward   -2.70/   3.24/   4.62 | target>=6  no | max   46.2% | len  400.0 | best    3.28
-iter   64 | reward   -2.70/   3.24/   4.62 | target>=6  no | max   46.2% | len  400.0 | best    3.28
-Iteration 65: new best mean reward 3.30
-iter   65 | reward   -2.70/   3.30/   4.62 | target>=6  no | max   46.2% | len  400.0 | best    3.30
-iter   66 | reward   -2.70/   3.28/   4.90 | target>=6  no | max   49.0% | len  400.0 | best    3.30
-iter   67 | reward   -4.82/   3.01/   4.90 | target>=6  no | max   49.0% | len  400.0 | best    3.30
-iter   68 | reward   -4.82/   3.01/   4.90 | target>=6  no | max   49.0% | len  400.0 | best    3.30
-iter   69 | reward   -4.82/   3.06/   4.90 | target>=6  no | max   49.0% | len  400.0 | best    3.30
-iter   70 | reward   -4.82/   3.06/   4.90 | target>=6  no | max   49.0% | len  400.0 | best    3.30
-iter   71 | reward   -4.82/   2.96/   5.08 | target>=6  no | max   50.8% | len  400.0 | best    3.30
-iter   72 | reward   -4.82/   2.96/   5.08 | target>=6  no | max   50.8% | len  400.0 | best    3.30
-iter   73 | reward   -4.82/   3.02/   5.08 | target>=6  no | max   50.8% | len  400.0 | best    3.30
-iter   74 | reward   -4.82/   3.02/   5.08 | target>=6  no | max   50.8% | len  400.0 | best    3.30
-iter   75 | reward   -4.82/   3.15/   5.14 | target>=6  no | max   51.4% | len  400.0 | best    3.30
-iter   76 | reward   -4.82/   3.15/   5.14 | target>=6  no | max   51.4% | len  400.0 | best    3.30
-iter   77 | reward   -4.82/   3.22/   5.14 | target>=6  no | max   51.4% | len  400.0 | best    3.30
-iter   78 | reward   -4.82/   3.04/   5.14 | target>=6  no | max   51.4% | len  400.0 | best    3.30
-iter   79 | reward   -4.82/   3.07/   5.14 | target>=6  no | max   51.4% | len  400.0 | best    3.30
-iter   80 | reward   -4.82/   3.13/   5.14 | target>=6  no | max   51.4% | len  400.0 | best    3.30
-iter   81 | reward   -2.39/   3.27/   5.14 | target>=6  no | max   51.4% | len  400.0 | best    3.30
-iter   82 | reward   -2.39/   3.27/   5.14 | target>=6  no | max   51.4% | len  400.0 | best    3.30
-iter   83 | reward   -2.39/   3.30/   5.14 | target>=6  no | max   51.4% | len  400.0 | best    3.30
-Iteration 84: new best mean reward 3.36
-iter   84 | reward   -2.39/   3.36/   5.14 | target>=6  no | max   51.4% | len  400.0 | best    3.36
-iter   85 | reward   -2.39/   3.36/   5.14 | target>=6  no | max   51.4% | len  400.0 | best    3.36
-iter   86 | reward   -2.39/   3.32/   5.14 | target>=6  no | max   51.4% | len  400.0 | best    3.36
-iter   87 | reward   -2.39/   3.32/   5.14 | target>=6  no | max   51.4% | len  400.0 | best    3.36
-iter   88 | reward   -3.81/   3.23/   5.00 | target>=6  no | max   50.0% | len  400.0 | best    3.36
-iter   89 | reward   -3.81/   3.23/   5.00 | target>=6  no | max   50.0% | len  400.0 | best    3.36
-iter   90 | reward   -3.81/   3.21/   5.01 | target>=6  no | max   50.1% | len  400.0 | best    3.36
-iter   91 | reward   -3.81/   3.21/   5.01 | target>=6  no | max   50.1% | len  400.0 | best    3.36
-iter   92 | reward   -4.43/   3.11/   5.01 | target>=6  no | max   50.1% | len  400.0 | best    3.36
-iter   93 | reward   -4.43/   3.11/   5.01 | target>=6  no | max   50.1% | len  400.0 | best    3.36
-iter   94 | reward   -4.43/   3.12/   5.01 | target>=6  no | max   50.1% | len  400.0 | best    3.36
-iter   95 | reward   -4.43/   3.23/   5.01 | target>=6  no | max   50.1% | len  400.0 | best    3.36
-iter   96 | reward   -4.43/   3.24/   5.01 | target>=6  no | max   50.1% | len  400.0 | best    3.36
-iter   97 | reward   -4.43/   3.21/   5.01 | target>=6  no | max   50.1% | len  400.0 | best    3.36
-iter   98 | reward   -4.43/   3.13/   5.01 | target>=6  no | max   50.1% | len  400.0 | best    3.36
-iter   99 | reward   -4.43/   3.22/   5.01 | target>=6  no | max   50.1% | len  400.0 | best    3.36
-iter  100 | reward   -4.43/   3.16/   5.01 | target>=6  no | max   50.1% | len  400.0 | best    3.36
-iter  101 | reward   -4.43/   3.24/   5.06 | target>=6  no | max   50.6% | len  400.0 | best    3.36
-iter  102 | reward   -4.43/   3.24/   5.06 | target>=6  no | max   50.6% | len  400.0 | best    3.36
-iter  103 | reward   -4.43/   3.12/   5.06 | target>=6  no | max   50.6% | len  400.0 | best    3.36
-iter  104 | reward   -4.43/   3.12/   5.06 | target>=6  no | max   50.6% | len  400.0 | best    3.36
-iter  105 | reward   -3.49/   3.22/   5.06 | target>=6  no | max   50.6% | len  400.0 | best    3.36
-iter  106 | reward   -3.49/   3.22/   5.06 | target>=6  no | max   50.6% | len  400.0 | best    3.36
-iter  107 | reward   -2.32/   3.35/   5.06 | target>=6  no | max   50.6% | len  400.0 | best    3.36
-iter  108 | reward   -2.32/   3.35/   5.06 | target>=6  no | max   50.6% | len  400.0 | best    3.36
-iter  109 | reward   -2.32/   3.21/   5.06 | target>=6  no | max   50.6% | len  400.0 | best    3.36
-iter  110 | reward   -2.32/   3.20/   5.06 | target>=6  no | max   50.6% | len  400.0 | best    3.36
-iter  111 | reward   -2.32/   3.05/   5.06 | target>=6  no | max   50.6% | len  400.0 | best    3.36
-iter  112 | reward   -2.12/   3.00/   5.06 | target>=6  no | max   50.6% | len  400.0 | best    3.36
-iter  113 | reward   -2.12/   2.90/   5.06 | target>=6  no | max   50.6% | len  400.0 | best    3.36
-iter  114 | reward   -2.12/   2.97/   5.06 | target>=6  no | max   50.6% | len  400.0 | best    3.36
-iter  115 | reward   -2.17/   2.91/   5.05 | target>=6  no | max   50.5% | len  400.0 | best    3.36
-iter  116 | reward   -2.17/   2.91/   5.05 | target>=6  no | max   50.5% | len  400.0 | best    3.36
-iter  117 | reward   -2.17/   2.91/   5.05 | target>=6  no | max   50.5% | len  400.0 | best    3.36
-iter  118 | reward   -2.73/   2.89/   5.05 | target>=6  no | max   50.5% | len  400.0 | best    3.36
-iter  119 | reward   -2.73/   2.89/   5.05 | target>=6  no | max   50.5% | len  400.0 | best    3.36
-iter  120 | reward   -2.73/   2.97/   5.05 | target>=6  no | max   50.5% | len  400.0 | best    3.36
-iter  121 | reward   -2.73/   2.97/   5.05 | target>=6  no | max   50.5% | len  400.0 | best    3.36
-iter  122 | reward   -2.73/   3.06/   5.08 | target>=6  no | max   50.8% | len  400.0 | best    3.36
-iter  123 | reward   -2.73/   3.06/   5.08 | target>=6  no | max   50.8% | len  400.0 | best    3.36
-iter  124 | reward   -2.73/   3.05/   5.08 | target>=6  no | max   50.8% | len  400.0 | best    3.36
-iter  125 | reward   -2.73/   2.92/   5.08 | target>=6  no | max   50.8% | len  400.0 | best    3.36
-iter  126 | reward   -2.73/   3.06/   5.08 | target>=6  no | max   50.8% | len  400.0 | best    3.36
-iter  127 | reward   -2.73/   3.15/   5.08 | target>=6  no | max   50.8% | len  400.0 | best    3.36
-iter  128 | reward   -2.73/   3.12/   5.08 | target>=6  no | max   50.8% | len  400.0 | best    3.36
-iter  129 | reward   -2.73/   3.17/   5.08 | target>=6  no | max   50.8% | len  400.0 | best    3.36
-iter  130 | reward   -2.33/   3.17/   5.15 | target>=6  no | max   51.5% | len  400.0 | best    3.36
-iter  131 | reward   -2.33/   3.14/   5.15 | target>=6  no | max   51.5% | len  400.0 | best    3.36
-iter  132 | reward   -2.33/   3.21/   5.15 | target>=6  no | max   51.5% | len  400.0 | best    3.36
-iter  133 | reward   -2.33/   3.28/   5.15 | target>=6  no | max   51.5% | len  400.0 | best    3.36
-iter  134 | reward   -2.33/   3.28/   5.15 | target>=6  no | max   51.5% | len  400.0 | best    3.36
-iter  135 | reward   -2.33/   3.21/   5.15 | target>=6  no | max   51.5% | len  400.0 | best    3.36
-iter  136 | reward   -2.33/   3.21/   5.15 | target>=6  no | max   51.5% | len  400.0 | best    3.36
-Iteration 137: new best mean reward 3.42
-iter  137 | reward   -2.33/   3.42/   5.15 | target>=6  no | max   51.5% | len  400.0 | best    3.42
-iter  138 | reward   -2.33/   3.42/   5.15 | target>=6  no | max   51.5% | len  400.0 | best    3.42
-Iteration 139: new best mean reward 3.56
-iter  139 | reward   -2.30/   3.56/   5.15 | target>=6  no | max   51.5% | len  400.0 | best    3.56
-iter  140 | reward   -3.17/   3.49/   5.15 | target>=6  no | max   51.5% | len  400.0 | best    3.56
-iter  141 | reward   -3.17/   3.53/   5.15 | target>=6  no | max   51.5% | len  400.0 | best    3.56
-iter  142 | reward   -3.90/   3.49/   5.15 | target>=6  no | max   51.5% | len  400.0 | best    3.56
-iter  143 | reward   -3.90/   3.49/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    3.56
-iter  144 | reward   -3.90/   3.50/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    3.56
-iter  145 | reward   -3.90/   3.52/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    3.56
-iter  146 | reward   -3.90/   3.56/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    3.56
-iter  147 | reward   -3.90/   3.44/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    3.56
-iter  148 | reward   -3.90/   3.40/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    3.56
-iter  149 | reward   -3.90/   3.42/   5.14 | target>=6  no | max   51.4% | len  400.0 | best    3.56
-iter  150 | reward   -3.90/   3.47/   5.14 | target>=6  no | max   51.4% | len  400.0 | best    3.56
-iter  151 | reward   -3.90/   3.47/   5.14 | target>=6  no | max   51.4% | len  400.0 | best    3.56
-iter  152 | reward   -3.90/   3.49/   5.14 | target>=6  no | max   51.4% | len  400.0 | best    3.56
-iter  153 | reward   -3.90/   3.49/   5.14 | target>=6  no | max   51.4% | len  400.0 | best    3.56
-iter  154 | reward   -3.90/   3.50/   5.14 | target>=6  no | max   51.4% | len  400.0 | best    3.56
-iter  155 | reward   -3.90/   3.51/   5.14 | target>=6  no | max   51.4% | len  400.0 | best    3.56
-iter  156 | reward   -2.89/   3.54/   5.14 | target>=6  no | max   51.4% | len  400.0 | best    3.56
-Iteration 157: new best mean reward 3.57
-iter  157 | reward   -2.89/   3.57/   5.14 | target>=6  no | max   51.4% | len  400.0 | best    3.57
-iter  158 | reward   -3.99/   3.54/   5.14 | target>=6  no | max   51.4% | len  400.0 | best    3.57
-iter  159 | reward   -3.99/   3.51/   5.14 | target>=6  no | max   51.4% | len  400.0 | best    3.57
-iter  160 | reward   -3.99/   3.54/   5.14 | target>=6  no | max   51.4% | len  400.0 | best    3.57
-Iteration 161: new best mean reward 3.68
-iter  161 | reward   -3.99/   3.68/   5.14 | target>=6  no | max   51.4% | len  400.0 | best    3.68
-Iteration 162: new best mean reward 3.70
-iter  162 | reward   -3.99/   3.70/   4.59 | target>=6  no | max   45.9% | len  400.0 | best    3.70
-iter  163 | reward   -5.13/   3.63/   4.59 | target>=6  no | max   45.9% | len  400.0 | best    3.70
-iter  164 | reward   -5.13/   3.63/   4.59 | target>=6  no | max   45.9% | len  400.0 | best    3.70
-Iteration 165: new best mean reward 3.70
-iter  165 | reward   -5.13/   3.70/   4.59 | target>=6  no | max   45.9% | len  400.0 | best    3.70
-Iteration 166: new best mean reward 3.73
-iter  166 | reward   -5.13/   3.73/   4.58 | target>=6  no | max   45.8% | len  400.0 | best    3.73
-Iteration 167: new best mean reward 3.74
-iter  167 | reward   -5.13/   3.74/   5.69 | target>=6  no | max   56.9% | len  400.0 | best    3.74
-iter  168 | reward   -5.13/   3.74/   5.69 | target>=6  no | max   56.9% | len  400.0 | best    3.74
-Iteration 169: new best mean reward 3.77
-iter  169 | reward   -5.13/   3.77/   5.69 | target>=6  no | max   56.9% | len  400.0 | best    3.77
-iter  170 | reward   -5.13/   3.77/   5.69 | target>=6  no | max   56.9% | len  400.0 | best    3.77
-Iteration 171: new best mean reward 3.80
-iter  171 | reward   -5.13/   3.80/   5.69 | target>=6  no | max   56.9% | len  400.0 | best    3.80
-Iteration 172: new best mean reward 3.89
-iter  172 | reward   -5.13/   3.89/   5.69 | target>=6  no | max   56.9% | len  400.0 | best    3.89
-iter  173 | reward   -5.13/   3.87/   5.69 | target>=6  no | max   56.9% | len  400.0 | best    3.89
-iter  174 | reward   -5.13/   3.87/   5.69 | target>=6  no | max   56.9% | len  400.0 | best    3.89
-iter  175 | reward   -5.13/   3.81/   5.69 | target>=6  no | max   56.9% | len  400.0 | best    3.89
-Iteration 176: new best mean reward 3.92
-iter  176 | reward   -3.04/   3.92/   5.69 | target>=6  no | max   56.9% | len  400.0 | best    3.92
-Iteration 177: new best mean reward 3.92
-iter  177 | reward   -3.04/   3.92/   5.69 | target>=6  no | max   56.9% | len  400.0 | best    3.92
-iter  178 | reward   -3.04/   3.92/   5.69 | target>=6  no | max   56.9% | len  400.0 | best    3.92
-iter  179 | reward   -3.04/   3.90/   5.69 | target>=6  no | max   56.9% | len  400.0 | best    3.92
-iter  180 | reward   -3.04/   3.86/   5.69 | target>=6  no | max   56.9% | len  400.0 | best    3.92
-iter  181 | reward   -3.04/   3.87/   5.27 | target>=6  no | max   52.7% | len  400.0 | best    3.92
-iter  182 | reward   -3.04/   3.87/   4.52 | target>=6  no | max   45.2% | len  400.0 | best    3.92
-iter  183 | reward   -3.04/   3.90/   4.52 | target>=6  no | max   45.2% | len  400.0 | best    3.92
-iter  184 | reward   -3.04/   3.85/   4.52 | target>=6  no | max   45.2% | len  400.0 | best    3.92
-iter  185 | reward   -3.04/   3.85/   4.52 | target>=6  no | max   45.2% | len  400.0 | best    3.92
-iter  186 | reward   -3.04/   3.81/   4.52 | target>=6  no | max   45.2% | len  400.0 | best    3.92
-iter  187 | reward   -3.04/   3.83/   4.52 | target>=6  no | max   45.2% | len  400.0 | best    3.92
-iter  188 | reward   -3.04/   3.78/   4.59 | target>=6  no | max   45.9% | len  400.0 | best    3.92
-iter  189 | reward    0.76/   3.85/   4.59 | target>=6  no | max   45.9% | len  400.0 | best    3.92
-iter  190 | reward    0.28/   3.81/   4.59 | target>=6  no | max   45.9% | len  400.0 | best    3.92
-iter  191 | reward    0.28/   3.80/   4.59 | target>=6  no | max   45.9% | len  400.0 | best    3.92
-iter  192 | reward    0.28/   3.81/   4.59 | target>=6  no | max   45.9% | len  400.0 | best    3.92
-iter  193 | reward    0.28/   3.81/   4.60 | target>=6  no | max   46.0% | len  400.0 | best    3.92
-iter  194 | reward    0.28/   3.83/   4.60 | target>=6  no | max   46.0% | len  400.0 | best    3.92
-iter  195 | reward    0.28/   3.82/   4.60 | target>=6  no | max   46.0% | len  400.0 | best    3.92
-iter  196 | reward   -3.82/   3.72/   4.60 | target>=6  no | max   46.0% | len  400.0 | best    3.92
-iter  197 | reward   -3.82/   3.73/   4.60 | target>=6  no | max   46.0% | len  400.0 | best    3.92
-iter  198 | reward   -3.82/   3.76/   4.60 | target>=6  no | max   46.0% | len  400.0 | best    3.92
-iter  199 | reward   -3.82/   3.79/   4.60 | target>=6  no | max   46.0% | len  400.0 | best    3.92
-iter  200 | reward   -3.82/   3.78/   4.60 | target>=6  no | max   46.0% | len  400.0 | best    3.92
-iter  201 | reward   -3.82/   3.78/   4.60 | target>=6  no | max   46.0% | len  400.0 | best    3.92
-iter  202 | reward   -3.82/   3.82/   4.60 | target>=6  no | max   46.0% | len  400.0 | best    3.92
-iter  203 | reward   -3.82/   3.82/   4.60 | target>=6  no | max   46.0% | len  400.0 | best    3.92
-iter  204 | reward   -3.82/   3.88/   4.60 | target>=6  no | max   46.0% | len  400.0 | best    3.92
-iter  205 | reward   -3.82/   3.87/   4.60 | target>=6  no | max   46.0% | len  400.0 | best    3.92
-iter  206 | reward   -3.82/   3.86/   4.60 | target>=6  no | max   46.0% | len  400.0 | best    3.92
-iter  207 | reward   -3.82/   3.86/   4.55 | target>=6  no | max   45.5% | len  400.0 | best    3.92
-iter  208 | reward   -3.82/   3.88/   4.54 | target>=6  no | max   45.4% | len  400.0 | best    3.92
-iter  209 | reward   -3.82/   3.87/   4.54 | target>=6  no | max   45.4% | len  400.0 | best    3.92
-Iteration 210: new best mean reward 3.96
-iter  210 | reward    3.07/   3.96/   4.54 | target>=6  no | max   45.4% | len  400.0 | best    3.96
-iter  211 | reward    3.07/   3.95/   4.53 | target>=6  no | max   45.3% | len  400.0 | best    3.96
-Iteration 212: new best mean reward 3.97
-iter  212 | reward    3.07/   3.97/   4.54 | target>=6  no | max   45.4% | len  400.0 | best    3.97
-iter  213 | reward    3.07/   3.96/   4.54 | target>=6  no | max   45.4% | len  400.0 | best    3.97
-iter  214 | reward    3.10/   3.96/   4.54 | target>=6  no | max   45.4% | len  400.0 | best    3.97
-iter  215 | reward    3.10/   3.96/   4.54 | target>=6  no | max   45.4% | len  400.0 | best    3.97
-iter  216 | reward    3.10/   3.96/   4.54 | target>=6  no | max   45.4% | len  400.0 | best    3.97
-Iteration 217: new best mean reward 3.99
-iter  217 | reward    3.10/   3.99/   4.54 | target>=6  no | max   45.4% | len  400.0 | best    3.99
-iter  218 | reward    2.32/   3.97/   4.54 | target>=6  no | max   45.4% | len  400.0 | best    3.99
-iter  219 | reward    2.32/   3.96/   4.54 | target>=6  no | max   45.4% | len  400.0 | best    3.99
-iter  220 | reward    2.32/   3.96/   4.55 | target>=6  no | max   45.5% | len  400.0 | best    3.99
-iter  221 | reward    2.32/   3.96/   4.55 | target>=6  no | max   45.5% | len  400.0 | best    3.99
-iter  222 | reward    2.32/   3.96/   4.56 | target>=6  no | max   45.6% | len  400.0 | best    3.99
-iter  223 | reward    2.32/   3.97/   4.56 | target>=6  no | max   45.6% | len  400.0 | best    3.99
-iter  224 | reward    2.32/   3.97/   4.56 | target>=6  no | max   45.6% | len  400.0 | best    3.99
-iter  225 | reward    2.32/   3.97/   4.56 | target>=6  no | max   45.6% | len  400.0 | best    3.99
-Iteration 226: new best mean reward 4.00
-iter  226 | reward    2.32/   4.00/   4.56 | target>=6  no | max   45.6% | len  400.0 | best    4.00
-Iteration 227: new best mean reward 4.00
-iter  227 | reward    2.32/   4.00/   4.56 | target>=6  no | max   45.6% | len  400.0 | best    4.00
-Iteration 228: new best mean reward 4.00
-iter  228 | reward    2.32/   4.00/   4.56 | target>=6  no | max   45.6% | len  400.0 | best    4.00
-Iteration 229: new best mean reward 4.00
-iter  229 | reward    2.32/   4.00/   4.56 | target>=6  no | max   45.6% | len  400.0 | best    4.00
-iter  230 | reward   -3.44/   3.91/   4.56 | target>=6  no | max   45.6% | len  400.0 | best    4.00
-iter  231 | reward   -3.44/   3.91/   4.56 | target>=6  no | max   45.6% | len  400.0 | best    4.00
-iter  232 | reward   -3.44/   3.96/   4.56 | target>=6  no | max   45.6% | len  400.0 | best    4.00
-iter  233 | reward   -3.44/   3.96/   4.56 | target>=6  no | max   45.6% | len  400.0 | best    4.00
-iter  234 | reward   -3.44/   3.97/   4.56 | target>=6  no | max   45.6% | len  400.0 | best    4.00
-iter  235 | reward   -3.44/   3.98/   4.56 | target>=6  no | max   45.6% | len  400.0 | best    4.00
-iter  236 | reward   -3.44/   3.99/   4.54 | target>=6  no | max   45.4% | len  400.0 | best    4.00
-iter  237 | reward   -3.44/   3.98/   4.54 | target>=6  no | max   45.4% | len  400.0 | best    4.00
-iter  238 | reward   -3.44/   3.99/   4.54 | target>=6  no | max   45.4% | len  400.0 | best    4.00
-iter  239 | reward   -3.44/   4.00/   4.54 | target>=6  no | max   45.4% | len  400.0 | best    4.00
-Iteration 240: new best mean reward 4.01
-iter  240 | reward   -3.44/   4.01/   4.54 | target>=6  no | max   45.4% | len  400.0 | best    4.01
-Iteration 241: new best mean reward 4.01
-iter  241 | reward   -3.44/   4.01/   4.54 | target>=6  no | max   45.4% | len  400.0 | best    4.01
-Iteration 242: new best mean reward 4.02
-iter  242 | reward   -3.44/   4.02/   4.53 | target>=6  no | max   45.3% | len  400.0 | best    4.02
-Iteration 243: new best mean reward 4.09
-iter  243 | reward    3.51/   4.09/   4.53 | target>=6  no | max   45.3% | len  400.0 | best    4.09
-iter  244 | reward    3.75/   4.09/   4.53 | target>=6  no | max   45.3% | len  400.0 | best    4.09
-iter  245 | reward    3.75/   4.08/   4.53 | target>=6  no | max   45.3% | len  400.0 | best    4.09
-iter  246 | reward    3.75/   4.08/   4.53 | target>=6  no | max   45.3% | len  400.0 | best    4.09
-Iteration 247: new best mean reward 4.09
-iter  247 | reward    3.75/   4.09/   4.53 | target>=6  no | max   45.3% | len  400.0 | best    4.09
-iter  248 | reward    3.75/   4.09/   4.53 | target>=6  no | max   45.3% | len  400.0 | best    4.09
-iter  249 | reward    3.59/   4.09/   4.53 | target>=6  no | max   45.3% | len  400.0 | best    4.09
-iter  250 | reward    3.59/   4.09/   4.53 | target>=6  no | max   45.3% | len  400.0 | best    4.09
-iter  251 | reward    3.59/   4.09/   4.53 | target>=6  no | max   45.3% | len  400.0 | best    4.09
-iter  252 | reward    3.59/   4.08/   4.53 | target>=6  no | max   45.3% | len  400.0 | best    4.09
-iter  253 | reward    3.59/   4.08/   4.52 | target>=6  no | max   45.2% | len  400.0 | best    4.09
-iter  254 | reward    3.59/   4.09/   4.53 | target>=6  no | max   45.3% | len  400.0 | best    4.09
-iter  255 | reward    3.59/   4.08/   4.53 | target>=6  no | max   45.3% | len  400.0 | best    4.09
-iter  256 | reward    3.04/   4.06/   4.53 | target>=6  no | max   45.3% | len  400.0 | best    4.09
-iter  257 | reward    3.04/   4.07/   4.90 | target>=6  no | max   49.0% | len  400.0 | best    4.09
-iter  258 | reward    3.04/   4.07/   4.90 | target>=6  no | max   49.0% | len  400.0 | best    4.09
-iter  259 | reward    3.04/   4.07/   4.90 | target>=6  no | max   49.0% | len  400.0 | best    4.09
-iter  260 | reward    3.04/   4.07/   4.90 | target>=6  no | max   49.0% | len  400.0 | best    4.09
-iter  261 | reward    3.04/   4.07/   4.90 | target>=6  no | max   49.0% | len  400.0 | best    4.09
-iter  262 | reward    3.04/   4.07/   4.90 | target>=6  no | max   49.0% | len  400.0 | best    4.09
-iter  263 | reward    3.04/   4.07/   4.90 | target>=6  no | max   49.0% | len  400.0 | best    4.09
-iter  264 | reward    3.04/   4.08/   4.90 | target>=6  no | max   49.0% | len  400.0 | best    4.09
-iter  265 | reward    3.04/   4.08/   4.90 | target>=6  no | max   49.0% | len  400.0 | best    4.09
-iter  266 | reward    3.04/   4.07/   4.90 | target>=6  no | max   49.0% | len  400.0 | best    4.09
-iter  267 | reward    3.04/   4.07/   4.90 | target>=6  no | max   49.0% | len  400.0 | best    4.09
-iter  268 | reward    3.04/   4.08/   4.90 | target>=6  no | max   49.0% | len  400.0 | best    4.09
-iter  269 | reward    3.26/   4.09/   5.10 | target>=6  no | max   51.0% | len  400.0 | best    4.09
-Iteration 270: new best mean reward 4.10
-iter  270 | reward    3.83/   4.10/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.10
-Iteration 271: new best mean reward 4.12
-iter  271 | reward    3.83/   4.12/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.12
-Iteration 272: new best mean reward 4.12
-iter  272 | reward    3.83/   4.12/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.12
-Iteration 273: new best mean reward 4.14
-iter  273 | reward    3.83/   4.14/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.14
-Iteration 274: new best mean reward 4.15
-iter  274 | reward    3.85/   4.15/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.15
-Iteration 275: new best mean reward 4.16
-iter  275 | reward    3.84/   4.16/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.16
-Iteration 276: new best mean reward 4.18
-iter  276 | reward    3.84/   4.18/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.18
-Iteration 277: new best mean reward 4.19
-iter  277 | reward    3.84/   4.19/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.19
-iter  278 | reward    3.84/   4.19/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.19
-Iteration 279: new best mean reward 4.19
-iter  279 | reward    3.84/   4.19/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.19
-iter  280 | reward    3.84/   4.19/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.19
-Iteration 281: new best mean reward 4.23
-iter  281 | reward    3.84/   4.23/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.23
-iter  282 | reward    3.84/   4.23/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.23
-Iteration 283: new best mean reward 4.26
-iter  283 | reward    3.84/   4.26/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.26
-iter  284 | reward    3.84/   4.26/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.26
-iter  285 | reward    3.84/   4.25/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.26
-iter  286 | reward    3.84/   4.25/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.26
-Iteration 287: new best mean reward 4.27
-iter  287 | reward    3.84/   4.27/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.27
-Iteration 288: new best mean reward 4.28
-iter  288 | reward    3.84/   4.28/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.28
-Iteration 289: new best mean reward 4.29
-iter  289 | reward    3.96/   4.29/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.29
-Iteration 290: new best mean reward 4.32
-iter  290 | reward    3.96/   4.32/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.32
-Iteration 291: new best mean reward 4.34
-iter  291 | reward    3.96/   4.34/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.34
-Iteration 292: new best mean reward 4.37
-iter  292 | reward    3.96/   4.37/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.37
-iter  293 | reward    3.96/   4.37/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.37
-Iteration 294: new best mean reward 4.39
-iter  294 | reward    3.94/   4.39/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.39
-iter  295 | reward    3.94/   4.39/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.39
-iter  296 | reward    3.94/   4.35/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.39
-iter  297 | reward    3.94/   4.35/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.39
-Iteration 298: new best mean reward 4.40
-iter  298 | reward    3.94/   4.40/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.40
-iter  299 | reward    3.94/   4.40/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.40
-iter  300 | reward    3.94/   4.40/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.40
-iter  301 | reward    3.94/   4.40/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.40
-iter  302 | reward    3.94/   4.39/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.40
-iter  303 | reward    3.94/   4.37/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.40
-iter  304 | reward    3.94/   4.37/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.40
-iter  305 | reward    3.94/   4.34/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.40
-iter  306 | reward    3.94/   4.35/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.40
-iter  307 | reward    3.94/   4.36/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.40
-iter  308 | reward    3.94/   4.36/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.40
-iter  309 | reward    3.95/   4.37/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.40
-iter  310 | reward    3.95/   4.37/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.40
-iter  311 | reward    3.95/   4.35/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.40
-iter  312 | reward    3.95/   4.35/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.40
-iter  313 | reward    3.95/   4.33/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.40
-iter  314 | reward    3.95/   4.33/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.40
-iter  315 | reward    3.95/   4.32/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.40
-iter  316 | reward    3.95/   4.32/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.40
-iter  317 | reward    3.95/   4.30/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.40
-iter  318 | reward    3.95/   4.31/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.40
-iter  319 | reward    3.71/   4.32/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.40
-iter  320 | reward    3.71/   4.30/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.40
-iter  321 | reward    3.71/   4.30/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.40
-iter  322 | reward    3.71/   4.30/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.40
-iter  323 | reward    3.71/   4.28/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.40
-iter  324 | reward    3.71/   4.27/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.40
-iter  325 | reward    3.71/   4.27/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.40
-iter  326 | reward    3.71/   4.32/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.40
-iter  327 | reward    3.71/   4.32/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.40
-iter  328 | reward    3.71/   4.33/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.40
-iter  329 | reward    3.71/   4.33/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.40
-iter  330 | reward    3.71/   4.35/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.40
-iter  331 | reward    3.71/   4.35/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.40
-iter  332 | reward    3.94/   4.36/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.40
-iter  333 | reward    3.94/   4.36/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.40
-iter  334 | reward    3.94/   4.34/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.40
-iter  335 | reward    3.94/   4.33/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.40
-iter  336 | reward    3.94/   4.35/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.40
-iter  337 | reward    3.94/   4.36/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.40
-iter  338 | reward    3.84/   4.37/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.40
-iter  339 | reward    3.84/   4.34/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.40
-iter  340 | reward    3.84/   4.34/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.40
-iter  341 | reward    3.84/   4.33/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.40
-iter  342 | reward    3.84/   4.33/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.40
-iter  343 | reward    3.84/   4.35/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.40
-iter  344 | reward    3.84/   4.35/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.40
-iter  345 | reward    3.84/   4.34/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.40
-iter  346 | reward    3.84/   4.34/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.40
-iter  347 | reward    3.84/   4.37/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.40
-iter  348 | reward    3.84/   4.37/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.40
-iter  349 | reward    3.84/   4.40/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.40
-iter  350 | reward    3.84/   4.40/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.40
-iter  351 | reward    3.84/   4.39/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.40
-iter  352 | reward    3.94/   4.39/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.40
-iter  353 | reward    3.94/   4.39/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.40
-Iteration 354: new best mean reward 4.41
-iter  354 | reward    3.94/   4.41/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  355 | reward    3.94/   4.41/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  356 | reward    3.94/   4.40/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  357 | reward    3.94/   4.40/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  358 | reward    3.94/   4.39/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  359 | reward    3.94/   4.39/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  360 | reward    3.94/   4.38/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  361 | reward    3.94/   4.38/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  362 | reward    3.95/   4.37/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  363 | reward    3.95/   4.37/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  364 | reward    3.96/   4.39/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  365 | reward    3.96/   4.39/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  366 | reward    3.95/   4.38/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  367 | reward    3.95/   4.38/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  368 | reward    3.95/   4.37/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  369 | reward    3.95/   4.38/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  370 | reward    3.95/   4.38/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  371 | reward    3.95/   4.36/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  372 | reward    3.95/   4.36/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  373 | reward    3.95/   4.38/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  374 | reward    3.95/   4.38/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  375 | reward    3.95/   4.36/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  376 | reward    3.95/   4.36/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  377 | reward    1.53/   4.34/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  378 | reward    1.53/   4.34/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  379 | reward    1.53/   4.32/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  380 | reward    1.53/   4.32/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  381 | reward    1.53/   4.33/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  382 | reward    1.53/   4.33/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  383 | reward    1.53/   4.32/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  384 | reward    1.53/   4.32/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  385 | reward    1.53/   4.32/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  386 | reward    1.53/   4.27/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  387 | reward    1.53/   4.27/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  388 | reward    1.53/   4.24/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.41
-iter  389 | reward    1.53/   4.24/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.41
-iter  390 | reward    3.96/   4.30/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.41
-iter  391 | reward    3.96/   4.30/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.41
-iter  392 | reward    3.96/   4.28/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.41
-iter  393 | reward    3.96/   4.28/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.41
-iter  394 | reward    3.96/   4.25/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.41
-iter  395 | reward    3.96/   4.25/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.41
-iter  396 | reward    3.97/   4.25/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.41
-iter  397 | reward    3.97/   4.25/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.41
-iter  398 | reward    3.97/   4.27/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.41
-iter  399 | reward    3.97/   4.27/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.41
-iter  400 | reward    3.97/   4.28/   5.10 | target>=6  no | max   51.0% | len  400.0 | best    4.41
-iter  401 | reward    3.97/   4.28/   5.10 | target>=6  no | max   51.0% | len  400.0 | best    4.41
-iter  402 | reward    3.97/   4.28/   5.10 | target>=6  no | max   51.0% | len  400.0 | best    4.41
-iter  403 | reward    3.88/   4.25/   5.10 | target>=6  no | max   51.0% | len  400.0 | best    4.41
-iter  404 | reward    3.88/   4.25/   5.10 | target>=6  no | max   51.0% | len  400.0 | best    4.41
-iter  405 | reward    3.88/   4.26/   5.10 | target>=6  no | max   51.0% | len  400.0 | best    4.41
-iter  406 | reward    3.88/   4.26/   5.10 | target>=6  no | max   51.0% | len  400.0 | best    4.41
-iter  407 | reward   -2.09/   4.12/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.41
-iter  408 | reward   -2.09/   4.12/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.41
-iter  409 | reward   -2.09/   4.10/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.41
-iter  410 | reward   -2.09/   4.10/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.41
-iter  411 | reward   -2.09/   3.88/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.41
-iter  412 | reward   -2.09/   3.88/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.41
-iter  413 | reward   -2.09/   3.82/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.41
-iter  414 | reward   -2.09/   3.82/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.41
-iter  415 | reward   -2.09/   3.80/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.41
-iter  416 | reward   -2.09/   3.80/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.41
-iter  417 | reward   -2.09/   3.80/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.41
-iter  418 | reward   -2.09/   3.67/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.41
-iter  419 | reward   -2.09/   3.67/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.41
-iter  420 | reward   -2.09/   3.62/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.41
-iter  421 | reward   -2.09/   3.62/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.41
-iter  422 | reward   -1.01/   3.58/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.41
-iter  423 | reward   -1.01/   3.58/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.41
-iter  424 | reward   -0.80/   3.71/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.41
-iter  425 | reward   -0.80/   3.71/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.41
-iter  426 | reward   -0.40/   3.70/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  427 | reward   -0.40/   3.70/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  428 | reward   -0.40/   3.57/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  429 | reward   -0.40/   3.57/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  430 | reward   -0.40/   3.50/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  431 | reward   -0.40/   3.50/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  432 | reward    0.01/   3.61/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  433 | reward    0.01/   3.61/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  434 | reward    0.01/   3.61/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  435 | reward    0.01/   3.55/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  436 | reward    0.01/   3.55/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  437 | reward    0.17/   3.63/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  438 | reward    0.17/   3.63/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  439 | reward    0.29/   3.64/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  440 | reward    0.29/   3.64/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  441 | reward    0.31/   3.81/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  442 | reward    0.31/   3.81/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  443 | reward    0.36/   3.94/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  444 | reward    0.36/   3.94/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  445 | reward    0.36/   3.99/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  446 | reward    0.36/   3.99/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  447 | reward    0.36/   3.99/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  448 | reward    0.90/   4.13/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  449 | reward    0.90/   4.15/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  450 | reward    0.72/   4.11/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  451 | reward    0.72/   4.11/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  452 | reward    0.72/   4.23/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  453 | reward    0.72/   4.23/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  454 | reward    0.72/   4.26/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  455 | reward    0.72/   4.26/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  456 | reward    0.72/   4.25/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  457 | reward    0.72/   4.25/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  458 | reward    0.72/   4.27/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  459 | reward    0.72/   4.27/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  460 | reward    0.72/   4.25/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  461 | reward    0.72/   4.25/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  462 | reward    0.72/   4.28/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  463 | reward    0.72/   4.26/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  464 | reward    0.95/   4.26/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  465 | reward    0.95/   4.24/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  466 | reward    0.95/   4.22/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  467 | reward    0.95/   4.22/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  468 | reward    0.95/   4.22/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  469 | reward    0.95/   4.26/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  470 | reward    0.95/   4.26/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  471 | reward    0.90/   4.09/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  472 | reward    0.90/   4.09/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  473 | reward    0.90/   4.08/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  474 | reward    0.90/   4.08/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  475 | reward    0.90/   4.11/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  476 | reward    0.90/   4.11/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  477 | reward    0.90/   4.13/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  478 | reward    0.90/   4.11/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  479 | reward    0.90/   4.08/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  480 | reward    0.90/   4.04/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  481 | reward    0.90/   4.06/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  482 | reward    0.90/   3.95/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  483 | reward   -4.65/   3.88/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  484 | reward   -4.65/   3.89/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  485 | reward   -4.65/   3.89/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  486 | reward   -4.65/   3.88/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  487 | reward   -4.65/   3.88/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  488 | reward   -4.65/   3.69/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  489 | reward   -4.65/   3.69/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  490 | reward   -4.65/   3.65/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  491 | reward   -4.65/   3.65/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  492 | reward   -4.65/   3.71/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  493 | reward   -4.65/   3.71/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  494 | reward   -4.65/   3.70/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  495 | reward   -4.65/   3.71/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  496 | reward    0.32/   3.83/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  497 | reward    0.49/   3.92/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  498 | reward    0.49/   3.89/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  499 | reward    0.49/   3.96/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  500 | reward    0.76/   4.00/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  501 | reward    0.76/   3.99/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  502 | reward    0.76/   3.99/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  503 | reward    0.76/   4.10/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  504 | reward    0.76/   4.10/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  505 | reward    0.76/   4.11/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  506 | reward    0.76/   4.11/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  507 | reward    0.76/   4.16/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  508 | reward    0.76/   4.16/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  509 | reward    0.76/   4.13/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  510 | reward    0.76/   4.10/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  511 | reward    0.76/   4.08/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  512 | reward    0.76/   4.11/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  513 | reward    0.83/   4.16/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  514 | reward    0.83/   4.18/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  515 | reward    0.83/   4.21/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  516 | reward    0.83/   4.15/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  517 | reward    0.83/   4.15/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  518 | reward    0.76/   4.06/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  519 | reward    0.76/   4.06/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  520 | reward    0.76/   3.94/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  521 | reward    0.76/   3.94/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  522 | reward    0.76/   3.76/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  523 | reward    0.76/   3.76/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  524 | reward    0.76/   3.68/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  525 | reward    0.76/   3.68/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  526 | reward    0.76/   3.63/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  527 | reward    0.76/   3.66/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  528 | reward    0.76/   3.54/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  529 | reward    0.76/   3.52/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  530 | reward    0.84/   3.66/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  531 | reward    0.84/   3.69/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  532 | reward    0.84/   3.74/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  533 | reward    0.82/   3.78/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  534 | reward    0.82/   3.78/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  535 | reward    0.82/   3.97/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  536 | reward    0.82/   3.97/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  537 | reward    0.82/   4.13/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  538 | reward    0.82/   4.13/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  539 | reward    0.82/   4.21/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  540 | reward    0.82/   4.18/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  541 | reward    0.82/   4.22/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  542 | reward    0.82/   4.16/   5.13 | target>=6  no | max   51.3% | len  400.0 | best    4.41
-iter  543 | reward    0.82/   4.13/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  544 | reward    0.82/   4.11/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  545 | reward    0.82/   4.09/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.41
-iter  546 | reward    0.94/   4.14/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.41
-iter  547 | reward    0.94/   4.12/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.41
-iter  548 | reward    0.94/   4.14/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.41
-iter  549 | reward    0.94/   4.11/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.41
-iter  550 | reward    0.96/   4.15/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.41
-iter  551 | reward    0.96/   4.15/   5.11 | target>=6  no | max   51.1% | len  400.0 | best    4.41
-iter  552 | reward    0.96/   4.14/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  553 | reward    0.96/   4.14/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  554 | reward    0.96/   4.24/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  555 | reward    1.01/   4.29/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  556 | reward    1.01/   4.36/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-iter  557 | reward    3.72/   4.40/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.41
-Iteration 558: new best mean reward 4.43
-iter  558 | reward    3.72/   4.43/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.43
-iter  559 | reward    3.71/   4.43/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.43
-Iteration 560: new best mean reward 4.43
-iter  560 | reward    3.71/   4.43/   5.12 | target>=6  no | max   51.2% | len  400.0 | best    4.43
-iter  561 | reward    3.71/   4.42/   5.29 | target>=6  no | max   52.9% | len  400.0 | best    4.43
-iter  562 | reward    1.35/   4.36/   5.29 | target>=6  no | max   52.9% | len  400.0 | best    4.43
-iter  563 | reward    1.35/   4.38/   5.29 | target>=6  no | max   52.9% | len  400.0 | best    4.43
-iter  564 | reward    1.35/   4.37/   5.29 | target>=6  no | max   52.9% | len  400.0 | best    4.43
-iter  565 | reward    1.35/   4.37/   5.29 | target>=6  no | max   52.9% | len  400.0 | best    4.43
-iter  566 | reward    1.35/   4.39/   5.29 | target>=6  no | max   52.9% | len  400.0 | best    4.43
-iter  567 | reward    1.24/   4.32/   5.29 | target>=6  no | max   52.9% | len  400.0 | best    4.43
-iter  568 | reward    1.24/   4.32/   5.29 | target>=6  no | max   52.9% | len  400.0 | best    4.43
-iter  569 | reward    1.24/   4.29/   5.30 | target>=6  no | max   53.0% | len  400.0 | best    4.43
-iter  570 | reward    1.24/   4.29/   5.30 | target>=6  no | max   53.0% | len  400.0 | best    4.43
-iter  571 | reward    1.24/   4.24/   5.30 | target>=6  no | max   53.0% | len  400.0 | best    4.43
-iter  572 | reward    1.24/   4.22/   5.30 | target>=6  no | max   53.0% | len  400.0 | best    4.43
-iter  573 | reward    1.24/   4.22/   5.30 | target>=6  no | max   53.0% | len  400.0 | best    4.43
-iter  574 | reward    1.24/   4.23/   5.30 | target>=6  no | max   53.0% | len  400.0 | best    4.43
-iter  575 | reward    1.24/   4.25/   5.30 | target>=6  no | max   53.0% | len  400.0 | best    4.43
-iter  576 | reward    1.24/   4.26/   5.30 | target>=6  no | max   53.0% | len  400.0 | best    4.43
-iter  577 | reward    1.24/   4.27/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.43
-iter  578 | reward    1.24/   4.28/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.43
-iter  579 | reward    1.24/   4.28/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.43
-iter  580 | reward    1.30/   4.29/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.43
-iter  581 | reward    1.33/   4.33/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.43
-iter  582 | reward    1.34/   4.38/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.43
-iter  583 | reward    1.34/   4.34/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.43
-iter  584 | reward    3.53/   4.32/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.43
-iter  585 | reward    3.53/   4.32/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.43
-iter  586 | reward    3.53/   4.32/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.43
-iter  587 | reward    3.53/   4.36/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.43
-iter  588 | reward    3.53/   4.36/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.43
-iter  589 | reward    3.53/   4.36/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.43
-iter  590 | reward    3.53/   4.38/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.43
-iter  591 | reward    3.53/   4.39/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.43
-iter  592 | reward    3.53/   4.38/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.43
-iter  593 | reward    2.77/   4.37/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.43
-iter  594 | reward    2.77/   4.37/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.43
-iter  595 | reward    2.77/   4.38/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.43
-iter  596 | reward    2.77/   4.39/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.43
-Iteration 597: new best mean reward 4.44
-iter  597 | reward    2.77/   4.44/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.44
-Iteration 598: new best mean reward 4.50
-iter  598 | reward    2.77/   4.50/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.50
-iter  599 | reward    2.77/   4.50/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.50
-iter  600 | reward    2.77/   4.47/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.50
-iter  601 | reward    2.77/   4.47/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.50
-iter  602 | reward    2.77/   4.45/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.50
-iter  603 | reward    2.77/   4.48/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.50
-iter  604 | reward    2.77/   4.43/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.50
-iter  605 | reward    2.77/   4.43/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.50
-iter  606 | reward    2.77/   4.45/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.50
-iter  607 | reward    3.94/   4.45/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.50
-iter  608 | reward    3.94/   4.45/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.50
-iter  609 | reward    3.94/   4.48/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.50
-Iteration 610: new best mean reward 4.52
-iter  610 | reward    3.94/   4.52/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.52
-iter  611 | reward    3.94/   4.50/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.52
-iter  612 | reward    3.94/   4.47/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.52
-iter  613 | reward    3.94/   4.49/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.52
-iter  614 | reward    3.97/   4.50/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.52
-Iteration 615: new best mean reward 4.52
-iter  615 | reward    3.97/   4.52/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.52
-iter  616 | reward    3.97/   4.52/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.52
-iter  617 | reward    3.69/   4.51/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.52
-iter  618 | reward    3.55/   4.48/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.52
-iter  619 | reward    1.26/   4.46/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.52
-iter  620 | reward    1.26/   4.45/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.52
-iter  621 | reward    1.26/   4.43/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.52
-iter  622 | reward    1.26/   4.37/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.52
-iter  623 | reward    1.26/   4.30/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.52
-iter  624 | reward    1.26/   4.29/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.52
-iter  625 | reward    1.26/   4.28/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.52
-iter  626 | reward    1.26/   4.28/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.52
-iter  627 | reward    1.26/   4.28/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.52
-iter  628 | reward    1.26/   4.25/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.52
-iter  629 | reward    1.26/   4.25/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.52
-iter  630 | reward    1.26/   4.27/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.52
-iter  631 | reward    1.26/   4.27/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.52
-iter  632 | reward    1.32/   4.31/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.52
-iter  633 | reward    1.32/   4.31/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.52
-iter  634 | reward    1.32/   4.31/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.52
-iter  635 | reward    1.32/   4.33/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.52
-iter  636 | reward    3.54/   4.37/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.52
-iter  637 | reward    3.72/   4.37/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.52
-iter  638 | reward    3.72/   4.38/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.52
-iter  639 | reward    3.72/   4.38/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.52
-iter  640 | reward    3.72/   4.38/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.52
-iter  641 | reward    3.72/   4.41/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.52
-iter  642 | reward    3.72/   4.43/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.52
-iter  643 | reward    3.93/   4.42/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.52
-iter  644 | reward    3.93/   4.41/   5.30 | target>=6  no | max   53.0% | len  400.0 | best    4.52
-iter  645 | reward    3.93/   4.40/   5.30 | target>=6  no | max   53.0% | len  400.0 | best    4.52
-iter  646 | reward    3.64/   4.41/   5.30 | target>=6  no | max   53.0% | len  400.0 | best    4.52
-iter  647 | reward    3.64/   4.45/   5.30 | target>=6  no | max   53.0% | len  400.0 | best    4.52
-iter  648 | reward    3.64/   4.45/   5.30 | target>=6  no | max   53.0% | len  400.0 | best    4.52
-iter  649 | reward    3.64/   4.50/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.52
-iter  650 | reward    3.64/   4.50/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.52
-Iteration 651: new best mean reward 4.53
-iter  651 | reward    3.64/   4.53/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.53
-iter  652 | reward    3.64/   4.52/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.53
-iter  653 | reward    3.64/   4.53/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.53
-iter  654 | reward    3.64/   4.53/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.53
-Iteration 655: new best mean reward 4.55
-iter  655 | reward    3.64/   4.55/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.55
-iter  656 | reward    3.64/   4.52/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.55
-iter  657 | reward    3.64/   4.52/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.55
-iter  658 | reward    3.56/   4.54/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.55
-Iteration 659: new best mean reward 4.56
-iter  659 | reward    3.56/   4.56/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.56
-iter  660 | reward    3.56/   4.51/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.56
-iter  661 | reward    3.56/   4.48/   5.30 | target>=6  no | max   53.0% | len  400.0 | best    4.56
-iter  662 | reward    3.56/   4.46/   5.30 | target>=6  no | max   53.0% | len  400.0 | best    4.56
-iter  663 | reward    3.56/   4.46/   5.30 | target>=6  no | max   53.0% | len  400.0 | best    4.56
-iter  664 | reward    3.56/   4.43/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.56
-iter  665 | reward    3.56/   4.43/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.56
-iter  666 | reward    3.56/   4.40/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.56
-iter  667 | reward    3.56/   4.40/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.56
-iter  668 | reward    3.53/   4.38/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.56
-iter  669 | reward    3.53/   4.37/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.56
-iter  670 | reward    3.53/   4.35/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.56
-iter  671 | reward    3.53/   4.35/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.56
-iter  672 | reward    3.53/   4.35/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.56
-iter  673 | reward    3.53/   4.36/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.56
-iter  674 | reward    3.53/   4.37/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.56
-iter  675 | reward    3.53/   4.37/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.56
-iter  676 | reward    3.53/   4.38/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.56
-iter  677 | reward    3.53/   4.37/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.56
-iter  678 | reward    3.53/   4.37/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.56
-iter  679 | reward    3.53/   4.37/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.56
-iter  680 | reward    3.53/   4.37/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.56
-iter  681 | reward    1.32/   4.34/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.56
-iter  682 | reward    1.32/   4.34/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.56
-iter  683 | reward    1.32/   4.37/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.56
-iter  684 | reward    1.32/   4.37/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.56
-iter  685 | reward    1.32/   4.36/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.56
-iter  686 | reward    1.32/   4.37/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.56
-iter  687 | reward    1.32/   4.40/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.56
-iter  688 | reward    1.32/   4.40/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.56
-iter  689 | reward    1.32/   4.39/   5.31 | target>=6  no | max   53.1% | len  400.0 | best    4.56
-iter  690 | reward    1.32/   4.37/   5.32 | target>=6  no | max   53.2% | len  400.0 | best    4.56
-iter  691 | reward    1.32/   4.39/   5.32 | target>=6  no | max   53.2% | len  400.0 | best    4.56
-iter  692 | reward    1.32/   4.41/   5.32 | target>=6  no | max   53.2% | len  400.0 | best    4.56
-iter  693 | reward    1.32/   4.41/   5.32 | target>=6  no | max   53.2% | len  400.0 | best    4.56
-iter  694 | reward    3.92/   4.41/   5.32 | target>=6  no | max   53.2% | len  400.0 | best    4.56
-iter  695 | reward    3.92/   4.41/   5.32 | target>=6  no | max   53.2% | len  400.0 | best    4.56
-iter  696 | reward    3.92/   4.44/   5.32 | target>=6  no | max   53.2% | len  400.0 | best    4.56
-iter  697 | reward    3.92/   4.44/   5.32 | target>=6  no | max   53.2% | len  400.0 | best    4.56
-iter  698 | reward    2.62/   4.39/   5.32 | target>=6  no | max   53.2% | len  400.0 | best    4.56
-iter  699 | reward    2.62/   4.39/   5.32 | target>=6  no | max   53.2% | len  400.0 | best    4.56
-iter  700 | reward    2.62/   4.38/   5.32 | target>=6  no | max   53.2% | len  400.0 | best    4.56
-iter  701 | reward    2.62/   4.38/   5.32 | target>=6  no | max   53.2% | len  400.0 | best    4.56
-iter  702 | reward    2.62/   4.40/   5.32 | target>=6  no | max   53.2% | len  400.0 | best    4.56
-iter  703 | reward    2.62/   4.41/   5.32 | target>=6  no | max   53.2% | len  400.0 | best    4.56
-iter  704 | reward    2.62/   4.40/   5.32 | target>=6  no | max   53.2% | len  400.0 | best    4.56
-iter  705 | reward    2.62/   4.41/   5.32 | target>=6  no | max   53.2% | len  400.0 | best    4.56
-iter  706 | reward    2.62/   4.43/   5.32 | target>=6  no | max   53.2% | len  400.0 | best    4.56
-iter  707 | reward    2.62/   4.42/   5.32 | target>=6  no | max   53.2% | len  400.0 | best    4.56
-iter  708 | reward    2.62/   4.42/   5.32 | target>=6  no | max   53.2% | len  400.0 | best    4.56
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m [2026-06-03 09:34:47,685 E 3704 3704] (raylet) node_manager.cc:3069: 14 Workers (tasks / actors) killed due to memory pressure (OOM), 0 Workers crashed due to other reasons at node (ID: bb4a0655e86ced08b97c2d6d17bb148fa8f19e73aeec0bb53c4958b7, IP: 172.18.0.6) over the last time period. To see more information about the Workers killed on this node, use `ray logs raylet.out -ip 172.18.0.6`
+[2m[33m(raylet)[0m 
+[2m[33m(raylet)[0m Refer to the documentation on how to address the out of memory issue: https://docs.ray.io/en/latest/ray-core/scheduling/ray-oom-prevention.html. Consider provisioning more memory on this node or reducing task parallelism by requesting more CPUs per task. To adjust the kill threshold, set the environment variable `RAY_memory_usage_threshold` when starting Ray. To disable worker killing, set the environment variable `RAY_memory_monitor_refresh_ms` to zero.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+iter    2 | reward   -1.64/  -0.82/   0.08 | target>=6  no | max    0.8% | len  400.0 | best    0.00
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m [2026-06-03 09:35:50,256 E 3704 3704] (raylet) node_manager.cc:3069: 15 Workers (tasks / actors) killed due to memory pressure (OOM), 0 Workers crashed due to other reasons at node (ID: bb4a0655e86ced08b97c2d6d17bb148fa8f19e73aeec0bb53c4958b7, IP: 172.18.0.6) over the last time period. To see more information about the Workers killed on this node, use `ray logs raylet.out -ip 172.18.0.6`
+[2m[33m(raylet)[0m 
+[2m[33m(raylet)[0m Refer to the documentation on how to address the out of memory issue: https://docs.ray.io/en/latest/ray-core/scheduling/ray-oom-prevention.html. Consider provisioning more memory on this node or reducing task parallelism by requesting more CPUs per task. To adjust the kill threshold, set the environment variable `RAY_memory_usage_threshold` when starting Ray. To disable worker killing, set the environment variable `RAY_memory_monitor_refresh_ms` to zero.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+2026-06-03 09:36:27,072	ERROR actor_manager.py:507 -- Ray error, taking actor 10 out of service. The actor died unexpectedly before finishing this task.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+iter    3 | reward   -2.02/  -0.78/   0.08 | target>=6  no | max    0.8% | len  400.0 | best    0.00
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m [2026-06-03 09:36:52,000 E 3704 3704] (raylet) node_manager.cc:3069: 16 Workers (tasks / actors) killed due to memory pressure (OOM), 0 Workers crashed due to other reasons at node (ID: bb4a0655e86ced08b97c2d6d17bb148fa8f19e73aeec0bb53c4958b7, IP: 172.18.0.6) over the last time period. To see more information about the Workers killed on this node, use `ray logs raylet.out -ip 172.18.0.6`
+[2m[33m(raylet)[0m 
+[2m[33m(raylet)[0m Refer to the documentation on how to address the out of memory issue: https://docs.ray.io/en/latest/ray-core/scheduling/ray-oom-prevention.html. Consider provisioning more memory on this node or reducing task parallelism by requesting more CPUs per task. To adjust the kill threshold, set the environment variable `RAY_memory_usage_threshold` when starting Ray. To disable worker killing, set the environment variable `RAY_memory_monitor_refresh_ms` to zero.
+2026-06-03 09:36:57,683	ERROR actor_manager.py:507 -- Ray error, taking actor 14 out of service. The actor died unexpectedly before finishing this task.
+2026-06-03 09:36:57,683	ERROR actor_manager.py:507 -- Ray error, taking actor 15 out of service. The actor died unexpectedly before finishing this task.
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+[2m[33m(raylet)[0m /opt/miniconda3/envs/aiar-rl-explore-gpu/lib/python3.10/site-packages/ray/_private/parameter.py:4: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools<81.
+[2m[33m(raylet)[0m   import pkg_resources
+2026-06-03 09:54:51,588	ERROR actor_manager.py:507 -- Ray error, taking actor 6 out of service. The actor died unexpectedly before finishing this task.
+2026-06-03 09:54:51,589	ERROR actor_manager.py:507 -- Ray error, taking actor 12 out of service. The actor died unexpectedly before finishing this task.
+iter    4 | reward   -2.02/  -0.60/   1.87 | target>=6  no | max   18.7% | len  400.0 | best    0.00
