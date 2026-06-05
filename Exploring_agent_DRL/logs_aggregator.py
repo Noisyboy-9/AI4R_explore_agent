@@ -61,7 +61,7 @@ def main() -> None:
 
         aggregate_rows.append(build_aggregate_row(csv_file))
 
-    aggregated_dataframe = pd.DataFrame(aggregate_rows)
+    aggregated_dataframe = pd.DataFrame(aggregate_rows).sort_values("job_id")
     aggregated_dataframe.to_csv(OUTPUT_FILE, index=False)
 
     print(f"Saved {len(aggregated_dataframe)} rows to {OUTPUT_FILE}")
