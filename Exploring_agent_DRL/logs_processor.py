@@ -1,12 +1,11 @@
 from pathlib import Path
 import math
-
 import re
 
 import pandas as pd
 
 
-LOG_FILE = Path("logs/hparam_sweep/job_6_iter_500_batch_2000_sgd_5_entropy_0_1.log")
+LOGS_DIR = Path("logs/hparam_sweep")
 OUTPUT_DIR = Path("logs_processed")
 CRASH_LINE_PREFIX = "Traceback"
 
@@ -51,13 +50,21 @@ def parse_log_file(log_file: Path) -> pd.DataFrame:
 
 
 def main() -> None:
-    dataframe = parse_log_file(LOG_FILE)
-
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    output_file = OUTPUT_DIR / f"{LOG_FILE.stem}.csv"
-    dataframe.to_csv(output_file, index=False)
 
-    print(f"Saved {len(dataframe)} rows to {output_file}")
+    log_files = sorted(LOGS_DIR.glob("*.log"))
+    for log_file in log_files:
+        dataframe = parse_log_file(log_file)
+        output_file = OUTPUT_DIR / f"{log_file.stem}.csv"
+
+        if dataframe.empty:
+            if output_file.exists():
+                output_file.unlink()
+            print(f"Skipped {log_file} because it has no parsed rows")
+            continue
+
+        dataframe.to_csv(output_file, index=False)
+        print(f"Saved {len(dataframe)} rows to {output_file}")
 
 
 if __name__ == "__main__":
