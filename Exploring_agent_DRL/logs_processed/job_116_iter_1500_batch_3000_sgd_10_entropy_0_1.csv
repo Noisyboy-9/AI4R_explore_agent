@@ -1,0 +1,4 @@
+iteration_number,reward,is_target_reached
+1,0.0,False
+2,-0.05,False
+3,0.87,False
