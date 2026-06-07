@@ -52,3 +52,5 @@ Thumbs.db
 
 .gpu_job_queues
 .ipynb_checkpoints/
+
+.matplotlib-cache
