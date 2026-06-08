@@ -29,7 +29,6 @@ ray_results/
 **/rllib_checkpoint.json
 
 # Local logs and TensorBoard output
-*.log
 *.out
 *.err
 tensorboard/

@@ -14,7 +14,7 @@ setup:
 	else \
 		cd $(CONDA_ENV_DIR) && $(CONDA_BIN) env create --name $(CONDA_ENV_NAME) --file $(CONDA_ENV_FILE); \
 	fi
-	$(CONDA_BIN) install -n $(CONDA_ENV_NAME) -y -c conda-forge urllib3 requests
+	$(CONDA_BIN) install -n $(CONDA_ENV_NAME) -y -c conda-forge urllib3 requests "numpy<2"
 
 ahmet: setup
 	$(CONDA_BIN) run -n $(CONDA_ENV_NAME) bash $(SCRIPT_DIR)/run_exploring_agent_cpu_ahmet.sh
