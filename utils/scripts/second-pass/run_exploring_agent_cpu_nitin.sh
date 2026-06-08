@@ -17,8 +17,10 @@ POLL_INTERVAL_SECONDS=5
 PYTHON_BIN="${PYTHON_BIN:-python}"
 TRAINING_DIR="Exploring_agent_DRL"
 REPO_ROOT="$(pwd)"
-BASE_CHECKPOINT_DIR="${REPO_ROOT}/tmp/hparam_sweep/second-pass/${FRIEND_SLUG}"
-LOG_DIR="${REPO_ROOT}/logs/second-pass/${FRIEND_SLUG}"
+CHECKPOINT_SUBDIR="tmp/hparam_sweep/second-pass/${FRIEND_SLUG}"
+LOG_SUBDIR="logs/second-pass/${FRIEND_SLUG}"
+BASE_CHECKPOINT_DIR="${REPO_ROOT}/${CHECKPOINT_SUBDIR}"
+LOG_DIR="${REPO_ROOT}/${LOG_SUBDIR}"
 FINISHED_JOBS_FILE="${LOG_DIR}/finished_jobs.txt"
 
 if [ ! -d "${TRAINING_DIR}" ]; then
@@ -139,6 +141,18 @@ run_job() {
   RUNNING_JOB_IDS+=("${current_job_id}")
 }
 
+commit_and_push_results() {
+  git add -- "${LOG_SUBDIR}" "${CHECKPOINT_SUBDIR}"
+
+  if git diff --cached --quiet; then
+    echo "No changes to commit for ${FRIEND_NAME}."
+    return
+  fi
+
+  git commit -m "Feat: run finished for ${FRIEND_SLUG}"
+  git push origin "${BRANCH_NAME}"
+}
+
 echo "Starting second-pass entropy sweep for ${FRIEND_NAME} with up to ${MAX_JOBS} concurrent jobs."
 
 for entropy in "${ENTROPY_VALUES[@]}"; do
@@ -164,3 +178,9 @@ done
 echo "Enumerated ${job_id} jobs."
 echo "Submitted ${submitted_jobs} jobs."
 echo "Jobs with non-zero exit status: ${failed_jobs}"
+
+if [ "${failed_jobs}" -ne 0 ]; then
+  exit 1
+fi
+
+commit_and_push_results
