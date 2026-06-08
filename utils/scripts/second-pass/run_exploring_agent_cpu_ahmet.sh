@@ -16,8 +16,9 @@ NUM_GPUS_PER_JOB=0
 POLL_INTERVAL_SECONDS=5
 PYTHON_BIN="${PYTHON_BIN:-python}"
 TRAINING_DIR="Exploring_agent_DRL"
-BASE_CHECKPOINT_DIR="tmp/hparam_sweep/second-pass/${FRIEND_SLUG}"
-LOG_DIR="logs/second-pass/${FRIEND_SLUG}"
+REPO_ROOT="$(pwd)"
+BASE_CHECKPOINT_DIR="${REPO_ROOT}/tmp/hparam_sweep/second-pass/${FRIEND_SLUG}"
+LOG_DIR="${REPO_ROOT}/logs/second-pass/${FRIEND_SLUG}"
 FINISHED_JOBS_FILE="${LOG_DIR}/finished_jobs.txt"
 
 if [ ! -d "${TRAINING_DIR}" ]; then
