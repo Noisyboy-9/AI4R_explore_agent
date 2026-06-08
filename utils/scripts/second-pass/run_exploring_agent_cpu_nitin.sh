@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-FRIEND_NAME="Ahmet"
-FRIEND_SLUG="ahmet"
-BRANCH_NAME="second-run/${FRIEND_SLUG}"
-ENTROPY_VALUES=(0.0 0.05)
+FRIEND_NAME="Nitin"
+FRIEND_SLUG="nitin"
+BRANCH_NAME="second-pass/${FRIEND_SLUG}"
+ENTROPY_VALUES=(0.02 0.03)
 
 ITERATIONS=500
 TRAIN_BATCH_SIZE=4000
@@ -16,8 +16,8 @@ NUM_GPUS_PER_JOB=0
 POLL_INTERVAL_SECONDS=5
 PYTHON_BIN="${PYTHON_BIN:-python}"
 TRAINING_DIR="Exploring_agent_DRL"
-BASE_CHECKPOINT_DIR="tmp/hparam_sweep/second_run/${FRIEND_SLUG}"
-LOG_DIR="logs/second_run/${FRIEND_SLUG}"
+BASE_CHECKPOINT_DIR="tmp/hparam_sweep/second-pass/${FRIEND_SLUG}"
+LOG_DIR="logs/second-pass/${FRIEND_SLUG}"
 FINISHED_JOBS_FILE="${LOG_DIR}/finished_jobs.txt"
 
 if [ ! -d "${TRAINING_DIR}" ]; then
@@ -138,7 +138,7 @@ run_job() {
   RUNNING_JOB_IDS+=("${current_job_id}")
 }
 
-echo "Starting second-run entropy sweep for ${FRIEND_NAME} with up to ${MAX_JOBS} concurrent jobs."
+echo "Starting second-pass entropy sweep for ${FRIEND_NAME} with up to ${MAX_JOBS} concurrent jobs."
 
 for entropy in "${ENTROPY_VALUES[@]}"; do
   if should_skip_job "${job_id}"; then

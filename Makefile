@@ -1,6 +1,6 @@
 SHELL := /bin/bash
 
-SCRIPT_DIR := utils/scripts/second_run
+SCRIPT_DIR := utils/scripts/second-pass
 CONDA_ENV_DIR := Exploring_agent_DRL
 CONDA_ENV_FILE := environment.yml
 CONDA_ENV_NAME := aiar-rl-explore-gpu
