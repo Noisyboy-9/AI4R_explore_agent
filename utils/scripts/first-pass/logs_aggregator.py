@@ -8,7 +8,7 @@ import pandas as pd
 
 logging.basicConfig(level=logging.ERROR, format="%(levelname)s: %(message)s")
 
-LOGS_DIR = Path("../logs_processed/first-pass")
+LOGS_DIR = Path("../../../logs_processed/first-pass")
 OUTPUT_FILE = LOGS_DIR /"aggregated.csv"
 
 FILE_NAME_PATTERN = re.compile(
