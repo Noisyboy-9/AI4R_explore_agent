@@ -5,8 +5,8 @@ import re
 import pandas as pd
 
 
-LOGS_DIR = Path("../logs/first-pass")
-OUTPUT_DIR = Path("../logs_processed")
+LOGS_DIR = Path("../../../logs/first-pass")
+OUTPUT_DIR = Path("../../../logs_processed")
 CRASH_LINE_PREFIX = "Traceback"
 
 LOG_LINE_PATTERN = re.compile(

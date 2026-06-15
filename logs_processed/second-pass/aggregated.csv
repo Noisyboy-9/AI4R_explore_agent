@@ -1,0 +1,9 @@
+job_id,iteration,train_batch_size,sgd_minibatch_size,entropy,max_reward,is_target_reached,is_training_stable
+0,500,4000,10,0.0,5.78,False,True
+1,500,4000,10,0.05,4.17,False,True
+2,500,4000,10,0.0025,6.32,True,True
+3,500,4000,10,0.04,4.82,False,True
+4,500,4000,10,0.02,6.39,True,True
+5,500,4000,10,0.03,4.77,False,True
+6,500,4000,10,0.005,6.08,True,True
+7,500,4000,10,0.01,6.41,True,True
