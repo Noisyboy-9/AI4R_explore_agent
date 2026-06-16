@@ -23,7 +23,7 @@ miniconda*/
 Exploring_agent_DRL/ray_results/
 ray_results/
 **/ray_results/
-**/checkpoint*/
+#**/checkpoint*/
 **/.is_checkpoint
 **/.tune_metadata
 **/rllib_checkpoint.json
